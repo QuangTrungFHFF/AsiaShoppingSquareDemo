@@ -10,6 +10,7 @@ import com.asiasquare.byteg.shoppingdemo.databinding.GridViewCatalogItemBinding
 import com.asiasquare.byteg.shoppingdemo.datamodel.Catalog
 
 class CatalogFragmentAdapter(private val onClickListener: OnClickListener) : ListAdapter<Catalog,CatalogFragmentAdapter.CatalogViewHolder>(DiffCallback){
+
     /** ViewHolder class **/
     class CatalogViewHolder(private val binding: GridViewCatalogItemBinding) : RecyclerView.ViewHolder(binding.root){
 
@@ -26,6 +27,19 @@ class CatalogFragmentAdapter(private val onClickListener: OnClickListener) : Lis
                 val binding = GridViewCatalogItemBinding.inflate(layoutInflater, parent, false)
                 return CatalogViewHolder(binding)
             }
+        }
+    }
+
+
+    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
+        return CatalogViewHolder.from(parent)
+    }
+
+    override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
+        val item = getItem(position)
+        holder.bind(item)
+        holder.itemView.setOnClickListener {
+            onClickListener.clickListener(item)
         }
     }
 
@@ -49,11 +63,6 @@ class CatalogFragmentAdapter(private val onClickListener: OnClickListener) : Lis
         fun onClick(catalog: Catalog) = clickListener(catalog)
     }
 
-    override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): CatalogViewHolder {
-        TODO("Not yet implemented")
-    }
 
-    override fun onBindViewHolder(holder: CatalogViewHolder, position: Int) {
-        TODO("Not yet implemented")
-    }
+
 }

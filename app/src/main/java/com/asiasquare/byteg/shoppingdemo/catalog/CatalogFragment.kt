@@ -1,10 +1,13 @@
 package com.asiasquare.byteg.shoppingdemo.catalog
 
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentCatalogBinding
@@ -17,6 +20,8 @@ class CatalogFragment : Fragment() {
     /** binding will only exist between onAttach and on Detach **/
     private var _binding : FragmentCatalogBinding? = null
     private val binding get() = _binding!!
+
+
 
     /**
      * Create viewModel, provide application to Factory to create an AndroidViewModel class
@@ -33,6 +38,21 @@ class CatalogFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentCatalogBinding.inflate(inflater,container,false)
+
+        /** Create recyclerView adapter and define OnClickListener **/
+        val adapter = CatalogFragmentAdapter(CatalogFragmentAdapter.OnClickListener{
+            Toast.makeText(context, "dsadasdsdsa", Toast.LENGTH_SHORT).show()
+        })
+
+        binding.rvMainCatalog.adapter = adapter
+
+        /** Update data to adapter **/
+        viewModel.catalogList.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                adapter.submitList(it)
+                Log.d("dsadas",it.toString())
+            }
+        })
 
         return binding.root
     }
