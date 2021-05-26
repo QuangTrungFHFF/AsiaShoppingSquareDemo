@@ -41,7 +41,7 @@ class CatalogFragment : Fragment() {
 
         /** Create recyclerView adapter and define OnClickListener **/
         val adapter = CatalogFragmentAdapter(CatalogFragmentAdapter.OnClickListener{
-            Toast.makeText(context, "dsadasdsdsa", Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
         })
 
         binding.rvMainCatalog.adapter = adapter
@@ -50,7 +50,6 @@ class CatalogFragment : Fragment() {
         viewModel.catalogList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
-                Log.d("dsadas",it.toString())
             }
         })
 
