@@ -27,4 +27,5 @@ class ItemListFragment : Fragment() {
         super.onDestroyView()
         _binding = null
     }
+    //new comment
 }
