@@ -9,6 +9,7 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import androidx.navigation.fragment.findNavController
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentCatalogBinding
 /**
@@ -41,7 +42,7 @@ class CatalogFragment : Fragment() {
 
         /** Create recyclerView adapter and define OnClickListener **/
         val adapter = CatalogFragmentAdapter(CatalogFragmentAdapter.OnClickListener{
-            Toast.makeText(context, it.name, Toast.LENGTH_SHORT).show()
+            viewModel.onCatalogClick(it)
         })
 
         binding.rvMainCatalog.adapter = adapter
@@ -50,6 +51,16 @@ class CatalogFragment : Fragment() {
         viewModel.catalogList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+            }
+        })
+
+        /** Navigate to list of catalog by Id **/
+        viewModel.navigateToCatalog.observe(viewLifecycleOwner, Observer { catalog ->
+            catalog?.let {
+                this.findNavController().navigate(
+                    CatalogFragmentDirections.actionCatalogFragmentToItemListFragment(catalog.id)
+                )
+                viewModel.onNavigationComplete()
             }
         })
 

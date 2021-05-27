@@ -18,5 +18,9 @@
         android:id="@+id/itemListFragment"
         android:name="com.asiasquare.byteg.shoppingdemo.itemlist.ItemListFragment"
         android:label="fragment_item_list"
-        tools:layout="@layout/fragment_item_list" />
+        tools:layout="@layout/fragment_item_list" >
+        <argument
+            android:name="catalogId"
+            app:argType="integer" />
+    </fragment>
 </navigation>

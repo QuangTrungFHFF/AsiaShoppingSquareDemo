@@ -14,6 +14,10 @@ class CatalogFragmentViewModel(application: Application) : AndroidViewModel(appl
     val catalogList :LiveData<List<Catalog>>
         get() = _catalogList
 
+    private val _navigateToCatalog = MutableLiveData<Catalog?>()
+    val navigateToCatalog : LiveData<Catalog?>
+        get() = _navigateToCatalog
+
 
     init {
         generateDummyList()
@@ -34,6 +38,15 @@ class CatalogFragmentViewModel(application: Application) : AndroidViewModel(appl
         catalogList.add(Catalog(5,"Thực phẩm đóng hộp", R.drawable.ct_dohop))
 
         _catalogList.value= catalogList
+    }
+
+    /** Pass catalog value when onClick **/
+    fun onCatalogClick( catalog: Catalog){
+        _navigateToCatalog.value = catalog
+    }
+
+    fun onNavigationComplete(){
+        _navigateToCatalog.value = null
     }
 
 
