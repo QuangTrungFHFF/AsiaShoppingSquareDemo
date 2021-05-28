@@ -1,5 +1,9 @@
 package com.asiasquare.byteg.shoppingdemo.datamodel
 
+import android.os.Parcelable
+import kotlinx.android.parcel.Parcelize
+
+@Parcelize
 class ItemList(
     val id: Int,
     val textTenSanPham : String,
@@ -7,4 +11,4 @@ class ItemList(
 
     //val textGiaSanPham: String,
     //val textGiaKhuyenMai: String
-    )
+    ): Parcelable

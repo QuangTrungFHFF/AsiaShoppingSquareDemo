@@ -46,10 +46,10 @@ class ItemListFragment : Fragment() {
         })
 
         /** Navigate to detail by Id **/
-        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer { item ->
-            item?.let {
+        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
                 this.findNavController().navigate(
-                    ItemListFragmentDirections.actionItemListFragmentToDetailFragment(item.id)
+                    ItemListFragmentDirections.actionItemListFragmentToDetailFragment(it)
                 )
                 viewModel.onNavigationComplete()
             }

@@ -40,13 +40,14 @@ class ItemListFragmentViewModel(application: Application) : AndroidViewModel(app
     }
 
 
-    fun onDetailClick( item: ItemList){
-        _navigateToDetail.value = item
+    fun onDetailClick( itemList: ItemList){
+        _navigateToDetail.value = itemList
     }
 
     fun onNavigationComplete(){
         _navigateToDetail.value = null
     }
+
 
 
     class Factory(private val app: Application) : ViewModelProvider.Factory{

@@ -32,7 +32,7 @@
         android:label="fragment_detail"
         tools:layout="@layout/fragment_detail" >
         <argument
-            android:name="itemID"
-            app:argType="integer" />
+            android:name="selectedItem"
+            app:argType="com.asiasquare.byteg.shoppingdemo.datamodel.ItemList" />
     </fragment>
 </navigation>

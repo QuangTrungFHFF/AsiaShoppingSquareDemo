@@ -14,14 +14,14 @@ import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 class ItemListFragmentAdapter(private val onClickListener: OnClickListener):ListAdapter <ItemList, ItemListFragmentAdapter.ItemListViewHolder>(DiffCallback) {
 
 
-    class ItemListViewHolder (private val binding: GridViewItemListBinding, var ItemList: ItemList? =null):
+    class ItemListViewHolder (private val binding: GridViewItemListBinding):
         RecyclerView.ViewHolder(binding.root)  {
 
         fun bind(item: ItemList) {
             binding.apply {
                 binding.anhsanpham.load(item.imgResource)
                 tensanpham.text = item.textTenSanPham
-                ItemList = item
+               // ItemList = item
 //          giaItemGioHang.text = item.textGiaSanPham
 //          giakhuyenmai.text = item.textGiaKhuyenMai
             }
@@ -42,10 +42,10 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
     }
 
     override fun onBindViewHolder(holder: ItemListViewHolder,position: Int) {
-        val item = getItem(position)
-        holder.bind(item)
+        val itemList = getItem(position)
+        holder.bind(itemList)
         holder.itemView.setOnClickListener {
-            onClickListener.clickListener(item)
+            onClickListener.clickListener(itemList)
         }
     }
 
@@ -62,8 +62,8 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
     }
 
     /** Simple ClickListener. Return itemList Object info when user click **/
-    class OnClickListener(val clickListener : (item : ItemList) -> Unit){
-        fun onClick(item : ItemList) = clickListener(item)
+    class OnClickListener(val clickListener : (itemList : ItemList) -> Unit){
+        fun onClick(itemList : ItemList) = clickListener(itemList)
     }
 
 }
