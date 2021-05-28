@@ -9,7 +9,6 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
-import com.asiasquare.byteg.shoppingdemo.catalog.CatalogFragmentDirections
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
 
 class ItemListFragment : Fragment() {

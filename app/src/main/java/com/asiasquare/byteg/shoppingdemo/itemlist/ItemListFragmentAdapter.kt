@@ -14,13 +14,14 @@ import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 class ItemListFragmentAdapter(private val onClickListener: OnClickListener):ListAdapter <ItemList, ItemListFragmentAdapter.ItemListViewHolder>(DiffCallback) {
 
 
-    class ItemListViewHolder (private val binding: GridViewItemListBinding):
+    class ItemListViewHolder (private val binding: GridViewItemListBinding, var ItemList: ItemList? =null):
         RecyclerView.ViewHolder(binding.root)  {
 
         fun bind(item: ItemList) {
             binding.apply {
                 binding.anhsanpham.load(item.imgResource)
                 tensanpham.text = item.textTenSanPham
+                ItemList = item
 //          giaItemGioHang.text = item.textGiaSanPham
 //          giakhuyenmai.text = item.textGiaKhuyenMai
             }

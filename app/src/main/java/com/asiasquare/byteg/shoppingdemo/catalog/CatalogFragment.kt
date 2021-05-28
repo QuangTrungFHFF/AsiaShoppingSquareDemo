@@ -40,6 +40,7 @@ class CatalogFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentCatalogBinding.inflate(inflater,container,false)
 
+
         /** Create recyclerView adapter and define OnClickListener **/
         val adapter = CatalogFragmentAdapter(CatalogFragmentAdapter.OnClickListener{
             viewModel.onCatalogClick(it)

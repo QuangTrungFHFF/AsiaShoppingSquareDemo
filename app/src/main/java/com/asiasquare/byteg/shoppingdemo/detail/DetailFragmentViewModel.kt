@@ -1,7 +1,61 @@
 package com.asiasquare.byteg.shoppingdemo.detail
 
-import androidx.lifecycle.ViewModel
+import android.app.Application
+import androidx.lifecycle.*
+import com.asiasquare.byteg.shoppingdemo.R
+import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
-class DetailFragmentViewModel : ViewModel() {
-    // TODO: Implement the ViewModel
+class DetailFragmentViewModel(application: Application) : AndroidViewModel(application){
+
+    /**
+     * List of catalog, observe this to get tha change in database
+     */
+    private val _detailList = MutableLiveData<List<ItemList>>()
+    val detailList : LiveData<List<ItemList>>
+        get() = _detailList
+
+    private val _navigateToPayment = MutableLiveData<ItemList?>()
+    val navigateToPayment : LiveData<ItemList?>
+        get() = _navigateToPayment
+
+    init {
+        generateDummyList()
+    }
+
+
+    /**
+     * Create dummy list for testing
+     */
+    private fun generateDummyList(){
+        val detailList = mutableListOf<ItemList>()
+
+        detailList.add(ItemList(0,"Gạo & mì các loại", R.drawable.ct_bungao))
+        detailList.add(ItemList(1,"Thực phẩm đông lạnh", R.drawable.ct_donglanh))
+        detailList.add(ItemList(2,"Gia vị", R.drawable.ct_nuoccham))
+        detailList.add(ItemList(3,"Rau, củ, quả", R.drawable.ct_raucu))
+        detailList.add(ItemList(4,"Đồ khô & ăn vặt", R.drawable.ct_dokho))
+        detailList.add(ItemList(5,"Thực phẩm đóng hộp", R.drawable.ct_dohop))
+
+        _detailList.value= detailList
+    }
+
+
+    fun onPaymentClick( item: ItemList){
+        _navigateToPayment.value = item
+    }
+
+    fun onNavigationComplete(){
+        _navigateToPayment.value = null
+    }
+
+
+    class Factory(private val app: Application) : ViewModelProvider.Factory{
+        override fun <T : ViewModel?> create(modelClass: Class<T>): T {
+            if(modelClass.isAssignableFrom(DetailFragmentViewModel::class.java)){
+                return DetailFragmentViewModel(app) as T
+            }
+            throw IllegalArgumentException("Unable to construct viewmodel")
+        }
+
+    }
 }
