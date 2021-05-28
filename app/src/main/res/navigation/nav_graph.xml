@@ -35,4 +35,14 @@
             android:name="selectedItem"
             app:argType="com.asiasquare.byteg.shoppingdemo.datamodel.ItemList" />
     </fragment>
+    <fragment
+        android:id="@+id/cartFragment"
+        android:name="com.asiasquare.byteg.shoppingdemo.cart.CartFragment"
+        android:label="Cart"
+        tools:layout="@layout/fragment_cart" />
+    <fragment
+        android:id="@+id/favoriteFragment"
+        android:name="com.asiasquare.byteg.shoppingdemo.favorite.FavoriteFragment"
+        android:label="Favorite"
+        tools:layout="@layout/fragment_favorite" />
 </navigation>

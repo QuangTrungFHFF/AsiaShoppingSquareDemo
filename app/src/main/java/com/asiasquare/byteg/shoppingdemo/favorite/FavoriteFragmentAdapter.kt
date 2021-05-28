@@ -8,14 +8,15 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewFavoriteItemBinding
-import com.asiasquare.byteg.shoppingdemo.datamodel.Favorite
+import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
-class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): ListAdapter<Favorite, FavoriteFragmentAdapter.FavoriteViewHolder>(DiffCallback) {
+
+class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): ListAdapter<ItemList, FavoriteFragmentAdapter.FavoriteViewHolder>(DiffCallback) {
 
     /** ViewHolder class **/
     class FavoriteViewHolder(private val binding: GridViewFavoriteItemBinding):RecyclerView.ViewHolder(binding.root) {
         /** Bind item to View, load image here using Coil */
-        fun bind (favorite: Favorite){
+        fun bind (favorite: ItemList){
             binding.anhItemYeuThich.load(favorite.imgResource)
             binding.tenItemYeuThich.text = favorite.textTenSanPham
         }
@@ -43,13 +44,13 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
         }
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<Favorite>(){
-        override fun areItemsTheSame(oldItem: Favorite, newItem: Favorite): Boolean {
+    companion object DiffCallback: DiffUtil.ItemCallback<ItemList>(){
+        override fun areItemsTheSame(oldItem: ItemList, newItem: ItemList): Boolean {
             return oldItem.id == newItem.id
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: Favorite, newItem: Favorite): Boolean {
+        override fun areContentsTheSame(oldItem: ItemList, newItem: ItemList): Boolean {
             return oldItem == newItem
         }
 
@@ -57,8 +58,8 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
     }
 
     /** Simple ClickListener. Return favorite Object info when user click **/
-    class OnClickListener(val clickListener : (favorite : Favorite) -> Unit){
-        fun onClick(favorite: Favorite) = clickListener(favorite)
+    class OnClickListener(val clickListener : (favorite : ItemList) -> Unit){
+        fun onClick(favorite: ItemList) = clickListener(favorite)
     }
 
 
