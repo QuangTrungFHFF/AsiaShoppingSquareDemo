@@ -11,8 +11,7 @@ import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "local_items_table")
 data class LocalItem(
-    @PrimaryKey(autoGenerate = true)
-    var localItemId: Int,
+    @PrimaryKey
     @ColumnInfo(name = "item_id")
     var itemId : Int,
     @ColumnInfo(name = "item_name")
