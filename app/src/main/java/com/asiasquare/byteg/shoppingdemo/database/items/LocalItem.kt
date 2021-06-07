@@ -19,6 +19,16 @@ data class LocalItem(
     var itemName: String,
     @ColumnInfo(name = "item_price")
     var itemPrice : Double,
-    @ColumnInfo(name = "item_sale_price")
-    var email : String
+    @ColumnInfo(name = "item_discounted_price")
+    var itemDiscountedPrice : Double,
+    @ColumnInfo(name = "item_image_src")
+    var itemImageSource : String,
+    @ColumnInfo(name = "item_weight")
+    var itemWeight : String,
+    @ColumnInfo(name = "item_description")
+    var itemDescription : String,
+    @ColumnInfo(name = "item_brand")
+    var itemBrand : String,
+    @ColumnInfo(name = "item_origin")
+    var itemOrigin : String
 )
