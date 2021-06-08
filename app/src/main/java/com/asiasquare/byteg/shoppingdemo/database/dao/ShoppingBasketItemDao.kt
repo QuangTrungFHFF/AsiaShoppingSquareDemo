@@ -17,10 +17,10 @@ interface ShoppingBasketItemDao {
     @Delete
     fun deleteItem(item : ShoppingBasketItem)
 
-    @Query(value = "DELETE FROM local_items_table")
+    @Query(value = "DELETE FROM shopping_basket_table")
     fun clearShoppingBasket()
 
-    @Query(value = "SELECT * FROM local_customer_table ORDER BY customer_name DESC")
+    @Query(value = "SELECT * FROM shopping_basket_table")
     fun getAllItemsInBasket() : LiveData<List<ShoppingBasketItem>>
 
 }
