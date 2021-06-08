@@ -4,8 +4,8 @@ import androidx.room.ColumnInfo
 import androidx.room.Entity
 import androidx.room.PrimaryKey
 
-@Entity(tableName = "shopping_basket_table")
-data class ShoppingBasketItem(
+@Entity(tableName = "favorite_table")
+data class FavoriteItem(
     @PrimaryKey
     var itemId : Int,
     @ColumnInfo(name = "item_name")
