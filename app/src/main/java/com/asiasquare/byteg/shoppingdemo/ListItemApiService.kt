@@ -3,6 +3,7 @@ package com.asiasquare.byteg.shoppingdemo
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.squareup.moshi.Moshi
 import com.squareup.moshi.kotlin.reflect.KotlinJsonAdapterFactory
+import retrofit2.Call
 import retrofit2.Retrofit
 import retrofit2.converter.moshi.MoshiConverterFactory
 import retrofit2.http.GET
@@ -22,7 +23,8 @@ private val retrofit = Retrofit.Builder()
 //test link
 interface ListItemApiService{
     @GET("server/ungdungchaua/getsanphamasiaandroid0.php/{idHang}")
-    suspend fun getProperties(): List<NetworkItem>
+    //suspend fun getProperties(): List<NetworkItem>
+    fun getProperties(): Call<List<NetworkItem>>
 
 }
 

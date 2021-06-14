@@ -7,6 +7,9 @@ import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 import kotlinx.coroutines.launch
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
 
 class ItemListFragmentViewModel(application: Application) : AndroidViewModel(application){
 
@@ -28,9 +31,17 @@ class ItemListFragmentViewModel(application: Application) : AndroidViewModel(app
     val navigateToDetail : LiveData<NetworkItem?>
         get() = _navigateToDetail
 
+
+    private val _response = MutableLiveData<String>()
+
+    // The external immutable LiveData for the request status String
+val response: LiveData<String>
+get() = _response
+
     init {
         //generateDummyList()
-        getItemList()
+        //getItemList()
+    getItemProperties()
     }
 
 
@@ -38,7 +49,7 @@ class ItemListFragmentViewModel(application: Application) : AndroidViewModel(app
      * Create dummy list for testing
      */
 //    private fun generateDummyList(){
-//        val itemList = mutableListOf<NetworkItem>()
+//        val itemList = mutableListOf<ItemList>()
 //
 //        itemList.add(ItemList(0,"Gạo & mì các loại", R.drawable.ct_bungao))
 //        itemList.add(ItemList(1,"Thực phẩm đông lạnh", R.drawable.ct_donglanh))
@@ -50,24 +61,39 @@ class ItemListFragmentViewModel(application: Application) : AndroidViewModel(app
 //        _itemList.value= itemList
 //    }
 
-    private fun getItemList() {
+//    private fun getItemList() {
+//
+//        viewModelScope.launch {
+//            _status.value = ListItemApiStatus.LOADING
+//
+//            try {
+//                _itemList.value = ListItemApi.retrofitService.getProperties()
+//                _status.value = ListItemApiStatus.DONE
+//
+//
+//            } catch (e: Exception) {
+//                _status.value = ListItemApiStatus.ERROR
+//                _itemList.value = ArrayList()
+//            }
+//        }
+//
+//    }
 
-        viewModelScope.launch {
-            _status.value = ListItemApiStatus.LOADING
-
-            try {
-                _itemList.value = ListItemApi.retrofitService.getProperties()
-                _status.value = ListItemApiStatus.DONE
-
-
-            } catch (e: Exception) {
-                _status.value = ListItemApiStatus.ERROR
-                _itemList.value = ArrayList()
+    private fun getItemProperties() {
+        ListItemApi.retrofitService.getProperties().enqueue(object :Callback<List<NetworkItem>>{
+            override fun onResponse(
+                call: Call<List<NetworkItem>>,
+                response: Response<List<NetworkItem>>
+            ) {
+                _response.value = "Success: ${response.body()?.size} items properties retrieved"
             }
-        }
 
+            override fun onFailure(call: Call<List<NetworkItem>>, t: Throwable) {
+                _response.value = "Failure: " + t.message
+            }
+
+        })
     }
-
 
     fun onDetailClick( networkItem: NetworkItem){
         _navigateToDetail.value = networkItem
