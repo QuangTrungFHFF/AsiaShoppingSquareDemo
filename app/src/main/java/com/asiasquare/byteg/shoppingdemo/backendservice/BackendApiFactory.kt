@@ -33,6 +33,7 @@ internal class BackendApiFactory internal constructor(private val backendUrl: St
             .client(httpClient)
             .build()
             .create(CheckoutApiService::class.java)
+
     }
 
     private companion object {

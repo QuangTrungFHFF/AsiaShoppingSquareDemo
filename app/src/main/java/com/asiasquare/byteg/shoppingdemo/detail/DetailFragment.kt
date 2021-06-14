@@ -6,13 +6,10 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
-import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
-import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
 //class DetailFragment : Fragment() {
 //    private var _binding : FragmentDetailBinding? = null
@@ -56,7 +53,7 @@ private var _binding : FragmentDetailBinding? = null
 private val binding get() = _binding!!
 
     private val args: DetailFragmentArgs by navArgs()
-    private lateinit var itemList: ItemList
+    private lateinit var itemList: NetworkItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -79,8 +76,8 @@ private val binding get() = _binding!!
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            ivCatalogGrid.load(itemList.imgResource)
-            tenSanPham.text = itemList.textTenSanPham
+            ivCatalogGrid.load(itemList.itemImageSource)
+            tenSanPham.text = itemList.itemName
         }
     }
 }
