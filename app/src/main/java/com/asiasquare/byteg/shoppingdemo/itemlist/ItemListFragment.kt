@@ -38,12 +38,19 @@ class ItemListFragment : Fragment() {
 
         binding.recyclerViewCatalog.adapter = adapter
 
+        /** Test Link BASE_URL **/
+        viewModel.response.observe(viewLifecycleOwner, Observer { newString->
+            binding.testString.text = newString.toString()
+        })
+
         /** Update data to adapter **/
         viewModel.itemList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
         })
+
+
 
         /** Navigate to detail by Id **/
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {

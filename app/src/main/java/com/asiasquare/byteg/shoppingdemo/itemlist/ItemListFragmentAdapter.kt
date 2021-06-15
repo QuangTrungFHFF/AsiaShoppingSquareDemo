@@ -19,7 +19,7 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
         fun bind(item: NetworkItem) {
             binding.apply {
-                binding.anhsanpham.load(item.itemImageSource)
+                anhsanpham.load(item.itemImageSource)
                 tensanpham.text = item.itemName
             }
         }
