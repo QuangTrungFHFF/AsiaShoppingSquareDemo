@@ -4,6 +4,7 @@ import android.app.Application
 import androidx.annotation.NonNull
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
+import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
 class DetailFragmentViewModel(itemList:NetworkItem, application: Application) : AndroidViewModel(application){
 
