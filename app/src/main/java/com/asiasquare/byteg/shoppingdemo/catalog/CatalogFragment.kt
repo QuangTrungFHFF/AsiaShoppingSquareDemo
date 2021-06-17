@@ -65,6 +65,12 @@ class CatalogFragment : Fragment() {
             }
         })
 
+        binding.buttonTest.setOnClickListener {
+            this.findNavController().navigate(
+                CatalogFragmentDirections.actionCatalogFragmentToBlankFragment()
+            )
+        }
+
         return binding.root
     }
 
