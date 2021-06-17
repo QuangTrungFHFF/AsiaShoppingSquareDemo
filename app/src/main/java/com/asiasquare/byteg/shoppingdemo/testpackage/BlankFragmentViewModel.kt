@@ -1,19 +1,49 @@
 package com.asiasquare.byteg.shoppingdemo.testpackage
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
+import android.util.Log
+import androidx.lifecycle.*
+import com.asiasquare.byteg.shoppingdemo.backendservice.ServerApi
+import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.launch
+import kotlinx.coroutines.withContext
 
 class BlankFragmentViewModel(application: Application):AndroidViewModel(application){
 
+    private val _size = MutableLiveData<Int>()
+    val size : LiveData<Int>
+        get() = _size
+
+    private val _text = MutableLiveData<String>()
+    val text :LiveData<String>
+        get() = _text
+
+    init {
+        getData()
+    }
+    private fun getData(){
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO){
+                    val listResult = ServerApi.retrofitService.getData()
+                    _size.postValue(listResult.size)
+                    _text.postValue(listResult[0].toString())
+                }
+
+                Log.d("Get data","sucess")
+
+            }catch (e: Exception){
+                e.message?.let { Log.d("Get data",it) }
+            }
+        }
+    }
 
 
 
 
 
 
-    
+
     /**
      * Factory for constructing InfoViewModel with parameter
      */

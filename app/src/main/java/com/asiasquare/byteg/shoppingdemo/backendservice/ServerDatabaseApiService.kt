@@ -21,7 +21,7 @@ private val retrofit = Retrofit.Builder()
 
 interface ServerDatabaseApiService{
 
-    @POST("server/ungdungchaua/getsanphamasiaandroid0.php?page=2")
+    @POST("server/ungdungchaua/getsanphamasiaandroid1.php?page=1")
     suspend fun getData(): List<NetworkItem>
 
 }
