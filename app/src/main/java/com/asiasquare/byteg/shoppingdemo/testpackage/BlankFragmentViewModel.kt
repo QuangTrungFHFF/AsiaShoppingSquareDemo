@@ -21,6 +21,7 @@ class BlankFragmentViewModel(application: Application):AndroidViewModel(applicat
     init {
         getData()
     }
+
     private fun getData(){
         viewModelScope.launch {
             try {
