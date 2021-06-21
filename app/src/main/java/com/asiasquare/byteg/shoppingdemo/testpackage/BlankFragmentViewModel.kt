@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.backendservice.ServerApi
+import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -14,8 +15,8 @@ class BlankFragmentViewModel(application: Application):AndroidViewModel(applicat
     val size : LiveData<Int>
         get() = _size
 
-    private val _text = MutableLiveData<String>()
-    val text :LiveData<String>
+    private val _text = MutableLiveData<NetworkItem>()
+    val text :LiveData<NetworkItem>
         get() = _text
 
     init {
@@ -26,9 +27,9 @@ class BlankFragmentViewModel(application: Application):AndroidViewModel(applicat
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO){
-                    val listResult = ServerApi.retrofitService.getData()
+                    val listResult = ServerApi.retrofitService.getDataFirst()
                     _size.postValue(listResult.size)
-                    _text.postValue(listResult[0].toString())
+                    _text.postValue(listResult[0])
                 }
 
                 Log.d("Get data","sucess")

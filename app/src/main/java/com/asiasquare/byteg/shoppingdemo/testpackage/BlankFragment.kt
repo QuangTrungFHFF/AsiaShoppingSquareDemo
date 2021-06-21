@@ -34,7 +34,7 @@ class BlankFragment : Fragment() {
             binding.tvResultSize.text = it.toString()
         })
         viewModel.text.observe(viewLifecycleOwner, Observer {
-            binding.tvResultFirst.text = it
+            binding.tvResultFirst.text = it.itemDescription.toString()
         })
         // Inflate the layout for this fragment
         return binding.root

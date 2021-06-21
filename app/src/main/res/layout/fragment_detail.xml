@@ -82,7 +82,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="12dp"
                 android:textColor="#fa3223"
-                android:text="60000"
+                tools:text="60000"
                 android:textSize="16sp"
                 app:layout_constraintStart_toStartOf="@+id/ten_san_pham"
                 app:layout_constraintTop_toBottomOf="@+id/ten_san_pham" />
@@ -143,7 +143,7 @@
                 android:visibility="visible"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/devider"
-                tools:text="Chi tiet san pham" />
+                android:text="Thông tin sản phẩm" />
 
             <TextView
                 android:id="@+id/san_pham_thuong_hieu"
@@ -169,7 +169,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginStart="32dp"
                 android:layout_marginTop="32dp"
-                tools:text="Mo Ta san pham"
+                android:text="Mô Tả sản phẩm"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toBottomOf="@+id/devider2" />
 

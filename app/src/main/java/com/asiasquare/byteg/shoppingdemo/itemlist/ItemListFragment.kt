@@ -39,11 +39,13 @@ class ItemListFragment : Fragment() {
         binding.recyclerViewCatalog.adapter = adapter
 
         /** Update data to adapter **/
-        viewModel.itemList.observe(viewLifecycleOwner, Observer {
+        viewModel.text.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
         })
+
+
 
         /** Navigate to detail by Id **/
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
