@@ -10,8 +10,11 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentCatalogBinding
+import com.asiasquare.byteg.shoppingdemo.detail.DetailFragmentArgs
+
 /**
     First fragment of the app.
     Display a list of catalog for user to choose.
@@ -21,7 +24,6 @@ class CatalogFragment : Fragment() {
     /** binding will only exist between onAttach and on Detach **/
     private var _binding : FragmentCatalogBinding? = null
     private val binding get() = _binding!!
-
 
 
     /**
@@ -46,6 +48,10 @@ class CatalogFragment : Fragment() {
             viewModel.onCatalogClick(it)
         })
 
+//        val args = CatalogFragmentArgs.fromBundle(requireArguments())
+//        Toast.makeText(context, "Catalog ID: ${args.catalogId}", Toast.LENGTH_LONG).show()
+
+
         binding.rvMainCatalog.adapter = adapter
 
         /** Update data to adapter **/
@@ -63,8 +69,10 @@ class CatalogFragment : Fragment() {
                 )
                 viewModel.onNavigationComplete()
             }
+
         })
 
+        //BUTTON TEST
         binding.buttonTest.setOnClickListener {
             this.findNavController().navigate(
                 CatalogFragmentDirections.actionCatalogFragmentToBlankFragment()

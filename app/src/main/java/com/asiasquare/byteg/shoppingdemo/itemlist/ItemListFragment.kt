@@ -9,9 +9,16 @@ import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
+import androidx.navigation.fragment.navArgs
+import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
+import kotlin.properties.Delegates
+
 
 class ItemListFragment : Fragment() {
+
+    private val args: ItemListFragmentArgs by navArgs()
+    private var itemList by Delegates.notNull<Int>()
 
     private var _binding : FragmentItemListBinding? = null
     private val binding get() = _binding!!
@@ -32,7 +39,6 @@ class ItemListFragment : Fragment() {
 
         /** Create recyclerView adapter and define OnClickListener **/
         val adapter = ItemListFragmentAdapter(ItemListFragmentAdapter.OnClickListener{
-            //Toast.makeText(context, it.id, Toast.LENGTH_SHORT).show()
             viewModel.onDetailClick(it)
         })
 
@@ -42,9 +48,20 @@ class ItemListFragment : Fragment() {
         viewModel.text.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
+//                when (args.catalogId){
+//                    0 -> adapter.submitList(it).getData()
+//                    1 ->
+//                    2 ->
+//                    3 ->
+//                    4 ->
+//                    5 ->
+//                    else ->
+//                }
             }
         })
 
+        itemList= args.catalogId
+        Toast.makeText(context, "Catalog ID: ${args.catalogId}", Toast.LENGTH_LONG).show()
 
 
         /** Navigate to detail by Id **/

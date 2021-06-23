@@ -26,6 +26,21 @@ interface ServerDatabaseApiService{
 
     @POST("server/ungdungchaua/getsanphamasiaandroid1.php?page=1")
     suspend fun getDataSecond(): List<NetworkItem>
+
+    @POST("server/ungdungchaua/getsanphamasiaandroid2.php?page=1")
+    suspend fun getDataThird(): List<NetworkItem>
+
+    @POST("server/ungdungchaua/getsanphamasiaandroid3.php?page=1")
+    suspend fun getDataFourth(): List<NetworkItem>
+
+    @POST("server/ungdungchaua/getsanphamasiaandroid4.php?page=1")
+    suspend fun getDataFifth(): List<NetworkItem>
+
+    @POST("server/ungdungchaua/getsanphamasiaandroid5.php?page=1")
+    suspend fun getDataSixth(): List<NetworkItem>
+
+    @POST("server/ungdungchaua/getsanphamasiaandroid6.php?page=1")
+    suspend fun getDataSeventh(): List<NetworkItem>
 }
 
 object ServerApi{
