@@ -20,14 +20,11 @@ class ItemListFragment : Fragment() {
     private val args: ItemListFragmentArgs by navArgs()
     private var itemList by Delegates.notNull<Int>()
 
+
     private var _binding : FragmentItemListBinding? = null
     private val binding get() = _binding!!
 
-    private val viewModel: ItemListFragmentViewModel by lazy {
-        val activity = requireNotNull(this.activity)
-        ViewModelProvider(this, ItemListFragmentViewModel.Factory(activity.application))
-            .get(ItemListFragmentViewModel::class.java)
-    }
+    private lateinit var viewModel: ItemListFragmentViewModel
 
 
     override fun onCreateView(
@@ -36,6 +33,14 @@ class ItemListFragment : Fragment() {
     ): View? {
         // Inflate the layout for this fragment
         _binding = FragmentItemListBinding.inflate(inflater,container,false)
+
+        //toast with id
+        itemList = args.catalogId
+
+        val activity = requireNotNull(this.activity)
+        viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(activity.application,itemList))
+                .get(ItemListFragmentViewModel::class.java)
+
 
         /** Create recyclerView adapter and define OnClickListener **/
         val adapter = ItemListFragmentAdapter(ItemListFragmentAdapter.OnClickListener{
@@ -48,20 +53,10 @@ class ItemListFragment : Fragment() {
         viewModel.text.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
-                when (args.catalogId){
-                    0 -> adapter.submitList(it).getData()
-//                    1 ->
-//                    2 ->
-//                    3 ->
-//                    4 ->
-//                    5 ->
-//                    else ->
-                }
             }
         })
 
-        //toast with id
-        itemList= args.catalogId
+
         Toast.makeText(context, "Catalog ID: ${args.catalogId}", Toast.LENGTH_LONG).show()
 
 
