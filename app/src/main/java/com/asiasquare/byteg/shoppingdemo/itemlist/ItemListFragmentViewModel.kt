@@ -30,15 +30,13 @@ class ItemListFragmentViewModel(application: Application) : AndroidViewModel(app
 
     init {
         getData()
+        getDataSecond()
     }
 
 
 
     private fun getData(){
-
         viewModelScope.launch {
-
-
             try {
                 withContext(Dispatchers.IO){
 
@@ -50,7 +48,21 @@ class ItemListFragmentViewModel(application: Application) : AndroidViewModel(app
                 e.message?.let { Log.d("Get data",it) }
             }
         }
+    }
 
+    private fun getDataSecond(){
+        viewModelScope.launch {
+            try {
+                withContext(Dispatchers.IO){
+
+                    val listResult = ServerApi.retrofitService.getDataSecond()
+                    _text.postValue(listResult)
+                }
+                Log.d("Get data","sucess")
+            }catch (e: Exception){
+                e.message?.let { Log.d("Get data",it) }
+            }
+        }
     }
 
     fun onDetailClick( itemList: NetworkItem){

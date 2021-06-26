@@ -48,18 +48,19 @@ class ItemListFragment : Fragment() {
         viewModel.text.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
-//                when (args.catalogId){
-//                    0 -> adapter.submitList(it).getData()
+                when (args.catalogId){
+                    0 -> adapter.submitList(it).getData()
 //                    1 ->
 //                    2 ->
 //                    3 ->
 //                    4 ->
 //                    5 ->
 //                    else ->
-//                }
+                }
             }
         })
 
+        //toast with id
         itemList= args.catalogId
         Toast.makeText(context, "Catalog ID: ${args.catalogId}", Toast.LENGTH_LONG).show()
 
