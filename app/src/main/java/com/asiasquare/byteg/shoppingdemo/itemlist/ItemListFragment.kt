@@ -39,7 +39,7 @@ class ItemListFragment : Fragment() {
 
         val activity = requireNotNull(this.activity)
         viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(activity.application,itemList))
-                .get(ItemListFragmentViewModel::class.java)
+            .get(ItemListFragmentViewModel::class.java)
 
 
         /** Create recyclerView adapter and define OnClickListener **/
