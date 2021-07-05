@@ -34,7 +34,7 @@ class ItemListFragment : Fragment() {
         // Inflate the layout for this fragment
         _binding = FragmentItemListBinding.inflate(inflater,container,false)
 
-        //toast with id
+
         itemList = args.catalogId
 
         val activity = requireNotNull(this.activity)
@@ -56,7 +56,7 @@ class ItemListFragment : Fragment() {
             }
         })
 
-
+        //toast with id
         Toast.makeText(context, "Catalog ID: ${args.catalogId}", Toast.LENGTH_LONG).show()
 
 

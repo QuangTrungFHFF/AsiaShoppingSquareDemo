@@ -3,6 +3,7 @@ package com.asiasquare.byteg.shoppingdemo.itemlist
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,10 +21,11 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
         fun bind(item: NetworkItem) {
             binding.apply {
-                binding.anhsanpham.load(item.itemImageSource)
+                anhsanpham.load(item.itemImageSource)
                 tensanpham.text = item.itemName
                 giasanpham.text= item.itemPrice.toString()
             }
+
         }
         companion object{
             fun from(parent: ViewGroup): ItemListViewHolder{

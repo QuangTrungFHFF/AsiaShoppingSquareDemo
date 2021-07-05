@@ -6,11 +6,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
+import com.asiasquare.byteg.shoppingdemo.itemlist.ItemListFragmentViewModel
 
 //class DetailFragment : Fragment() {
 //    private var _binding : FragmentDetailBinding? = null
@@ -53,6 +55,8 @@ class DetailFragment : Fragment(){
 private var _binding : FragmentDetailBinding? = null
 private val binding get() = _binding!!
 
+    private lateinit var viewModel: DetailFragmentViewModel
+
     private val args: DetailFragmentArgs by navArgs()
     private lateinit var itemList: NetworkItem
 
@@ -86,6 +90,10 @@ private val binding get() = _binding!!
             sanPhamThuongHieu.text =itemList.itemBrand
             sanPhamXuatXu.text= itemList.itemOrigin
 
+        }
+        binding.timChiTietActivity.setOnClickListener {
+            Toast.makeText(context, "tim clicked", Toast.LENGTH_SHORT).show()
+            //viewModel.onLikeImageClicking()
         }
     }
 }
