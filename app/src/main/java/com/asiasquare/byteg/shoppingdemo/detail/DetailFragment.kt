@@ -6,14 +6,11 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import coil.load
+import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
-import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
-import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
 //class DetailFragment : Fragment() {
 //    private var _binding : FragmentDetailBinding? = null
@@ -65,8 +62,9 @@ private val binding get() = _binding!!
         val application = requireNotNull(activity).application
         _binding = FragmentDetailBinding.inflate(inflater,container,false)
 
+        val dataSource = AsiaDatabase.getInstance(application).favoriteItemDao
         val itemProperty = DetailFragmentArgs.fromBundle(requireArguments()).selectedItem
-        val viewModelFactory = DetailFragmentViewModel.Factory(itemProperty, application)
+        val viewModelFactory = DetailFragmentViewModel.Factory(dataSource,itemProperty, application)
         ViewModelProvider(
             this, viewModelFactory).get(DetailFragmentViewModel::class.java)
 

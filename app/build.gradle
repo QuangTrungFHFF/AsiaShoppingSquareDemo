@@ -86,6 +86,7 @@ dependencies {
     annotationProcessor "androidx.room:room-compiler:$room_version"
     implementation "androidx.room:room-ktx:$room_version"
 
+
     //Coil - loading image library
     implementation "io.coil-kt:coil:1.2.1"
 

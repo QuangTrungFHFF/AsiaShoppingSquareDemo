@@ -2,11 +2,14 @@ package com.asiasquare.byteg.shoppingdemo.detail
 
 import android.app.Application
 import androidx.lifecycle.*
-import com.asiasquare.byteg.shoppingdemo.R
+import com.asiasquare.byteg.shoppingdemo.database.dao.FavoriteItemDao
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
-import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
-class DetailFragmentViewModel(itemList:NetworkItem, application: Application) : AndroidViewModel(application){
+class DetailFragmentViewModel(
+    val database: FavoriteItemDao,
+    itemList:NetworkItem,
+    application: Application
+    ) : AndroidViewModel(application){
 
     /**
      * List of catalog, observe this to get tha change in database
@@ -24,25 +27,6 @@ class DetailFragmentViewModel(itemList:NetworkItem, application: Application) : 
     }
 
 
-
-
-    /**
-     * Create dummy list for testing
-     */
-//    private fun generateDummyList(){
-//        val detailList = mutableListOf<ItemList>()
-//
-//        detailList.add(ItemList(0,"Gạo & mì các loại", R.drawable.ct_bungao))
-//        detailList.add(ItemList(1,"Thực phẩm đông lạnh", R.drawable.ct_donglanh))
-//        detailList.add(ItemList(2,"Gia vị", R.drawable.ct_nuoccham))
-//        detailList.add(ItemList(3,"Rau, củ, quả", R.drawable.ct_raucu))
-//        detailList.add(ItemList(4,"Đồ khô & ăn vặt", R.drawable.ct_dokho))
-//        detailList.add(ItemList(5,"Thực phẩm đóng hộp", R.drawable.ct_dohop))
-//
-//        _detailList.value= detailList
-//    }
-
-
     fun onPaymentClick( item: NetworkItem){
         _navigateToPayment.value = item
     }
@@ -53,11 +37,12 @@ class DetailFragmentViewModel(itemList:NetworkItem, application: Application) : 
 
 
     class Factory(
+        private val dataSource: FavoriteItemDao,
         private val itemProperty: NetworkItem,
         private val app: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(DetailFragmentViewModel::class.java)){
-                return DetailFragmentViewModel(itemProperty, app) as T
+                return DetailFragmentViewModel(dataSource, itemProperty, app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

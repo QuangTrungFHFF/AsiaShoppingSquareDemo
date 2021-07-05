@@ -1,3 +1,4 @@
+
 package com.asiasquare.byteg.shoppingdemo.backendservice
 
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
