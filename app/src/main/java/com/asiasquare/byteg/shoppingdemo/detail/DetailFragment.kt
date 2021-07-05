@@ -93,7 +93,7 @@ private val binding get() = _binding!!
         }
         binding.timChiTietActivity.setOnClickListener {
             Toast.makeText(context, "tim clicked", Toast.LENGTH_SHORT).show()
-            //viewModel.onLikeImageClicking()
+            viewModel.onLikeImageClicking()
         }
     }
 }
