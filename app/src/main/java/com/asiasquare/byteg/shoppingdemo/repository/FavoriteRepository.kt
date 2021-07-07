@@ -18,4 +18,12 @@ class FavoriteRepository(private val database: AsiaDatabase){
         }
     }
 
+    suspend fun getFavoriteItemById(id: Int) : FavoriteItem? {
+        var item : FavoriteItem? = null
+        withContext(Dispatchers.IO){
+            item = database.favoriteItemDao.get(id)
+        }
+        return item
+    }
+
 }

@@ -1,6 +1,7 @@
 package com.asiasquare.byteg.shoppingdemo.detail
 
 import android.app.Application
+import android.util.Log
 import androidx.core.content.res.FontResourcesParserCompat
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
@@ -15,29 +16,19 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
 
-    /**
-     * List of catalog, observe this to get tha change in database
-     */
-    private val _selectedItem = item
-
-
-    init {
-
-    }
-
-
-    private fun initializeFavoriteList() {
-
-    }
-
+    private val _selectedItem = item.asDomainItem()
 
     fun onAddFavoriteClicking() {
+        viewModelScope.launch {
+            if(favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId)!= null){
+                Log.d("Detail viewmodel","Item da co trong favorite")
+            }else
+            {
+                favoriteItemRepository.addFavoriteItem(_selectedItem.asFavoriteItem())
+            }
 
-
+        }
     }
-
-
-
 
     class Factory(
         private val item: NetworkItem,
