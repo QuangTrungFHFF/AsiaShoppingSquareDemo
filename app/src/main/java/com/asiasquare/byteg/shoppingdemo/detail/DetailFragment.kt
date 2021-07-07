@@ -58,7 +58,7 @@ private val binding get() = _binding!!
     private lateinit var viewModel: DetailFragmentViewModel
 
     private val args: DetailFragmentArgs by navArgs()
-    private lateinit var itemList: NetworkItem
+    private lateinit var item: NetworkItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {
@@ -72,23 +72,21 @@ private val binding get() = _binding!!
         ViewModelProvider(
             this, viewModelFactory).get(DetailFragmentViewModel::class.java)
 
-        itemList =args.selectedItem
+        item =args.selectedItem
 
         return binding.root
-
-
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
-            ivCatalogGrid.load(itemList.itemImageSource)
-            tenSanPham.text = itemList.itemName
-            giaSanPham.text = itemList.itemPrice.toString()
-            moTaSanPham.text = itemList.itemDescription
-            khoiLuongSanPham.text = itemList.itemWeight
-            sanPhamThuongHieu.text =itemList.itemBrand
-            sanPhamXuatXu.text= itemList.itemOrigin
+            ivCatalogGrid.load(item.itemImageSource)
+            tenSanPham.text = item.itemName
+            giaSanPham.text = item.itemPrice.toString()
+            moTaSanPham.text = item.itemDescription
+            khoiLuongSanPham.text = item.itemWeight
+            sanPhamThuongHieu.text =item.itemBrand
+            sanPhamXuatXu.text= item.itemOrigin
 
         }
         binding.timChiTietActivity.setOnClickListener {

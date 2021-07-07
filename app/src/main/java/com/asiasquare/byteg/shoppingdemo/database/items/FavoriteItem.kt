@@ -6,7 +6,7 @@ import androidx.room.PrimaryKey
 
 @Entity(tableName = "favorite_table")
 data class FavoriteItem (
-    @PrimaryKey (autoGenerate = true)
+    @PrimaryKey
     var itemId : Int = 0,
     @ColumnInfo(name = "item_name")
     var itemName: String = "",
@@ -23,7 +23,5 @@ data class FavoriteItem (
     @ColumnInfo(name = "item_brand")
     var itemBrand : String= "",
     @ColumnInfo(name = "item_origin")
-    var itemOrigin : String= "",
-    @ColumnInfo(name = "item_amount")
-    var itemAmount : Int= 0
+    var itemOrigin : String= ""
 )

@@ -18,7 +18,7 @@ import kotlin.properties.Delegates
 class ItemListFragment : Fragment() {
 
     private val args: ItemListFragmentArgs by navArgs()
-    private var itemList by Delegates.notNull<Int>()
+    private var itemListCatalogId by Delegates.notNull<Int>()
 
 
     private var _binding : FragmentItemListBinding? = null
@@ -35,10 +35,10 @@ class ItemListFragment : Fragment() {
         _binding = FragmentItemListBinding.inflate(inflater,container,false)
 
 
-        itemList = args.catalogId
+        itemListCatalogId = args.catalogId
 
         val activity = requireNotNull(this.activity)
-        viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(activity.application,itemList))
+        viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(activity.application,itemListCatalogId))
             .get(ItemListFragmentViewModel::class.java)
 
 
