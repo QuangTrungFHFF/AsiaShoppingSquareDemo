@@ -35,7 +35,7 @@ class FavoriteFragment : Fragment() {
 
         /** Create recyclerView adapter and define OnClickListener **/
         val adapter = FavoriteFragmentAdapter(FavoriteFragmentAdapter.OnClickListener{
-            Toast.makeText(context, it.id, Toast.LENGTH_SHORT).show()
+            Toast.makeText(context, "${it.itemId} - ${it.itemName}", Toast.LENGTH_SHORT).show()
         })
         binding.recyclerViewYeuThich.adapter=adapter
 

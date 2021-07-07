@@ -7,18 +7,19 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewFavoriteItemBinding
 import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
 
-class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): ListAdapter<ItemList, FavoriteFragmentAdapter.FavoriteViewHolder>(DiffCallback) {
+class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): ListAdapter<FavoriteItem, FavoriteFragmentAdapter.FavoriteViewHolder>(DiffCallback) {
 
     /** ViewHolder class **/
     class FavoriteViewHolder(private val binding: GridViewFavoriteItemBinding):RecyclerView.ViewHolder(binding.root) {
         /** Bind item to View, load image here using Coil */
-        fun bind (favorite: ItemList){
-            binding.anhItemYeuThich.load(favorite.imgResource)
-            binding.tenItemYeuThich.text = favorite.textTenSanPham
+        fun bind (favorite: FavoriteItem){
+            binding.anhItemYeuThich.load(favorite.itemImageSource)
+            binding.tenItemYeuThich.text = favorite.itemName
         }
 
         /** inflate the small item in recyclerView **/
@@ -44,13 +45,13 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
         }
     }
 
-    companion object DiffCallback: DiffUtil.ItemCallback<ItemList>(){
-        override fun areItemsTheSame(oldItem: ItemList, newItem: ItemList): Boolean {
-            return oldItem.id == newItem.id
+    companion object DiffCallback: DiffUtil.ItemCallback<FavoriteItem>(){
+        override fun areItemsTheSame(oldItem: FavoriteItem, newItem: FavoriteItem): Boolean {
+            return oldItem.itemId == newItem.itemId
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: ItemList, newItem: ItemList): Boolean {
+        override fun areContentsTheSame(oldItem: FavoriteItem, newItem: FavoriteItem): Boolean {
             return oldItem == newItem
         }
 
@@ -58,8 +59,8 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
     }
 
     /** Simple ClickListener. Return favorite Object info when user click **/
-    class OnClickListener(val clickListener : (favorite : ItemList) -> Unit){
-        fun onClick(favorite: ItemList) = clickListener(favorite)
+    class OnClickListener(val clickListener : (favorite : FavoriteItem) -> Unit){
+        fun onClick(favorite: FavoriteItem) = clickListener(favorite)
     }
 
 
