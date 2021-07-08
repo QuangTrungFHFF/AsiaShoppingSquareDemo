@@ -8,13 +8,19 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
+import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentFavoriteBinding
+import com.asiasquare.byteg.shoppingdemo.databinding.GridViewFavoriteItemBinding
 
 
 class FavoriteFragment : Fragment() {
 
     private var _binding: FragmentFavoriteBinding?=null
     private val binding get()=_binding!!
+
+    //private lateinit var item: FavoriteItem
+
 
     /**
      * Create viewModel, provide application to Factory to create an AndroidViewModel class
@@ -39,11 +45,15 @@ class FavoriteFragment : Fragment() {
         })
         binding.recyclerViewYeuThich.adapter=adapter
 
+
         viewModel.favoriteList.observe(viewLifecycleOwner, Observer{
             it?.let {
                 adapter.submitList(it)
             }
         })
+
+
+
         return binding.root
     }
 

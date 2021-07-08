@@ -18,6 +18,13 @@ class FavoriteRepository(private val database: AsiaDatabase){
         }
     }
 
+    suspend fun deleteFavoriteItem(item: FavoriteItem){
+        withContext(Dispatchers.IO){
+            database.favoriteItemDao.delete(item)
+            Log.d("REPO FAV", "Successful delete item to favorite")
+        }
+    }
+
     suspend fun getFavoriteItemById(id: Int) : FavoriteItem? {
         var item : FavoriteItem? = null
         withContext(Dispatchers.IO){

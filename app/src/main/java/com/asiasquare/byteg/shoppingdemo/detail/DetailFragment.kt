@@ -7,12 +7,12 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import coil.load
-import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
+import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
-import com.asiasquare.byteg.shoppingdemo.itemlist.ItemListFragmentViewModel
 
 
 class DetailFragment : Fragment(){
@@ -35,6 +35,7 @@ class DetailFragment : Fragment(){
         val viewModelFactory = DetailFragmentViewModel.Factory(item,application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailFragmentViewModel::class.java)
 
+
         return binding.root
     }
 
@@ -48,11 +49,26 @@ class DetailFragment : Fragment(){
             khoiLuongSanPham.text = item.itemWeight
             sanPhamThuongHieu.text =item.itemBrand
             sanPhamXuatXu.text= item.itemOrigin
-
         }
+
+        //check if favorite product is in the list or not
+        viewModel.checkFavorite()
+
+        //Change heart color: red if it's a favorite, black if it's not
+        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
+            val checkFavorite = when(viewModel.isFavorite.value){
+                true -> R.drawable.timdo24
+                else -> R.drawable.timden24
+            }
+            binding.ivFavorite.setImageResource(checkFavorite)
+        })
+
+
+
         binding.ivFavorite.setOnClickListener {
-            Toast.makeText(context, "tim clicked", Toast.LENGTH_SHORT).show()
+            //Toast.makeText(context, "Favorite item is added", Toast.LENGTH_SHORT).show()
             viewModel.onAddFavoriteClicking()
         }
+
     }
 }

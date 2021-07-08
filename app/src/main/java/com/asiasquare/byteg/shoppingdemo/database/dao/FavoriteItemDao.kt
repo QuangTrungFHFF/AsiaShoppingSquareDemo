@@ -11,6 +11,9 @@ interface FavoriteItemDao {
     @Insert
     fun insert(item : FavoriteItem)
 
+    @Delete
+    fun delete(item : FavoriteItem)
+
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(item : FavoriteItem)
 

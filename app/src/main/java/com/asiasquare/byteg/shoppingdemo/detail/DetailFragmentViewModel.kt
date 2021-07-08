@@ -2,11 +2,8 @@ package com.asiasquare.byteg.shoppingdemo.detail
 
 import android.app.Application
 import android.util.Log
-import androidx.core.content.res.FontResourcesParserCompat
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
-import com.asiasquare.byteg.shoppingdemo.database.dao.FavoriteItemDao
-import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.*
@@ -18,17 +15,38 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
 
     private val _selectedItem = item.asDomainItem()
 
+    private val _isFavorite =MutableLiveData<Boolean>(true)
+    val isFavorite : LiveData<Boolean>
+        get() = _isFavorite
+
     fun onAddFavoriteClicking() {
         viewModelScope.launch {
             if(favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId)!= null){
                 Log.d("Detail viewmodel","Item da co trong favorite")
+
+                favoriteItemRepository.deleteFavoriteItem(_selectedItem.asFavoriteItem())
+                checkFavorite()
+
             }else
             {
                 favoriteItemRepository.addFavoriteItem(_selectedItem.asFavoriteItem())
+
+                checkFavorite()
             }
 
         }
     }
+
+    fun checkFavorite() {
+        viewModelScope.launch {
+            _isFavorite.value =
+                favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId) !== null
+
+        }
+    }
+
+
+
 
     class Factory(
         private val item: NetworkItem,
