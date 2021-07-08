@@ -20,16 +20,16 @@ FavoriteFragmentViewModel (application: Application) : AndroidViewModel(applicat
 
     val favoriteList = favoriteItemRepository.favoriteItems
 
-   private val _selectedItems =FavoriteItem()
+   private val _selectedItem =FavoriteItem()
 
 
 
     fun onDeleteFavoriteClicking() {
         viewModelScope.launch {
-            if(favoriteItemRepository.getFavoriteItemById(_selectedItems.itemId)!= null){
+            if(favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId)!= null){
                 Log.d("Favorite viewmodel","Item da duoc xoa")
 
-                favoriteItemRepository.deleteFavoriteItem(_selectedItems)
+                favoriteItemRepository.deleteFavoriteItem(_selectedItem)
 
             }
             }
