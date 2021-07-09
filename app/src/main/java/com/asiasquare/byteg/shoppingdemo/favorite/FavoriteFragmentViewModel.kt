@@ -9,6 +9,8 @@ import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.channels.Channel
+import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -20,7 +22,8 @@ FavoriteFragmentViewModel (application: Application) : AndroidViewModel(applicat
 
     val favoriteList = favoriteItemRepository.favoriteItems
 
-
+    private val tasksEventChannel = Channel<TasksEvent>()
+    val tasksEvent = tasksEventChannel.receiveAsFlow()
 
     fun onDeleteFavoriteClicking(favorite : FavoriteItem) {
         viewModelScope.launch {
@@ -34,7 +37,20 @@ FavoriteFragmentViewModel (application: Application) : AndroidViewModel(applicat
 
         }
 
+    fun onTaskSwiped (favorite : FavoriteItem)=viewModelScope.launch{
+        favoriteItemRepository.deleteFavoriteItem(favorite)
+        tasksEventChannel.send(TasksEvent.ShowUndoDeleteTaskMessage(favorite))
+    }
 
+    fun onUndoDeleteClick(favorite : FavoriteItem) = viewModelScope.launch {
+        favoriteItemRepository.addFavoriteItem(favorite)
+    }
+
+    sealed class TasksEvent {
+
+        data class ShowUndoDeleteTaskMessage(val task: FavoriteItem) : TasksEvent()
+
+    }
 
     /**
      * Factory for constructing CatalogFragmentViewModel with parameter

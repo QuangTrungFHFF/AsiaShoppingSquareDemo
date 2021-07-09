@@ -8,11 +8,16 @@ import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
+import androidx.lifecycle.lifecycleScope
+import androidx.recyclerview.widget.ItemTouchHelper
+import androidx.recyclerview.widget.RecyclerView
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentFavoriteBinding
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewFavoriteItemBinding
 import com.asiasquare.byteg.shoppingdemo.detail.DetailFragmentViewModel
+import com.google.android.material.snackbar.Snackbar
+import kotlinx.coroutines.flow.collect
 
 
 class FavoriteFragment : Fragment() {
@@ -44,13 +49,43 @@ class FavoriteFragment : Fragment() {
         binding.recyclerViewYeuThich.adapter=adapter
 
 
+
         viewModel.favoriteList.observe(viewLifecycleOwner, Observer{
             it?.let {
                 adapter.submitList(it)
             }
         })
 
+        /** Swipe delete functionality **/
+        ItemTouchHelper(object : ItemTouchHelper.SimpleCallback(0,
+            ItemTouchHelper.LEFT or ItemTouchHelper.RIGHT){
+            override fun onMove(
+                recyclerView: RecyclerView,
+                viewHolder: RecyclerView.ViewHolder,
+                target: RecyclerView.ViewHolder
+            ): Boolean {
+                return false
+            }
 
+            override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
+                val task = adapter.currentList[viewHolder.adapterPosition]
+                viewModel.onTaskSwiped(task)
+            }
+        }).attachToRecyclerView(binding.recyclerViewYeuThich)
+
+        /** Undo delete functionality **/
+        viewLifecycleOwner.lifecycleScope.launchWhenStarted {
+            viewModel.tasksEvent.collect { event->
+                when (event){
+                    is FavoriteFragmentViewModel.TasksEvent.ShowUndoDeleteTaskMessage -> {
+                        Snackbar.make(requireView(), "Favorite Item is deleted", Snackbar.LENGTH_LONG)
+                            .setAction("UNDO"){
+                                viewModel.onUndoDeleteClick(event.task)
+                            }.show()
+                    }
+                }
+            }
+        }
 
         return binding.root
     }

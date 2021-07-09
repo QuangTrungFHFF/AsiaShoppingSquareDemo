@@ -10,11 +10,12 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewFavoriteItemBinding
+import java.util.*
 
 
 class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): ListAdapter<FavoriteItem, FavoriteFragmentAdapter.FavoriteViewHolder>(DiffCallback) {
 
-    private var favoriteItems: MutableList<FavoriteItem> ?=null
+    //private lateinit var favoriteItems: MutableList<FavoriteItem>
 
 
     /** ViewHolder class **/
@@ -48,6 +49,7 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
 
         val item = getItem(position)
+        //val fl: FavoriteItem = favoriteItems[position]
 
         holder.bind(item)
         holder.itemView.setOnClickListener {
@@ -58,7 +60,9 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
 
             Toast.makeText(it.context, "Deleted $position", Toast.LENGTH_SHORT).show()
             //favoriteItems?.removeAt(position)
+
             onClickListener.onCancelClick(item, position)
+            //onClickListener.onCancelClick(fl, position)
             //viewModel?.onDeleteFavoriteClicking()
             //notifyDataSetChanged()
         }
@@ -80,8 +84,7 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
 
     /** Simple ClickListener. Return favorite Object info when user click **/
     class OnClickListener(val clickListener : (favorite : FavoriteItem) -> Unit){
-        private var viewModel : FavoriteFragmentViewModel?=null
-
+        var viewModel : FavoriteFragmentViewModel?= null
         fun onClick(favorite: FavoriteItem) = clickListener(favorite)
 
         fun onCancelClick(favorite: FavoriteItem, position: Int) {
