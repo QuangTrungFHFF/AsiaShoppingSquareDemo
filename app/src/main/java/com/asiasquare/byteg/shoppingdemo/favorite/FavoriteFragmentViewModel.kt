@@ -20,16 +20,14 @@ FavoriteFragmentViewModel (application: Application) : AndroidViewModel(applicat
 
     val favoriteList = favoriteItemRepository.favoriteItems
 
-   private val _selectedItem =FavoriteItem()
 
 
-
-    fun onDeleteFavoriteClicking() {
+    fun onDeleteFavoriteClicking(favorite : FavoriteItem) {
         viewModelScope.launch {
-            if(favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId)!= null){
+            if(favoriteItemRepository.getFavoriteItemById(favorite.itemId)!= null){
                 Log.d("Favorite viewmodel","Item da duoc xoa")
 
-                favoriteItemRepository.deleteFavoriteItem(_selectedItem)
+                favoriteItemRepository.deleteFavoriteItem(favorite)
 
             }
             }
@@ -41,7 +39,8 @@ FavoriteFragmentViewModel (application: Application) : AndroidViewModel(applicat
     /**
      * Factory for constructing CatalogFragmentViewModel with parameter
      */
-    class Factory(private val app: Application) : ViewModelProvider.Factory{
+    class Factory(
+        private val app: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(FavoriteFragmentViewModel::class.java)){
                 return FavoriteFragmentViewModel(app) as T

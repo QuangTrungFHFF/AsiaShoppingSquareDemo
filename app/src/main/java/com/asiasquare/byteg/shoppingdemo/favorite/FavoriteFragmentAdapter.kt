@@ -2,30 +2,25 @@ package com.asiasquare.byteg.shoppingdemo.favorite
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
-import androidx.navigation.fragment.navArgs
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewFavoriteItemBinding
-import com.asiasquare.byteg.shoppingdemo.itemlist.ItemListFragmentArgs
-import java.util.*
 
 
 class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): ListAdapter<FavoriteItem, FavoriteFragmentAdapter.FavoriteViewHolder>(DiffCallback) {
 
-    //private var favoriteItems: MutableList<FavoriteItem> = Collections.emptyList()
-    //lateinit var database:AsiaDatabase
+    private var favoriteItems: MutableList<FavoriteItem> ?=null
 
 
     /** ViewHolder class **/
     class FavoriteViewHolder(val binding: GridViewFavoriteItemBinding):RecyclerView.ViewHolder(binding.root) {
         /** Bind item to View, load image here using Coil */
+
 
         fun bind (favorite: FavoriteItem){
             binding.anhItemYeuThich.load(favorite.itemImageSource)
@@ -53,7 +48,6 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
     override fun onBindViewHolder(holder: FavoriteViewHolder, position: Int) {
 
         val item = getItem(position)
-        val viewModel : FavoriteFragmentViewModel? = null
 
         holder.bind(item)
         holder.itemView.setOnClickListener {
@@ -61,12 +55,13 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
         }
 
         holder.binding.buttonXoaYeuThich.setOnClickListener {
-            Toast.makeText(it.context, "Deleted $position", Toast.LENGTH_SHORT).show()
-            //favoriteItems.removeAt(position)
-            viewModel?.onDeleteFavoriteClicking()
-            notifyDataSetChanged()
-        }
 
+            Toast.makeText(it.context, "Deleted $position", Toast.LENGTH_SHORT).show()
+            //favoriteItems?.removeAt(position)
+            onClickListener.onCancelClick(item, position)
+            //viewModel?.onDeleteFavoriteClicking()
+            //notifyDataSetChanged()
+        }
 
     }
 
@@ -85,7 +80,14 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
 
     /** Simple ClickListener. Return favorite Object info when user click **/
     class OnClickListener(val clickListener : (favorite : FavoriteItem) -> Unit){
+        private var viewModel : FavoriteFragmentViewModel?=null
+
         fun onClick(favorite: FavoriteItem) = clickListener(favorite)
+
+        fun onCancelClick(favorite: FavoriteItem, position: Int) {
+            viewModel?.onDeleteFavoriteClicking(favorite)
+        }
+
     }
 
 
