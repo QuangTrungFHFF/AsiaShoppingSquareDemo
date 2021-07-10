@@ -15,7 +15,7 @@ import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 class
-FavoriteFragmentViewModel (application: Application) : AndroidViewModel(application) {
+FavoriteFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
@@ -25,24 +25,25 @@ FavoriteFragmentViewModel (application: Application) : AndroidViewModel(applicat
     private val tasksEventChannel = Channel<TasksEvent>()
     val tasksEvent = tasksEventChannel.receiveAsFlow()
 
-    fun onDeleteFavoriteClicking(favorite : FavoriteItem) {
+    fun onDeleteFavoriteClicking(favorite: FavoriteItem) {
         viewModelScope.launch {
-            if(favoriteItemRepository.getFavoriteItemById(favorite.itemId)!= null){
-                Log.d("Favorite viewmodel","Item da duoc xoa")
+            if (favoriteItemRepository.getFavoriteItemById(favorite.itemId) != null) {
+                Log.d("Favorite viewmodel", "Item da duoc xoa")
 
                 favoriteItemRepository.deleteFavoriteItem(favorite)
 
             }
-            }
-
         }
 
-    fun onTaskSwiped (favorite : FavoriteItem)=viewModelScope.launch{
+    }
+
+
+    fun onTaskSwiped(favorite: FavoriteItem) = viewModelScope.launch {
         favoriteItemRepository.deleteFavoriteItem(favorite)
         tasksEventChannel.send(TasksEvent.ShowUndoDeleteTaskMessage(favorite))
     }
 
-    fun onUndoDeleteClick(favorite : FavoriteItem) = viewModelScope.launch {
+    fun onUndoDeleteClick(favorite: FavoriteItem) = viewModelScope.launch {
         favoriteItemRepository.addFavoriteItem(favorite)
     }
 
@@ -56,9 +57,10 @@ FavoriteFragmentViewModel (application: Application) : AndroidViewModel(applicat
      * Factory for constructing CatalogFragmentViewModel with parameter
      */
     class Factory(
-        private val app: Application) : ViewModelProvider.Factory{
+        private val app: Application
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if(modelClass.isAssignableFrom(FavoriteFragmentViewModel::class.java)){
+            if (modelClass.isAssignableFrom(FavoriteFragmentViewModel::class.java)) {
                 return FavoriteFragmentViewModel(app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")

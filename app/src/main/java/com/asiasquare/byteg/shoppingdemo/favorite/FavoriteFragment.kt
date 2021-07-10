@@ -11,11 +11,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
-import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
-import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentFavoriteBinding
-import com.asiasquare.byteg.shoppingdemo.databinding.GridViewFavoriteItemBinding
-import com.asiasquare.byteg.shoppingdemo.detail.DetailFragmentViewModel
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 

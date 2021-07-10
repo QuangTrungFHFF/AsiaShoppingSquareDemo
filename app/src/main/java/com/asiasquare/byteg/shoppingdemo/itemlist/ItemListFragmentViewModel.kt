@@ -9,8 +9,11 @@ import com.asiasquare.byteg.shoppingdemo.backendservice.ServerApi
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import androidx.navigation.fragment.navArgs
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
+
+enum class ListStatus { LOADING, ERROR, DONE }
 
 class ItemListFragmentViewModel(application: Application, catalogId: Int) : AndroidViewModel(application){
 
@@ -27,6 +30,9 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     val text :LiveData<List<NetworkItem>>
         get() = _text
 
+    private val _status = MutableLiveData<ListStatus>()
+    val status: LiveData<ListStatus>
+        get() = _status
 
     init {
         getData(catalogId)
@@ -38,6 +44,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
         viewModelScope.launch {
             try {
                 withContext(Dispatchers.IO){
+                    _status.postValue (ListStatus.LOADING)
                     val listResult = when(catalogId){
                         0-> ServerApi.retrofitService.getDataFirst()
                         1-> ServerApi.retrofitService.getDataSecond()
@@ -47,10 +54,15 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
                         5-> ServerApi.retrofitService.getDataSixth()
                         else -> ServerApi.retrofitService.getDataSeventh()
                     }
+
+                    _status.postValue (ListStatus.DONE)
                     _text.postValue(listResult)
                 }
+
                 Log.d("Get data $catalogId","sucess")
             }catch (e: Exception){
+                _status.postValue (ListStatus.ERROR)
+
                 e.message?.let { Log.d("Get data $catalogId",it) }
             }
         }
