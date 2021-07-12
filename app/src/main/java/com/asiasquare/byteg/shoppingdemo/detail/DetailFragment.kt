@@ -52,11 +52,11 @@ class DetailFragment : Fragment(){
         }
 
         //check if favorite product is in the list or not
-        viewModel.checkFavorite()
+        //viewModel.checkFavorite()
 
         //Change heart color: red if it's a favorite, black if it's not
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
-            val checkFavorite = when(viewModel.isFavorite.value){
+            val checkFavorite = when(it){
                 true -> R.drawable.timdo24
                 else -> R.drawable.timden24
             }
@@ -67,7 +67,7 @@ class DetailFragment : Fragment(){
 
         binding.ivFavorite.setOnClickListener {
             //Toast.makeText(context, "Favorite item is added", Toast.LENGTH_SHORT).show()
-            viewModel.onAddFavoriteClicking()
+            viewModel.onFavoriteClicking()
         }
 
     }
