@@ -28,10 +28,8 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
     fun onDeleteFavoriteClicking(favorite: FavoriteItem) {
         viewModelScope.launch {
             if (favoriteItemRepository.getFavoriteItemById(favorite.itemId) != null) {
-                Log.d("Favorite viewmodel", "Item da duoc xoa")
-
                 favoriteItemRepository.deleteFavoriteItem(favorite)
-
+                Log.d("Favorite viewmodel", "Item da duoc xoa")
             }
         }
 
