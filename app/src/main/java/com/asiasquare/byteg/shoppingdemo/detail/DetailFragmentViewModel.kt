@@ -26,7 +26,6 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
             {
                 favoriteItemRepository.addFavoriteItem(_selectedItem.asFavoriteItem())
             }
-
         }
     }
 
