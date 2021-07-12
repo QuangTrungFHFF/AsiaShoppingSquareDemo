@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
+import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
 import kotlin.properties.Delegates
@@ -49,6 +50,25 @@ class ItemListFragment : Fragment() {
 
         binding.recyclerViewCatalog.adapter = adapter
 
+        /** ERROR, LOADING Event **/
+        viewModel.status.observe(viewLifecycleOwner, Observer {
+            it?.let {
+                when (viewModel.status.value) {
+                    ListStatus.LOADING -> {
+                        binding.statusImage.visibility = View.VISIBLE
+                        binding.statusImage.setImageResource(R.drawable.loading_animation)
+                    }
+                    ListStatus.ERROR -> {
+                        binding.statusImage.visibility = View.VISIBLE
+                        binding.statusImage.setImageResource(R.drawable.ic_connection_error)
+                    }
+                    ListStatus.DONE -> {
+                        binding.statusImage.visibility = View.GONE
+                        binding.progressBar.visibility= View.GONE
+                    }
+                }
+            }
+        })
         /** Update data to adapter **/
         viewModel.text.observe(viewLifecycleOwner, Observer {
             it?.let {
@@ -57,7 +77,7 @@ class ItemListFragment : Fragment() {
         })
 
         //toast with id
-        Toast.makeText(context, "Catalog ID: ${args.catalogId}", Toast.LENGTH_LONG).show()
+        //Toast.makeText(context, "Catalog ID: ${args.catalogId}", Toast.LENGTH_LONG).show()
 
 
         /** Navigate to detail by Id **/
