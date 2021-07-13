@@ -1,6 +1,7 @@
 package com.asiasquare.byteg.shoppingdemo.itemlist
 
 import android.app.Application
+import android.net.NetworkCapabilities
 import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
@@ -8,6 +9,8 @@ import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.backendservice.ServerApi
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import androidx.navigation.fragment.navArgs
+import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
+import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
@@ -15,7 +18,7 @@ import kotlinx.coroutines.withContext
 
 enum class ListStatus { LOADING, ERROR, DONE }
 
-class ItemListFragmentViewModel(application: Application, catalogId: Int) : AndroidViewModel(application){
+class ItemListFragmentViewModel(item: NetworkItem, application: Application, catalogId: Int) : AndroidViewModel(application){
 
 
     /**
@@ -34,8 +37,20 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     val status: LiveData<ListStatus>
         get() = _status
 
+
+    private val database = AsiaDatabase.getInstance(application)
+    private val favoriteItemRepository = FavoriteRepository(database)
+
+    private val _selectedItem = item.asDomainItem()
+
+
+    private val _isFavorite =MutableLiveData<Boolean>()
+    val isFavorite : LiveData<Boolean>
+        get() = _isFavorite
+
     init {
         getData(catalogId)
+        checkFavorite()
     }
 
 
@@ -68,6 +83,32 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
         }
     }
 
+    fun onFavoriteClicking() {
+        viewModelScope.launch {
+            if(isFavorite.value == true){
+                Log.d("ItemList viewmodel","Item is added into Favorite")
+
+                favoriteItemRepository.deleteFavoriteItem(_selectedItem.asFavoriteItem())
+                _isFavorite.value = false
+
+            }else
+            {
+                favoriteItemRepository.addFavoriteItem(_selectedItem.asFavoriteItem())
+
+                _isFavorite.value = true
+            }
+
+        }
+    }
+
+    fun checkFavorite() {
+        viewModelScope.launch {
+            _isFavorite.value =
+                favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId) !== null
+
+        }
+    }
+
     fun onDetailClick( itemList: NetworkItem){
         _navigateToDetail.value = itemList
     }
@@ -77,10 +118,11 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     }
 
 
-    class Factory(private val app: Application, private val catalogId: Int) : ViewModelProvider.Factory{
+    class Factory(private val item: NetworkItem,
+                  private val app: Application, private val catalogId: Int) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(ItemListFragmentViewModel::class.java)){
-                return ItemListFragmentViewModel(app,catalogId) as T
+                return ItemListFragmentViewModel(item, app,catalogId) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }

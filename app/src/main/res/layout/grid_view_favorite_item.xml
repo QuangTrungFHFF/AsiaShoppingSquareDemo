@@ -72,13 +72,13 @@
             android:layout_marginTop="8dp"
             android:layout_marginBottom="8dp"
             android:padding="8dp"
-            android:text="thêm vào giỏ"
+            android:text="Thêm vào giỏ"
             android:textColor="#FFFFFF"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="@+id/button_xoa_yeu_thich"
             app:layout_constraintStart_toEndOf="@+id/anh_item_yeu_thich"
-            app:layout_constraintTop_toBottomOf="@+id/gia_item_yeu_thich" />
-        <!--android:background="@drawable/custom_button"-->
+            app:layout_constraintTop_toBottomOf="@+id/gia_item_yeu_thich"
+            android:background="@drawable/custom_button"/>
 
         <ImageButton
             android:id="@+id/button_xoa_yeu_thich"

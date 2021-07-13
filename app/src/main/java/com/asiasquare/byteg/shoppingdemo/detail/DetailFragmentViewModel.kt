@@ -15,28 +15,25 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
 
     private val _selectedItem = item.asDomainItem()
 
-//    private val _isFavorite =MutableLiveData<Boolean>(true) khong nen de gia tri mac dinh
+
     private val _isFavorite =MutableLiveData<Boolean>()
     val isFavorite : LiveData<Boolean>
         get() = _isFavorite
 
-    //Chi check favorite 1 lan khi moi tao viewmodel
+
     init {
         checkFavorite()
     }
 
     fun onFavoriteClicking() {
         viewModelScope.launch {
-//            if(favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId)!= null){
             if(isFavorite.value == true){
                 Log.d("Detail viewmodel","Item da co trong favorite")
                 favoriteItemRepository.deleteFavoriteItem(_selectedItem.asFavoriteItem())
-//                checkFavorite() ---- khong can thiet
                 _isFavorite.value = false
 
             }else{
                 favoriteItemRepository.addFavoriteItem(_selectedItem.asFavoriteItem())
-                //                checkFavorite() ---- khong can thiet
                 _isFavorite.value = true
             }
         }
