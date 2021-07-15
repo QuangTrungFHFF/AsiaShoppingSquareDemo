@@ -20,8 +20,6 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
 
     val favoriteList = favoriteItemRepository.favoriteItems
 
-
-
     private val tasksEventChannel = Channel<TasksEvent>()
     val tasksEvent = tasksEventChannel.receiveAsFlow()
 
@@ -32,16 +30,8 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
                 Log.d("Favorite viewmodel", "Item da duoc xoa")
             }
         }
-
     }
 
-    fun getCountFavorite(): Int {
-        var itemCount = 0
-        viewModelScope.launch {
-            itemCount = favoriteItemRepository.getFavoriteItemCount()
-        }
-        return itemCount
-    }
 
     fun onTaskSwiped(favorite: FavoriteItem) = viewModelScope.launch {
         favoriteItemRepository.deleteFavoriteItem(favorite)

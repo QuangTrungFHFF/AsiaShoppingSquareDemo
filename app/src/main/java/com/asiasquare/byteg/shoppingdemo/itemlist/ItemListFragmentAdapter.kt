@@ -48,14 +48,14 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
     }
 
     override fun onBindViewHolder(holder: ItemListViewHolder,position: Int) {
-        val itemList = getItem(position)
-        holder.bind(itemList)
+        val item = getItem(position)
+        holder.bind(item)
         holder.itemView.setOnClickListener {
-            onClickListener.onItemClick(itemList)
+            onClickListener.onItemClick(item)
         }
 
         holder.btnFavorite.setOnClickListener {
-            onClickListener.onAddFavoriteClick()
+            onClickListener.onAddFavoriteClick(item)
         }
     }
 
@@ -75,7 +75,7 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
     interface OnClickListener{
         fun onItemClick(item: NetworkItem)
-        fun onAddFavoriteClick()
+        fun onAddFavoriteClick(item: NetworkItem)
     }
 
 }

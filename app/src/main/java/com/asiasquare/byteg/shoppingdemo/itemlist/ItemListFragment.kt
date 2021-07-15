@@ -26,7 +26,7 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: ItemListFragmentViewModel
-    private lateinit var item: NetworkItem
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,7 +39,7 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
         itemListCatalogId = args.catalogId
 
         val activity = requireNotNull(this.activity)
-        viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(item, activity.application,itemListCatalogId))
+        viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(activity.application,itemListCatalogId))
             .get(ItemListFragmentViewModel::class.java)
 
 
@@ -100,8 +100,8 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
         viewModel.onDetailClick(item)
     }
 
-    override fun onAddFavoriteClick() {
-        viewModel.onFavoriteClicking()
+    override fun onAddFavoriteClick(item: NetworkItem) {
+        viewModel.onFavoriteClicking(item)
     }
 
 

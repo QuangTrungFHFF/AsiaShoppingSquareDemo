@@ -11,6 +11,7 @@ import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.asiasquare.byteg.shoppingdemo.databinding.ActivityMainBinding
 import com.asiasquare.byteg.shoppingdemo.favorite.FavoriteFragmentViewModel
+import kotlin.math.absoluteValue
 
 class MainActivity : AppCompatActivity() {
 
@@ -27,10 +28,10 @@ class MainActivity : AppCompatActivity() {
         binding = ActivityMainBinding.inflate(layoutInflater)
         setContentView(binding.root)
 
-        val viewModel: FavoriteFragmentViewModel by lazy {
+        val viewModel: MainViewModel by lazy {
             val activity = requireNotNull(this)
-            ViewModelProvider(this, FavoriteFragmentViewModel.Factory(activity.application))
-                .get(FavoriteFragmentViewModel::class.java)
+            ViewModelProvider(this, MainViewModel.Factory(activity.application))
+                .get(MainViewModel::class.java)
         }
 
         val items= viewModel.getCountFavorite()
