@@ -33,4 +33,12 @@ class FavoriteRepository(private val database: AsiaDatabase){
         return item
     }
 
+    suspend fun getFavoriteItemCount() : Int{
+        var count =0
+        withContext(Dispatchers.IO){
+            count = database.favoriteItemDao.getFavoriteItemsCount()
+        }
+        return count
+    }
+
 }

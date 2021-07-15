@@ -112,7 +112,7 @@ class FavoriteFragment : Fragment(), FavoriteFragmentAdapter.OnClickListener {
                 viewModel.onDeleteFavoriteClicking(favorite)
             })
             // negative button text and action
-            .setNegativeButton("Không", DialogInterface.OnClickListener { dialog, id ->
+            .setNegativeButton("Quay lại", DialogInterface.OnClickListener { dialog, id ->
                 dialog.cancel()
             })
 
