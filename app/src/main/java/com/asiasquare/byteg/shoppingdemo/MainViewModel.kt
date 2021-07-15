@@ -1,11 +1,10 @@
 package com.asiasquare.byteg.shoppingdemo
 
 import android.app.Application
-import androidx.lifecycle.AndroidViewModel
-import androidx.lifecycle.ViewModel
-import androidx.lifecycle.ViewModelProvider
-import androidx.lifecycle.viewModelScope
+import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
+import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
+import com.asiasquare.byteg.shoppingdemo.itemlist.ListStatus
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.launch
 
@@ -14,12 +13,21 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
 
-    fun getCountFavorite(): Int {
-        var itemCount = 0
+
+    private val _itemCount = MutableLiveData<Int>()
+    val itemCount :LiveData<Int>
+        get() = _itemCount
+
+    init {
+        _itemCount.value=0
+    }
+
+    fun getCountFavorite(): Int? {
+
         viewModelScope.launch {
-            itemCount = favoriteItemRepository.getFavoriteItemCount()
+            _itemCount.value = favoriteItemRepository.getFavoriteItemCount()
         }
-        return itemCount
+        return _itemCount.value
     }
 
     /**

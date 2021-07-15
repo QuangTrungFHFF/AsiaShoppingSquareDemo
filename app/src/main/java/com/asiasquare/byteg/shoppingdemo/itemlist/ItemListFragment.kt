@@ -104,5 +104,9 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
         viewModel.onFavoriteClicking(item)
     }
 
+//    override fun onCheckFavorite(item: NetworkItem) {
+//        viewModel.checkFavorite(item)
+//    }
+
 
 }

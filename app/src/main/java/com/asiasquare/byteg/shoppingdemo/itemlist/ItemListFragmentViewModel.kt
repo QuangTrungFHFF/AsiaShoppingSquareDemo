@@ -50,7 +50,6 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
 
     init {
         getData(catalogId)
-        //checkFavorite()
     }
 
 
@@ -104,14 +103,13 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
         }
     }
 
-//    fun checkFavorite() {
-//
-//        viewModelScope.launch {
-//            val item: NetworkItem
-//            (favoriteItemRepository.getFavoriteItemById(item.asDomainItem().asFavoriteItem().itemId) !== null).also { _isFavorite.value = it }
-//
-//        }
-//    }
+
+    fun checkFavorite(item: NetworkItem) {
+        viewModelScope.launch {
+            _isFavorite.value =
+                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().asFavoriteItem().itemId) !== null
+        }
+    }
 
     fun onDetailClick( itemList: NetworkItem){
         _navigateToDetail.value = itemList

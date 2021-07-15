@@ -29,7 +29,10 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
                 }
                 tensanpham.text = item.itemName
                 giasanpham.text= item.itemPrice.toString()
+
+
             }
+
 
         }
         companion object{
@@ -56,6 +59,8 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
         holder.btnFavorite.setOnClickListener {
             onClickListener.onAddFavoriteClick(item)
+            //onClickListener.onCheckFavorite(item)
+
         }
     }
 
@@ -73,10 +78,12 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
     /** Simple ClickListener. Return itemList Object info when user click **/
 
-    interface OnClickListener{
+    interface OnClickListener {
         fun onItemClick(item: NetworkItem)
         fun onAddFavoriteClick(item: NetworkItem)
-    }
+        //fun onCheckFavorite(item: NetworkItem)
 
+
+    }
 }
 
