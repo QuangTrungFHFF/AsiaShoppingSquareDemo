@@ -42,13 +42,12 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
         }
     }
 
-    fun checkFavorite() {
+    private fun checkFavorite() {
         viewModelScope.launch {
             _isFavorite.value =
                 favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId) !== null
         }
     }
-
 
 
     class Factory(
