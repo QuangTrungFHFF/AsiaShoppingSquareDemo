@@ -4,15 +4,12 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
-import com.asiasquare.byteg.shoppingdemo.database.dao.FavoriteItemDao
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
-import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
-import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
-import kotlinx.coroutines.withContext
+
 
 class
 FavoriteFragmentViewModel(application: Application) : AndroidViewModel(application) {
@@ -22,7 +19,7 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
 
     val favoriteList = favoriteItemRepository.favoriteItems
 
-    //val items  = favoriteList.getValue()!!.size
+
 
     private val tasksEventChannel = Channel<TasksEvent>()
     val tasksEvent = tasksEventChannel.receiveAsFlow()
@@ -36,9 +33,17 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
         }
 
     }
+//    fun getCount() {
+//        viewModelScope.launch {
+//            favoriteList.getValue()!!.size
+//        }
+//    }
 
-
-
+    fun getCountFavorite(): Int {
+        viewModelScope.launch {
+            favoriteItemRepository.getFavoriteItemCount()
+        }
+    }
 
     fun onTaskSwiped(favorite: FavoriteItem) = viewModelScope.launch {
         favoriteItemRepository.deleteFavoriteItem(favorite)
@@ -50,9 +55,7 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     sealed class TasksEvent {
-
         data class ShowUndoDeleteTaskMessage(val task: FavoriteItem) : TasksEvent()
-
     }
 
     /**
