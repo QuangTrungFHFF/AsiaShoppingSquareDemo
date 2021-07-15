@@ -16,7 +16,7 @@ import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
 import kotlin.properties.Delegates
 
 
-class ItemListFragment : Fragment() {
+class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
 
     private val args: ItemListFragmentArgs by navArgs()
     private var itemListCatalogId by Delegates.notNull<Int>()
@@ -26,7 +26,7 @@ class ItemListFragment : Fragment() {
     private val binding get() = _binding!!
 
     private lateinit var viewModel: ItemListFragmentViewModel
-
+    private lateinit var item: NetworkItem
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -39,14 +39,12 @@ class ItemListFragment : Fragment() {
         itemListCatalogId = args.catalogId
 
         val activity = requireNotNull(this.activity)
-        viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(activity.application,itemListCatalogId))
+        viewModel = ViewModelProvider(this, ItemListFragmentViewModel.Factory(item, activity.application,itemListCatalogId))
             .get(ItemListFragmentViewModel::class.java)
 
 
         /** Create recyclerView adapter and define OnClickListener **/
-        val adapter = ItemListFragmentAdapter(ItemListFragmentAdapter.OnClickListener{
-            viewModel.onDetailClick(it)
-        })
+        val adapter = ItemListFragmentAdapter(this)
 
         binding.recyclerViewCatalog.adapter = adapter
 
@@ -96,6 +94,14 @@ class ItemListFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onItemClick(item: NetworkItem) {
+        viewModel.onDetailClick(item)
+    }
+
+    override fun onAddFavoriteClick() {
+        viewModel.onFavoriteClicking()
     }
 
 

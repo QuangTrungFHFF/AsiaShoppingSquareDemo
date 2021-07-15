@@ -18,6 +18,12 @@ class MainActivity : AppCompatActivity() {
     private lateinit var navController: NavController
     private lateinit var appBarConfiguration: AppBarConfiguration
 
+//        val database = AsiaDatabase.getInstance(application!!)
+//        val favoriteItemRepository = FavoriteRepository(database)
+//        val favoriteList = favoriteItemRepository.favoriteItems
+
+//        val items: Int  = favoriteList.value!!.size //error
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         binding = ActivityMainBinding.inflate(layoutInflater)
@@ -25,9 +31,21 @@ class MainActivity : AppCompatActivity() {
 
 
         //Setup navigation controller
-        val navHostFragment = supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
+        val navHostFragment =
+            supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         binding.bottomNav.setupWithNavController(navController)
+
+//        binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {
+//            backgroundColor = resources.getColor(R.color.secondary_800)
+//            badgeTextColor = resources.getColor(R.color.white)
+//            maxCharacterCount = 3
+//            if (items!=null) {
+//                number = items // should be change
+//                isVisible = true
+//            } else {
+//                isVisible = false}
+//        }
 
     }
 }
