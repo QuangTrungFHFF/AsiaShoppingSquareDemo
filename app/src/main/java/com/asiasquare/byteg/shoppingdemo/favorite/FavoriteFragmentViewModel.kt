@@ -2,6 +2,7 @@ package com.asiasquare.byteg.shoppingdemo.favorite
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
@@ -33,16 +34,13 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
         }
 
     }
-//    fun getCount() {
-//        viewModelScope.launch {
-//            favoriteList.getValue()!!.size
-//        }
-//    }
 
     fun getCountFavorite(): Int {
+        var itemCount = 0
         viewModelScope.launch {
-            favoriteItemRepository.getFavoriteItemCount()
+            itemCount = favoriteItemRepository.getFavoriteItemCount()
         }
+        return itemCount
     }
 
     fun onTaskSwiped(favorite: FavoriteItem) = viewModelScope.launch {
