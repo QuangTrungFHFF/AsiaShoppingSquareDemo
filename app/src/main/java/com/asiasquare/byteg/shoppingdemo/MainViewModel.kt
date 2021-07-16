@@ -11,22 +11,23 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
 
+    val favoriteItemCount = favoriteItemRepository.favoriteLiveItemCount
 
-    private val _itemCount = MutableLiveData<Int>()
-    val itemCount :LiveData<Int>
-        get() = _itemCount
 
-    init {
-        getCountFavorite()
-    }
+//    private val _itemCount = MutableLiveData<Int>()
+//    val itemCount :LiveData<Int>
+//        get() = _itemCount
 
-    fun getCountFavorite(): Int? {
+//    init {
+//      getCountFavorite()
+//    }
 
-        viewModelScope.launch {
-            _itemCount.value = favoriteItemRepository.getFavoriteItemCount()
-        }
-        return _itemCount.value
-    }
+//    fun getCountFavorite(): Int? {
+//        viewModelScope.launch {
+//            _itemCount.value = favoriteItemRepository.getFavoriteItemCount()
+//        }
+//        return _itemCount.value
+//    }
 
     /**
      * Factory for constructing CatalogFragmentViewModel with parameter

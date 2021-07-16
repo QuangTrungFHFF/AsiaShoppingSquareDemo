@@ -41,24 +41,37 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         binding.bottomNav.setupWithNavController(navController)
 
-
-
-        viewModel.itemCount.observe(this, Observer  {
-            //override fun onChanged (){
-                binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {
-                    backgroundColor = resources.getColor(R.color.secondary_800)
-                    badgeTextColor = resources.getColor(R.color.white)
-                    maxCharacterCount = 3
-                    if (viewModel.itemCount.value != null ) {
-                        number = viewModel.itemCount.value!! // should be change
-                        isVisible = true
-                    } else {
-                        isVisible = false
-                    }
+        viewModel.favoriteItemCount.observe(this, Observer {
+            binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {
+                backgroundColor = resources.getColor(R.color.secondary_800)
+                badgeTextColor = resources.getColor(R.color.white)
+                maxCharacterCount = 3
+                if (viewModel.favoriteItemCount.value != null ) {
+                    number = viewModel.favoriteItemCount.value!! // should be change
+                    isVisible = true
+                } else {
+                    isVisible = false
                 }
-            //}
-
+            }
         })
+
+
+//        viewModel.itemCount.observe(this, Observer  {
+//            //override fun onChanged (){
+//                binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {
+//                    backgroundColor = resources.getColor(R.color.secondary_800)
+//                    badgeTextColor = resources.getColor(R.color.white)
+//                    maxCharacterCount = 3
+//                    if (viewModel.itemCount.value != null ) {
+//                        number = viewModel.itemCount.value!! // should be change
+//                        isVisible = true
+//                    } else {
+//                        isVisible = false
+//                    }
+//                }
+//            //}
+//
+//        })
 
 
     }

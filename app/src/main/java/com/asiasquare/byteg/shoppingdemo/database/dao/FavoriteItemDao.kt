@@ -32,4 +32,7 @@ interface FavoriteItemDao {
     @Query(value = "SELECT COUNT(itemId) from favorite_table")
     fun getFavoriteItemsCount() : Int
 
+    @Query(value = "SELECT COUNT(itemId) from favorite_table")
+    fun getLiveItemsCount() : LiveData<Int>
+
 }

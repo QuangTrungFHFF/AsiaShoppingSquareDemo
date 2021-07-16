@@ -11,6 +11,8 @@ class FavoriteRepository(private val database: AsiaDatabase){
 
     val favoriteItems: LiveData<List<FavoriteItem>> = database.favoriteItemDao.getAllItemsInFavoriteList()
 
+    val favoriteLiveItemCount: LiveData<Int> = database.favoriteItemDao.getLiveItemsCount()
+
     suspend fun addFavoriteItem(item: FavoriteItem){
         withContext(Dispatchers.IO){
             database.favoriteItemDao.insert(item)
