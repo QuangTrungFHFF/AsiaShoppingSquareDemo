@@ -1,20 +1,16 @@
 package com.asiasquare.byteg.shoppingdemo
 
-import android.content.Context
+import android.os.Build
 import android.os.Bundle
-import android.util.AttributeSet
-import android.view.View
 import androidx.appcompat.app.AppCompatActivity
-import androidx.lifecycle.LifecycleOwner
-import androidx.lifecycle.Observer
+import androidx.core.content.res.ResourcesCompat
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
 import androidx.navigation.ui.setupWithNavController
-import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.databinding.ActivityMainBinding
-import shark.LibraryLeakReferenceMatcher
+
 
 class MainActivity : AppCompatActivity() {
 
@@ -41,12 +37,12 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         binding.bottomNav.setupWithNavController(navController)
 
-        viewModel.favoriteItemCount.observe(this, Observer {
+        viewModel.favoriteItemCount.observe(this, {
             binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {
-                backgroundColor = resources.getColor(R.color.secondary_800)
-                badgeTextColor = resources.getColor(R.color.white)
+                backgroundColor = ResourcesCompat.getColor(resources, R.color.secondary_500, null)
+                badgeTextColor = ResourcesCompat.getColor(resources, R.color.white, null)
                 maxCharacterCount = 3
-                if (viewModel.favoriteItemCount.value != null ) {
+                if (viewModel.favoriteItemCount.value != null && viewModel.favoriteItemCount.value!! >0 ) {
                     number = viewModel.favoriteItemCount.value!! // should be change
                     isVisible = true
                 } else {
@@ -55,23 +51,6 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
-//        viewModel.itemCount.observe(this, Observer  {
-//            //override fun onChanged (){
-//                binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {
-//                    backgroundColor = resources.getColor(R.color.secondary_800)
-//                    badgeTextColor = resources.getColor(R.color.white)
-//                    maxCharacterCount = 3
-//                    if (viewModel.itemCount.value != null ) {
-//                        number = viewModel.itemCount.value!! // should be change
-//                        isVisible = true
-//                    } else {
-//                        isVisible = false
-//                    }
-//                }
-//            //}
-//
-//        })
 
 
     }

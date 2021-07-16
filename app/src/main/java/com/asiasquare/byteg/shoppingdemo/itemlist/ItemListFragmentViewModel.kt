@@ -1,18 +1,13 @@
 package com.asiasquare.byteg.shoppingdemo.itemlist
 
 import android.app.Application
-import android.net.NetworkCapabilities
 import android.util.Log
-import android.widget.Toast
 import androidx.lifecycle.*
-import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.backendservice.ServerApi
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
-import androidx.navigation.fragment.navArgs
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.Dispatchers
-import kotlinx.coroutines.delay
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
@@ -29,9 +24,9 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     val navigateToDetail : LiveData<NetworkItem?>
         get() = _navigateToDetail
 
-    private val _text = MutableLiveData<List<NetworkItem>>()
-    val text :LiveData<List<NetworkItem>>
-        get() = _text
+    private val _list = MutableLiveData<List<NetworkItem>>()
+    val list :LiveData<List<NetworkItem>>
+        get() = _list
 
     private val _status = MutableLiveData<ListStatus>()
     val status: LiveData<ListStatus>
@@ -70,7 +65,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
                     }
 
                     _status.postValue (ListStatus.DONE)
-                    _text.postValue(listResult)
+                    _list.postValue(listResult)
 
                 }
 

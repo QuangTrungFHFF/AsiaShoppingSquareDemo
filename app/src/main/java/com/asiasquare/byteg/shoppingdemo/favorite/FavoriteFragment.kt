@@ -12,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
+import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentFavoriteBinding
 import com.google.android.material.snackbar.Snackbar
@@ -68,7 +69,7 @@ class FavoriteFragment : Fragment(), FavoriteFragmentAdapter.OnClickListener {
             }
 
             override fun onSwiped(viewHolder: RecyclerView.ViewHolder, direction: Int) {
-                val task = adapter.currentList[viewHolder.adapterPosition]
+                val task = adapter.currentList[viewHolder.absoluteAdapterPosition]
                 viewModel.onTaskSwiped(task)
             }
         }).attachToRecyclerView(binding.recyclerViewYeuThich)

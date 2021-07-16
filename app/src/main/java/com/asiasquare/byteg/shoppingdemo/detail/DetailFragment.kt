@@ -1,5 +1,6 @@
 package com.asiasquare.byteg.shoppingdemo.detail
 
+import android.annotation.SuppressLint
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import androidx.fragment.app.Fragment
@@ -39,20 +40,19 @@ class DetailFragment : Fragment(){
         return binding.root
     }
 
+    @SuppressLint("SetTextI18n")
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
         binding.apply {
             ivCatalogGrid.load(item.itemImageSource)
             tenSanPham.text = item.itemName
-            giaSanPham.text = item.itemPrice.toString()
+            giaSanPham.text = "€"+item.itemPrice.toString()
             moTaSanPham.text = item.itemDescription
             khoiLuongSanPham.text = item.itemWeight
             sanPhamThuongHieu.text =item.itemBrand
             sanPhamXuatXu.text= item.itemOrigin
         }
 
-        //check if favorite product is in the list or not
-        //viewModel.checkFavorite()
 
         //Change heart color: red if it's a favorite, black if it's not
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {

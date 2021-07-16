@@ -14,20 +14,6 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
     val favoriteItemCount = favoriteItemRepository.favoriteLiveItemCount
 
 
-//    private val _itemCount = MutableLiveData<Int>()
-//    val itemCount :LiveData<Int>
-//        get() = _itemCount
-
-//    init {
-//      getCountFavorite()
-//    }
-
-//    fun getCountFavorite(): Int? {
-//        viewModelScope.launch {
-//            _itemCount.value = favoriteItemRepository.getFavoriteItemCount()
-//        }
-//        return _itemCount.value
-//    }
 
     /**
      * Factory for constructing CatalogFragmentViewModel with parameter
