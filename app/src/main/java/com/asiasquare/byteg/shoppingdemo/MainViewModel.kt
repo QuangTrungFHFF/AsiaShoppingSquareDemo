@@ -3,8 +3,6 @@ package com.asiasquare.byteg.shoppingdemo
 import android.app.Application
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
-import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
-import com.asiasquare.byteg.shoppingdemo.itemlist.ListStatus
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.launch
 
@@ -19,7 +17,7 @@ class MainViewModel(application: Application) : AndroidViewModel(application) {
         get() = _itemCount
 
     init {
-        _itemCount.value=0
+        getCountFavorite()
     }
 
     fun getCountFavorite(): Int? {
