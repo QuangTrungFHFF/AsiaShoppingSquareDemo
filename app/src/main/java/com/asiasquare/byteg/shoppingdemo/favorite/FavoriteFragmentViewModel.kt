@@ -16,8 +16,8 @@ import kotlinx.coroutines.launch
 class
 FavoriteFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _navigateToDetail = MutableLiveData<FavoriteItem?>()
-    val navigateToDetail : MutableLiveData<FavoriteItem?>
+    private val _navigateToDetail = MutableLiveData<NetworkItem?>()
+    val navigateToDetail : MutableLiveData<NetworkItem?>
         get() = _navigateToDetail
 
     private val database = AsiaDatabase.getInstance(application)
