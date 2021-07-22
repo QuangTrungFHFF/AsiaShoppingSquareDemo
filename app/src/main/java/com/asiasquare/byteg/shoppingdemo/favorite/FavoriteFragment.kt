@@ -10,11 +10,13 @@ import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.lifecycle.lifecycleScope
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.ItemTouchHelper
 import androidx.recyclerview.widget.RecyclerView
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentFavoriteBinding
+import com.asiasquare.byteg.shoppingdemo.itemlist.ItemListFragmentDirections
 import com.google.android.material.snackbar.Snackbar
 import kotlinx.coroutines.flow.collect
 
@@ -52,6 +54,16 @@ class FavoriteFragment : Fragment(), FavoriteFragmentAdapter.OnClickListener {
                 } else
                     binding.emptyView.visibility = View.GONE
                 adapter.submitList(it)
+            }
+        })
+
+        /** Navigate to detail by Id **/
+        viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
+            if (null != it) {
+                this.findNavController().navigate(
+                    FavoriteFragmentDirections.actionFavoriteFragmentToDetailFragment(it)
+                )
+                viewModel.onNavigationComplete()
             }
         })
 
@@ -98,7 +110,7 @@ class FavoriteFragment : Fragment(), FavoriteFragmentAdapter.OnClickListener {
     }
 
     override fun onItemClick(favorite: FavoriteItem) {
-        TODO("Toan bo item")
+        viewModel.onDetailClick(favorite)
     }
 
     override fun onDeleteClick(favorite: FavoriteItem) {

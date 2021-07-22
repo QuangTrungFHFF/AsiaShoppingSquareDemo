@@ -4,6 +4,7 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.*
@@ -49,7 +50,7 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
 
     class Factory(
         private val item: NetworkItem,
-        private val app: Application) : ViewModelProvider.Factory{
+                private val app: Application) : ViewModelProvider.Factory{
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
             if(modelClass.isAssignableFrom(DetailFragmentViewModel::class.java)){
                 return DetailFragmentViewModel( item, app) as T

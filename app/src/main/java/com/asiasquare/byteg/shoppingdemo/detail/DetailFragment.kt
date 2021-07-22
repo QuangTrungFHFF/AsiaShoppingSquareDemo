@@ -12,6 +12,7 @@ import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.R
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
 
@@ -33,7 +34,7 @@ class DetailFragment : Fragment(){
 
         val application = requireNotNull(activity).application
         item = args.selectedItem
-        val viewModelFactory = DetailFragmentViewModel.Factory(item,application)
+        val viewModelFactory = DetailFragmentViewModel.Factory(item, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailFragmentViewModel::class.java)
 
 

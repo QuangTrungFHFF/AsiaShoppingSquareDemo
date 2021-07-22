@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
+import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
@@ -14,6 +15,10 @@ import kotlinx.coroutines.launch
 
 class
 FavoriteFragmentViewModel(application: Application) : AndroidViewModel(application) {
+
+    private val _navigateToDetail = MutableLiveData<FavoriteItem?>()
+    val navigateToDetail : MutableLiveData<FavoriteItem?>
+        get() = _navigateToDetail
 
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
@@ -44,6 +49,14 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
 
     sealed class TasksEvent {
         data class ShowUndoDeleteTaskMessage(val task: FavoriteItem) : TasksEvent()
+    }
+
+    fun onDetailClick( item: FavoriteItem){
+        _navigateToDetail.value = item.asDomainItem().asNetworkItem()
+    }
+
+    fun onNavigationComplete(){
+        _navigateToDetail.value = null
     }
 
     /**
