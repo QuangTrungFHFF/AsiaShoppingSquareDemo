@@ -8,8 +8,11 @@ import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 @Dao
 interface ItemDao {
 
-    @Insert
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
     fun insert(item : LocalItem)
+
+    @Insert(onConflict = OnConflictStrategy.REPLACE)
+    fun insertList(items : List<LocalItem>)
 
     @Update(onConflict = OnConflictStrategy.REPLACE)
     fun update(item : LocalItem)
