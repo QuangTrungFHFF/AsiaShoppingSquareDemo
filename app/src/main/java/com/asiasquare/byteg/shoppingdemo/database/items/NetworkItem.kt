@@ -54,3 +54,21 @@ data class NetworkItem(
         )
     }
 }
+
+data class NetworkItemContainer(val networkItems: List<NetworkItem>)
+fun NetworkItemContainer.asLocalItems() : List<LocalItem>{
+    return networkItems.map {
+        LocalItem(
+            itemId = it.itemId,
+            itemName = it.itemName,
+            itemPrice = it.itemPrice,
+            itemDiscountedPrice = 0.00,
+            itemImageSource = it.itemImageSource,
+            itemWeight = it.itemWeight,
+            itemDescription = it.itemDescription,
+            itemBrand = it.itemBrand,
+            itemOrigin = it.itemOrigin
+        )
+    }
+}
+

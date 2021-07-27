@@ -7,6 +7,7 @@ import com.asiasquare.byteg.shoppingdemo.backendservice.ServerApi
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
+import com.asiasquare.byteg.shoppingdemo.repository.ItemRepository
 import kotlinx.coroutines.Dispatchers
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
@@ -19,6 +20,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     /**
      * List of catalog, observe this to get the change in database
      */
+
 
     private val _navigateToDetail = MutableLiveData<NetworkItem?>()
     val navigateToDetail : LiveData<NetworkItem?>
@@ -35,7 +37,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
 
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
-
+    private val itemRepository = ItemRepository(database)
 
 
 
@@ -47,36 +49,49 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
         getData(catalogId)
     }
 
-
-
     private fun getData(catalogId: Int){
         viewModelScope.launch {
-            try {
-                withContext(Dispatchers.IO){
-                    _status.postValue (ListStatus.LOADING)
-                    val listResult = when(catalogId){
-                        0-> ServerApi.retrofitService.getDataFirst()
-                        1-> ServerApi.retrofitService.getDataSecond()
-                        2-> ServerApi.retrofitService.getDataThird()
-                        3-> ServerApi.retrofitService.getDataFourth()
-                        4-> ServerApi.retrofitService.getDataFifth()
-                        5-> ServerApi.retrofitService.getDataSixth()
-                        else -> ServerApi.retrofitService.getDataSeventh()
-                    }
+            _status.postValue (ListStatus.LOADING)
 
-                    _status.postValue (ListStatus.DONE)
-                    _list.postValue(listResult)
+            val items = itemRepository.getDataByCatalogId(catalogId)
 
-                }
+            _list.postValue(items)
 
-                Log.d("Get data $catalogId","sucess")
-            }catch (e: Exception){
-                _status.postValue (ListStatus.ERROR)
+            _status.postValue (ListStatus.DONE)
 
-                e.message?.let { Log.d("Get data $catalogId",it) }
-            }
+            itemRepository.addListLocalItem(items)
         }
     }
+
+
+//    private fun getData(catalogId: Int){
+//        viewModelScope.launch {
+//            try {
+//                withContext(Dispatchers.IO){
+//                    _status.postValue (ListStatus.LOADING)
+//                    val listResult = when(catalogId){
+//                        0-> ServerApi.retrofitService.getDataFirst()
+//                        1-> ServerApi.retrofitService.getDataSecond()
+//                        2-> ServerApi.retrofitService.getDataThird()
+//                        3-> ServerApi.retrofitService.getDataFourth()
+//                        4-> ServerApi.retrofitService.getDataFifth()
+//                        5-> ServerApi.retrofitService.getDataSixth()
+//                        else -> ServerApi.retrofitService.getDataSeventh()
+//                    }
+//
+//                    _status.postValue (ListStatus.DONE)
+//                    _list.postValue(listResult)
+//
+//                }
+//
+//                Log.d("Get data $catalogId","sucess")
+//            }catch (e: Exception){
+//                _status.postValue (ListStatus.ERROR)
+//
+//                e.message?.let { Log.d("Get data $catalogId",it) }
+//            }
+//        }
+//    }
 
     fun onFavoriteClicking(item: NetworkItem) {
 
