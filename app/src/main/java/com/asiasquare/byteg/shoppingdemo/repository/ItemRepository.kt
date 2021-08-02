@@ -12,6 +12,7 @@ class ItemRepository(private val database: AsiaDatabase) {
 
     val localItems: LiveData<List<LocalItem>> = database.itemDao.getAllItems()
 
+
     suspend fun getDataByCatalogId(catalogId: Int): List<NetworkItem>{
         var listResult = listOf<NetworkItem>()
         try {

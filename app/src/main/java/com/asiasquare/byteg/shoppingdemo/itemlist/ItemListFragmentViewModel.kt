@@ -2,6 +2,7 @@ package com.asiasquare.byteg.shoppingdemo.itemlist
 
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.backendservice.ServerApi
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
@@ -114,12 +115,6 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     }
 
 
-    fun checkFavorite(item: NetworkItem) {
-        viewModelScope.launch {
-            _isFavorite.value =
-                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().asFavoriteItem().itemId) !== null
-        }
-    }
 
     fun onDetailClick( itemList: NetworkItem){
         _navigateToDetail.value = itemList

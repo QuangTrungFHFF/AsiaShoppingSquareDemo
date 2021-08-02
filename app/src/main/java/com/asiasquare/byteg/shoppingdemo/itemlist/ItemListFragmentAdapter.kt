@@ -3,7 +3,6 @@ package com.asiasquare.byteg.shoppingdemo.itemlist
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
-import android.widget.Toast
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
@@ -20,7 +19,7 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
     class ItemListViewHolder (private val binding: GridViewItemListBinding):
         RecyclerView.ViewHolder(binding.root)  {
 
-        val btnFavorite= binding.imageViewTim
+        val btnFavorite= binding.imageViewAddFavorite
         @SuppressLint("SetTextI18n")
         fun bind(item: NetworkItem) {
             binding.apply {

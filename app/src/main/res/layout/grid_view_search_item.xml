@@ -40,15 +40,14 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/anhsanpham"
-            />
+            app:layout_constraintTop_toBottomOf="@id/anhsanpham" />
 
         <TextView
             android:id="@+id/giasanpham"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginStart="6dp"
-            tools:text="50.000"
+            tools:text="50.000 "
             android:textSize="24sp"
             android:textColor="#fa3223"
             app:layout_constraintStart_toStartOf="parent"
@@ -68,15 +67,13 @@
             app:layout_constraintVertical_bias="1.0"
             android:src="@drawable/add" />
 
-
-        <!--  //TODO SALE-->
         <TextView
             android:id="@+id/giakhuyenmai"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="4dp"
             android:layout_marginEnd="4dp"
-            tools:text="40.000"
+            android:text="40.000"
             android:textColor="#fa3223"
             android:visibility="invisible"
             app:layout_constraintEnd_toEndOf="@+id/tensanpham"

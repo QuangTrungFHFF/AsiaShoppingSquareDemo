@@ -10,10 +10,13 @@ import com.asiasquare.byteg.shoppingdemo.database.customers.LocalAddress
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "local_items_table")
+@Parcelize
 data class LocalItem(
     @PrimaryKey
     @ColumnInfo(name = "item_id")
     var itemId : Int,
+    @ColumnInfo(name = "item_brand_id")
+    var itemBrandId: Int = 0,
     @ColumnInfo(name = "item_name")
     var itemName: String,
     @ColumnInfo(name = "item_price")
@@ -30,4 +33,20 @@ data class LocalItem(
     var itemBrand : String,
     @ColumnInfo(name = "item_origin")
     var itemOrigin : String
-)
+) : Parcelable {
+
+    fun asDomainItem(): Item {
+        return Item(
+            itemId = itemId,
+            itemBrandId = itemBrandId,
+            itemName = itemName,
+            itemPrice = itemPrice,
+            itemDiscountedPrice = 0.00,
+            itemImageSource = itemImageSource,
+            itemWeight = itemWeight,
+            itemDescription = itemDescription,
+            itemBrand = itemBrand,
+            itemOrigin = itemOrigin
+        )
+    }
+}
