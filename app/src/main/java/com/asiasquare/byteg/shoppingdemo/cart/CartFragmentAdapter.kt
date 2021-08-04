@@ -7,18 +7,21 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
+import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GirdViewCartItemBinding
-import com.asiasquare.byteg.shoppingdemo.datamodel.ItemList
 
-class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAdapter<ItemList, CartFragmentAdapter.CartViewHolder>(DiffCallback){
+class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAdapter<ShoppingBasketItem, CartFragmentAdapter.CartViewHolder>(DiffCallback){
 
     class CartViewHolder(private val binding: GirdViewCartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
+        val btDelete = binding.buttonXoaGioHang
 
-        fun bind(cart: ItemList) {
+        fun bind(cart: ShoppingBasketItem) {
             binding.apply {
-                binding.anhItemGioHang.load(cart.imgResource)
-                tenItemGioHang.text = cart.textTenSanPham
+                binding.anhItemGioHang.load(cart.itemImageSource)
+                tenItemGioHang.text = cart.itemName
+                giaItemGioHang.text = cart.itemPrice.toString()
 
             }
         }
@@ -47,23 +50,27 @@ class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAd
 
         }
 
+        holder.btDelete.setOnClickListener {
+            onClickListener.onDeleteClick(item)
+        }
+
     }
 
-    companion object DiffCallback : DiffUtil.ItemCallback<ItemList>(){
-        override fun areItemsTheSame(oldItem: ItemList, newItem: ItemList): Boolean {
-            return oldItem.id == newItem.id
+    companion object DiffCallback : DiffUtil.ItemCallback<ShoppingBasketItem>(){
+        override fun areItemsTheSame(oldItem: ShoppingBasketItem, newItem: ShoppingBasketItem): Boolean {
+            return oldItem.itemId == newItem.itemId
         }
 
         @SuppressLint("DiffUtilEquals")
-        override fun areContentsTheSame(oldItem: ItemList, newItem: ItemList): Boolean {
+        override fun areContentsTheSame(oldItem: ShoppingBasketItem, newItem: ShoppingBasketItem): Boolean {
             return oldItem == newItem
         }
 
     }
 
     /** Simple ClickListener. Return cart Object info when user click **/
-    class OnClickListener(val clickListener : (cart : ItemList) -> Unit){
-        fun onClick(cart : ItemList) = clickListener(cart)
+    interface OnClickListener{
+        fun onDeleteClick(cart: ShoppingBasketItem)
     }
 
 

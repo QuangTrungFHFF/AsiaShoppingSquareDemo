@@ -27,7 +27,6 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
-
             android:textColor="#fa3223"
             app:layout_constraintBottom_toTopOf="@id/button_dat_hang"
             app:layout_constraintEnd_toEndOf="parent"

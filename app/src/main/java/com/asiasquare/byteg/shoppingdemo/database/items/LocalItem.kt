@@ -2,11 +2,8 @@ package com.asiasquare.byteg.shoppingdemo.database.items
 
 import android.os.Parcelable
 import androidx.room.ColumnInfo
-import androidx.room.Embedded
 import androidx.room.Entity
 import androidx.room.PrimaryKey
-import com.asiasquare.byteg.shoppingdemo.database.customers.Address
-import com.asiasquare.byteg.shoppingdemo.database.customers.LocalAddress
 import kotlinx.parcelize.Parcelize
 
 @Entity(tableName = "local_items_table")
@@ -38,7 +35,6 @@ data class LocalItem(
     fun asDomainItem(): Item {
         return Item(
             itemId = itemId,
-            itemBrandId = itemBrandId,
             itemName = itemName,
             itemPrice = itemPrice,
             itemDiscountedPrice = 0.00,

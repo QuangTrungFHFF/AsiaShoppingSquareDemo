@@ -8,23 +8,21 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class NetworkItem(
     @Json(name = "id")
-    val itemId : Int,
-    @Json(name = "idHang")
-    val itemBrandId: Int,
+    val itemId: Int,
     @Json(name = "tenSanPham")
     val itemName: String,
     @Json(name = "giaSanPham")
-    val itemPrice : Double,
+    val itemPrice: Double,
     @Json(name = "hinhAnhSanPham")
-    val itemImageSource : String,
+    val itemImageSource: String,
     @Json(name = "khoiLuong")
-    val itemWeight : String,
+    val itemWeight: String,
     @Json(name = "moTa")
-    val itemDescription : String,
+    val itemDescription: String,
     @Json(name = "thuongHieu")
-    val itemBrand : String,
+    val itemBrand: String,
     @Json(name = "xuatXu")
-    val itemOrigin : String
+    val itemOrigin: String
 ) : Parcelable {
     fun asLocalItem() : LocalItem {
         return LocalItem(
@@ -42,7 +40,6 @@ data class NetworkItem(
     fun asDomainItem() : Item {
         return Item(
             itemId = itemId,
-            itemBrandId = itemBrandId,
             itemName = itemName,
             itemPrice = itemPrice,
             itemDiscountedPrice = 0.00,

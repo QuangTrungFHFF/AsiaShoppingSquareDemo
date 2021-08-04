@@ -7,9 +7,7 @@ import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentBlankBinding
-import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
 
 
 class BlankFragment : Fragment() {

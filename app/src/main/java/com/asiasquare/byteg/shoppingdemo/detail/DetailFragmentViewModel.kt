@@ -1,11 +1,13 @@
 package com.asiasquare.byteg.shoppingdemo.detail
 
+import android.R
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
-import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
+import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
+import com.asiasquare.byteg.shoppingdemo.repository.CartRepository
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.*
 
@@ -13,13 +15,15 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
 
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
+    private val cartItemRepository = CartRepository(database)
+
 
     private val _selectedItem = item.asDomainItem()
-
 
     private val _isFavorite =MutableLiveData<Boolean>()
     val isFavorite : LiveData<Boolean>
         get() = _isFavorite
+
 
 
     init {
@@ -46,6 +50,21 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
                 favoriteItemRepository.getFavoriteItemById(_selectedItem.itemId) !== null
         }
     }
+
+
+    fun onCartClicking() {
+        viewModelScope.launch {
+            if (cartItemRepository.getCartItemById(_selectedItem.itemId) != null) {
+                cartItemRepository.updateCartItem(_selectedItem.asCartItem())
+                Log.d("Detail viewmodel", "So Luong da duoc update")
+            } else
+
+                cartItemRepository.addCartItem(_selectedItem.asCartItem())
+            Log.d("Detail viewmodel","Them Item vao Shopping Basket")
+            }
+        }
+
+
 
 
     class Factory(

@@ -75,8 +75,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@id/anh_item_gio_hang"
         app:layout_constraintTop_toBottomOf="@+id/gia_item_gio_hang"
-        app:layout_constraintVertical_bias="0.571" />
-    <!--android:src="@drawable/minus"-->
+        app:layout_constraintVertical_bias="0.571"
+        android:src="@drawable/minus"/>
 
     <TextView
         android:id="@+id/so_luong_item"
@@ -101,8 +101,8 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintStart_toEndOf="@+id/so_luong_item"
         app:layout_constraintTop_toBottomOf="@+id/gia_item_gio_hang"
-        app:layout_constraintVertical_bias="0.52" />
-    <!--android:src="@drawable/add"-->
+        app:layout_constraintVertical_bias="0.52"
+        android:src="@drawable/add"/>
 
     <ImageButton
         android:id="@+id/button_xoa_gio_hang"
@@ -111,8 +111,8 @@
         android:background="@android:color/transparent"
         android:textSize="17sp"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
-    <!--android:src="@drawable/cancel_64"-->
+        app:layout_constraintTop_toTopOf="parent"
+        android:src="@drawable/cancel_64" />
 
 
 

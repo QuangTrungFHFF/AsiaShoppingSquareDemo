@@ -7,13 +7,13 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.ArrayAdapter
 import android.widget.Toast
-import androidx.lifecycle.Observer
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.R
-import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
+import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
 
 
@@ -54,9 +54,18 @@ class DetailFragment : Fragment(){
             sanPhamXuatXu.text= item.itemOrigin
         }
 
+        /** Create spinner button **/
+        val amount = arrayListOf<Int>()
+        for (i in 1..10) {amount.add(i)}
 
-        //Change heart color: red if it's a favorite, black if it's not
-        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
+        val arrayAdapter =
+            context?.let { ArrayAdapter(it, R.layout.spinner_item_custom,amount) }
+        arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
+        binding.spinner.adapter= arrayAdapter
+
+
+        /** Change heart color: red if it's a favorite, black if it is not **/
+        viewModel.isFavorite.observe(viewLifecycleOwner, {
             val checkFavorite = when(it){
                 true -> R.drawable.timdo24
                 else -> R.drawable.timden24
@@ -65,11 +74,15 @@ class DetailFragment : Fragment(){
         })
 
 
-
         binding.ivFavorite.setOnClickListener {
-            //Toast.makeText(context, "Favorite item is added", Toast.LENGTH_SHORT).show()
             viewModel.onFavoriteClicking()
         }
+
+        binding.buttonMua.setOnClickListener {
+            viewModel.onCartClicking()
+            Toast.makeText(context, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show()
+        }
+
 
     }
 }

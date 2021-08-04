@@ -9,9 +9,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
+import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentCartBinding
+import com.asiasquare.byteg.shoppingdemo.favorite.FavoriteFragmentAdapter
 
-class CartFragment : Fragment() {
+class CartFragment : Fragment(), CartFragmentAdapter.OnClickListener {
 
     /** binding will only exist between onAttach and on Detach **/
     private var _binding : FragmentCartBinding? = null
@@ -35,9 +37,12 @@ class CartFragment : Fragment() {
         _binding = FragmentCartBinding.inflate(inflater,container,false)
 
         /** Create recyclerView adapter and define OnClickListener **/
-        val adapter = CartFragmentAdapter(CartFragmentAdapter.OnClickListener{
-            Toast.makeText(context, it.textTenSanPham, Toast.LENGTH_SHORT).show()
-        })
+        val adapter = CartFragmentAdapter(this)
+        binding.recyclerViewGioHang.adapter = adapter
+
+//        val adapter = CartFragmentAdapter(CartFragmentAdapter.OnClickListener{
+//            Toast.makeText(context, it.textTenSanPham, Toast.LENGTH_SHORT).show()
+//        })
 
         binding.recyclerViewGioHang.adapter = adapter
 
@@ -54,6 +59,10 @@ class CartFragment : Fragment() {
     override fun onDestroyView() {
         super.onDestroyView()
         _binding = null
+    }
+
+    override fun onDeleteClick(cart: ShoppingBasketItem) {
+        viewModel.onDeleteCartClicking(cart)
     }
 
 
