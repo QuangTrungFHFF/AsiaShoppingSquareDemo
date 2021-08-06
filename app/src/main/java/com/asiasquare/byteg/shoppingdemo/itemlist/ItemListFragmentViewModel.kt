@@ -60,7 +60,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
 
             _status.postValue (ListStatus.DONE)
 
-            itemRepository.addListLocalItem(items)
+            //itemRepository.addListLocalItem(items)
         }
     }
 

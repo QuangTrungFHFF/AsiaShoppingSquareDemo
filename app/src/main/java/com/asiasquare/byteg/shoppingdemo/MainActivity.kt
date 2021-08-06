@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.asiasquare.byteg.shoppingdemo.databinding.ActivityMainBinding
 
@@ -36,6 +37,9 @@ class MainActivity : AppCompatActivity() {
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
         binding.bottomNav.setupWithNavController(navController)
+
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController)
 
         viewModel.favoriteItemCount.observe(this, {
             binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {

@@ -60,7 +60,7 @@ class CatalogFragment : Fragment() {
         viewModel.navigateToCatalog.observe(viewLifecycleOwner, Observer { catalog ->
             catalog?.let {
                 this.findNavController().navigate(
-                    CatalogFragmentDirections.actionCatalogFragmentToItemListFragment(catalog.id)
+                    CatalogFragmentDirections.actionCatalogFragmentToItemListFragment(catalog.id, catalog.name)
                 )
                 viewModel.onNavigationComplete()
             }

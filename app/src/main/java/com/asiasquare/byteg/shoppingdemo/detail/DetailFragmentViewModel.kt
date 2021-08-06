@@ -1,17 +1,17 @@
 package com.asiasquare.byteg.shoppingdemo.detail
 
-import android.R
+
 import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
-import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.repository.CartRepository
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.*
 
-class DetailFragmentViewModel(item:NetworkItem, application: Application) : AndroidViewModel(application){
+class DetailFragmentViewModel(item: NetworkItem, application: Application) :
+    AndroidViewModel(application) {
 
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
@@ -20,11 +20,9 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
 
     private val _selectedItem = item.asDomainItem()
 
-    private val _isFavorite =MutableLiveData<Boolean>()
-    val isFavorite : LiveData<Boolean>
+    private val _isFavorite = MutableLiveData<Boolean>()
+    val isFavorite: LiveData<Boolean>
         get() = _isFavorite
-
-
 
     init {
         checkFavorite()
@@ -32,12 +30,12 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
 
     fun onFavoriteClicking() {
         viewModelScope.launch {
-            if(isFavorite.value == true){
-                Log.d("Detail viewmodel","Item da co trong favorite")
+            if (isFavorite.value == true) {
+                Log.d("Detail viewmodel", "Item da co trong favorite")
                 favoriteItemRepository.deleteFavoriteItem(_selectedItem.asFavoriteItem())
                 _isFavorite.value = false
 
-            }else{
+            } else {
                 favoriteItemRepository.addFavoriteItem(_selectedItem.asFavoriteItem())
                 _isFavorite.value = true
             }
@@ -60,22 +58,23 @@ class DetailFragmentViewModel(item:NetworkItem, application: Application) : Andr
             } else
 
                 cartItemRepository.addCartItem(_selectedItem.asCartItem())
-            Log.d("Detail viewmodel","Them Item vao Shopping Basket")
-            }
+            Log.d("Detail viewmodel", "Them Item vao Shopping Basket")
         }
-
-
+    }
 
 
     class Factory(
         private val item: NetworkItem,
-                private val app: Application) : ViewModelProvider.Factory{
+        private val app: Application
+    ) : ViewModelProvider.Factory {
         override fun <T : ViewModel?> create(modelClass: Class<T>): T {
-            if(modelClass.isAssignableFrom(DetailFragmentViewModel::class.java)){
-                return DetailFragmentViewModel( item, app) as T
+            if (modelClass.isAssignableFrom(DetailFragmentViewModel::class.java)) {
+                return DetailFragmentViewModel(item, app) as T
             }
             throw IllegalArgumentException("Unable to construct viewmodel")
         }
 
     }
 }
+
+

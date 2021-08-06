@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/itemListFragment"
         android:name="com.asiasquare.byteg.shoppingdemo.itemlist.ItemListFragment"
-        android:label="Sản Phẩm"
+        android:label="{name}"
         tools:layout="@layout/fragment_item_list">
         <argument
             android:name="catalogId"
@@ -28,11 +28,14 @@
         <action
             android:id="@+id/action_itemListFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <argument
+            android:name="name"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"
         android:name="com.asiasquare.byteg.shoppingdemo.detail.DetailFragment"
-        android:label="Chi Tiết"
+        android:label="Chi Tiết Sản Phẩm"
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="selectedItem"
@@ -46,7 +49,7 @@
     <fragment
         android:id="@+id/favoriteFragment"
         android:name="com.asiasquare.byteg.shoppingdemo.favorite.FavoriteFragment"
-        android:label="Yêu Thích"
+        android:label="Danh Sách Yêu Thích"
         tools:layout="@layout/fragment_favorite">
         <action
             android:id="@+id/action_favoriteFragment_to_detailFragment"

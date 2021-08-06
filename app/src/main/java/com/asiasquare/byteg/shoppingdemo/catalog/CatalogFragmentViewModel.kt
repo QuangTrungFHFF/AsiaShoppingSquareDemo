@@ -3,7 +3,10 @@ package com.asiasquare.byteg.shoppingdemo.catalog
 import android.app.Application
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.R
+import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.datamodel.Catalog
+import com.asiasquare.byteg.shoppingdemo.repository.ItemRepository
+import kotlinx.coroutines.launch
 
 class CatalogFragmentViewModel(application: Application) : AndroidViewModel(application){
 
@@ -18,9 +21,12 @@ class CatalogFragmentViewModel(application: Application) : AndroidViewModel(appl
     val navigateToCatalog : LiveData<Catalog?>
         get() = _navigateToCatalog
 
+    private val database = AsiaDatabase.getInstance(application)
+    private val itemRepository = ItemRepository(database)
 
     init {
         generateDummyList()
+        getData()
     }
 
 
@@ -38,6 +44,18 @@ class CatalogFragmentViewModel(application: Application) : AndroidViewModel(appl
         catalogList.add(Catalog(5,"Thực phẩm đóng hộp", R.drawable.ct_dohop))
 
         _catalogList.value= catalogList
+    }
+
+    /**
+     * insert Data into local table
+     */
+    private fun getData(){
+        viewModelScope.launch {
+            for (i in 0..5) {
+                val items = itemRepository.getDataByCatalogId(i)
+                itemRepository.addListLocalItem(items)
+            }
+        }
     }
 
     /** Pass catalog value when onClick **/
