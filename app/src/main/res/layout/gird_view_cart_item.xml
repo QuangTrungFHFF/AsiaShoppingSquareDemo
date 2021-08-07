@@ -79,7 +79,7 @@
         android:src="@drawable/minus"/>
 
     <TextView
-        android:id="@+id/so_luong_item"
+        android:id="@+id/tv_item_amount"
         android:layout_width="48dp"
         android:layout_height="48dp"
         android:layout_marginTop="8dp"
@@ -99,7 +99,7 @@
         android:layout_marginBottom="8dp"
         android:textSize="10sp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toEndOf="@+id/so_luong_item"
+        app:layout_constraintStart_toEndOf="@+id/tv_item_amount"
         app:layout_constraintTop_toBottomOf="@+id/gia_item_gio_hang"
         app:layout_constraintVertical_bias="0.52"
         android:src="@drawable/add"/>

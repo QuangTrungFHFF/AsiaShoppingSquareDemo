@@ -22,7 +22,7 @@ class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAd
                 binding.anhItemGioHang.load(cart.itemImageSource)
                 tenItemGioHang.text = cart.itemName
                 giaItemGioHang.text = cart.itemPrice.toString()
-
+                tvItemAmount.text = cart.itemAmount.toString()
             }
         }
 
