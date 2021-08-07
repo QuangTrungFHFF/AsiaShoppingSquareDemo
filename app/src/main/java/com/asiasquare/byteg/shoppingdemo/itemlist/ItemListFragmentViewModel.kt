@@ -41,7 +41,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     private val favoriteItemRepository = FavoriteRepository(database)
     private val itemRepository = ItemRepository(database)
 
-    val localItemList = itemRepository.localItems
+    val localItemList = itemRepository.getLocalItemListByCatalogId(catalogId)
 
     private val _isFavorite =MutableLiveData<Boolean>()
     val isFavorite : LiveData<Boolean>

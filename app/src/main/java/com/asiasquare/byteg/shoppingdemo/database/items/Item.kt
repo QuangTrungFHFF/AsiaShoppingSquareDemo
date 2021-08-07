@@ -7,9 +7,10 @@ import kotlinx.parcelize.Parcelize
 @Parcelize
 data class Item(
     val itemId: Int,
+    val itemBrandId: Int,
     val itemName: String,
     val itemPrice: Double,
-    val itemDiscountedPrice: Double,
+    val itemDiscountedPrice: Double = 0.0,
     val itemImageSource: String,
     val itemWeight: String,
     val itemDescription: String,
@@ -19,6 +20,7 @@ data class Item(
     fun asLocalItem() : LocalItem {
         return LocalItem(
             itemId = itemId,
+            itemBrandId = itemBrandId,
             itemName = itemName,
             itemPrice = itemPrice,
             itemDiscountedPrice = itemDiscountedPrice,
@@ -32,6 +34,7 @@ data class Item(
     fun asFavoriteItem() : FavoriteItem{
         return FavoriteItem(
             itemId = itemId,
+            itemBrandId = itemBrandId,
             itemName = itemName,
             itemPrice = itemPrice,
             itemDiscountedPrice = itemDiscountedPrice,
@@ -46,6 +49,7 @@ data class Item(
     fun asCartItem(amount: Int) : ShoppingBasketItem{
         return ShoppingBasketItem(
             itemId = itemId,
+            itemBrandId = itemBrandId,
             itemName = itemName,
             itemPrice = itemPrice,
             itemDiscountedPrice = itemDiscountedPrice,
@@ -61,6 +65,7 @@ data class Item(
     fun asNetworkItem() : NetworkItem{
         return NetworkItem(
             itemId = itemId,
+            itemBrandId = itemBrandId,
             itemName = itemName,
             itemPrice = itemPrice,
             //itemDiscountedPrice = itemDiscountedPrice,
