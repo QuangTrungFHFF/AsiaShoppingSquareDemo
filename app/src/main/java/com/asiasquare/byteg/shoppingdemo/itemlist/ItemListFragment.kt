@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.fragment.findNavController
 import androidx.navigation.fragment.navArgs
 import com.asiasquare.byteg.shoppingdemo.R
+import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentItemListBinding
 import kotlin.properties.Delegates
@@ -68,7 +69,7 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
             }
         })
         /** Update data to adapter **/
-        viewModel.list.observe(viewLifecycleOwner, Observer {
+        viewModel.localItemList.observe(viewLifecycleOwner, Observer {
             it?.let {
                 adapter.submitList(it)
             }
@@ -100,11 +101,11 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
         _binding = null
     }
 
-    override fun onItemClick(item: NetworkItem) {
+    override fun onItemClick(item: LocalItem) {
         viewModel.onDetailClick(item)
     }
 
-    override fun onAddFavoriteClick(item: NetworkItem) {
+    override fun onAddFavoriteClick(item: LocalItem) {
         viewModel.onFavoriteClicking(item)
     }
 

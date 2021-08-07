@@ -6,6 +6,7 @@ import android.widget.Toast
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
+import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import kotlinx.coroutines.channels.Channel
@@ -16,8 +17,8 @@ import kotlinx.coroutines.launch
 class
 FavoriteFragmentViewModel(application: Application) : AndroidViewModel(application) {
 
-    private val _navigateToDetail = MutableLiveData<NetworkItem?>()
-    val navigateToDetail : MutableLiveData<NetworkItem?>
+    private val _navigateToDetail = MutableLiveData<LocalItem?>()
+    val navigateToDetail : MutableLiveData<LocalItem?>
         get() = _navigateToDetail
 
     private val database = AsiaDatabase.getInstance(application)
@@ -52,7 +53,7 @@ FavoriteFragmentViewModel(application: Application) : AndroidViewModel(applicati
     }
 
     fun onDetailClick( item: FavoriteItem){
-        _navigateToDetail.value = item.asDomainItem().asNetworkItem()
+        _navigateToDetail.value = item.asDomainItem().asLocalItem()
     }
 
     fun onNavigationComplete(){

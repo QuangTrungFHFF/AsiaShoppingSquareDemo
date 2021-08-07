@@ -12,6 +12,7 @@ import android.widget.Toast
 import androidx.navigation.fragment.navArgs
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.R
+import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
@@ -25,7 +26,7 @@ class DetailFragment : Fragment(){
     private lateinit var viewModel: DetailFragmentViewModel
 
     private val args: DetailFragmentArgs by navArgs()
-    private lateinit var item: NetworkItem
+    private lateinit var item: LocalItem
 
     override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?,
                               savedInstanceState: Bundle?): View? {

@@ -36,7 +36,7 @@
         tools:layout="@layout/fragment_detail">
         <argument
             android:name="selectedItem"
-            app:argType="com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem" />
+            app:argType="com.asiasquare.byteg.shoppingdemo.database.items.LocalItem" />
     </fragment>
     <fragment
         android:id="@+id/cartFragment"

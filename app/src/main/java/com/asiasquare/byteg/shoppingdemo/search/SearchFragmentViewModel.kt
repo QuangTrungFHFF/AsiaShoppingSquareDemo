@@ -26,8 +26,8 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
     val searchItems = searchFlow.asLiveData()
 
 
-    private val _navigateToDetail = MutableLiveData<NetworkItem?>()
-    val navigateToDetail : MutableLiveData<NetworkItem?>
+    private val _navigateToDetail = MutableLiveData<LocalItem?>()
+    val navigateToDetail : MutableLiveData<LocalItem?>
         get() = _navigateToDetail
 
 
@@ -36,7 +36,7 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
         get() = _isFavorite
 
     fun onDetailClick( item: LocalItem){
-        _navigateToDetail.value = item.asDomainItem().asNetworkItem()
+        _navigateToDetail.value = item
     }
 
     fun onNavigationComplete(){
