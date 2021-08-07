@@ -6,7 +6,9 @@ import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
+import com.asiasquare.byteg.shoppingdemo.itemlist.ListStatus
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
+import com.asiasquare.byteg.shoppingdemo.repository.ItemRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
@@ -15,8 +17,7 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
 
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
-
-
+    private val itemRepository = ItemRepository(database)
 
     val searchQuery = MutableStateFlow("")
     private val searchFlow = searchQuery.flatMapLatest {
@@ -34,6 +35,29 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
     private val _isFavorite =MutableLiveData<Boolean>()
     val isFavorite : LiveData<Boolean>
         get() = _isFavorite
+
+
+    init {
+        getData()
+    }
+
+    private fun getData(){
+        viewModelScope.launch {
+            val items = itemRepository.getAllData()
+            saveDataToLocalDatabase(items)
+        }
+    }
+
+    private fun saveDataToLocalDatabase(items: List<NetworkItem>){
+        viewModelScope.launch {
+            try {
+                itemRepository.addListLocalItem(items)
+            }catch (e: Exception){
+                e.message?.let { Log.d("Search: Get all data",it) }
+            }
+        }
+
+    }
 
     fun onDetailClick( item: LocalItem){
         _navigateToDetail.value = item

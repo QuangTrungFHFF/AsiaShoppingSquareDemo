@@ -33,7 +33,7 @@ interface ShoppingBasketItemDao {
     @Query(value = "SELECT COUNT(itemId) from shopping_basket_table")
     fun getCartItemsCount() : Int
 
-    @Query(value = "SELECT COUNT(itemId) from shopping_basket_table")
-    fun getLiveCartItemsCount() : LiveData<Int>
+    @Query(value = "SELECT SUM(item_amount) from shopping_basket_table")
+    fun getLiveAmountItemsCount() : LiveData<Int>
 
 }

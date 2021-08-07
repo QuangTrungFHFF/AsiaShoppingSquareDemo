@@ -22,6 +22,43 @@
             tools:listitem="@layout/gird_view_cart_item"
             />
 
+        <RelativeLayout
+
+            android:id="@+id/empty_view"
+            android:visibility="invisible"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="4dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="4dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.35">
+
+            <ImageView
+                android:id="@+id/empty_shelter_image"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:src="@drawable/shopping_cart_128" />
+
+            <TextView
+                android:id="@+id/empty_title_text"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/empty_shelter_image"
+                android:layout_centerHorizontal="true"
+                android:fontFamily="sans-serif-medium"
+                android:paddingTop="16dp"
+                android:textSize="@dimen/textsize_blank_site"
+                android:text="@string/empty_view_title_shopping_cart"
+                android:textAppearance="?android:textAppearanceMedium" />
+
+
+        </RelativeLayout>
+
         <TextView
             android:id="@+id/tong_tien"
             android:layout_width="wrap_content"
@@ -38,9 +75,10 @@
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:gravity="center"
-            android:text="Tiến hành đặt hàng"
+            android:text="@string/tien_hang_dat_hang"
             android:textColor="#FFFFFF"
             android:textSize="20sp"
+            android:background="@color/colorAccent"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toStartOf="parent" />
     </androidx.constraintlayout.widget.ConstraintLayout>

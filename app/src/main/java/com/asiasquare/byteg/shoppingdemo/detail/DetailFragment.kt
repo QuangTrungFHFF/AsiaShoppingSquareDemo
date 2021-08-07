@@ -53,9 +53,9 @@ class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
             tenSanPham.text = item.itemName
             giaSanPham.text = "€"+item.itemPrice.toString()
             moTaSanPham.text = item.itemDescription
-            khoiLuongSanPham.text = item.itemWeight
-            sanPhamThuongHieu.text =item.itemBrand
-            sanPhamXuatXu.text= item.itemOrigin
+            khoiLuongSanPham.text = "Khối lượng: "+item.itemWeight
+            sanPhamThuongHieu.text ="Thương hiệu: "+item.itemBrand
+            sanPhamXuatXu.text= "Xuấtxứ: "+item.itemOrigin
         }
 
         /** Create spinner button **/

@@ -7,7 +7,6 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
-import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GirdViewCartItemBinding
 
@@ -16,12 +15,15 @@ class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAd
     class CartViewHolder(private val binding: GirdViewCartItemBinding) :
         RecyclerView.ViewHolder(binding.root) {
         val btDelete = binding.buttonXoaGioHang
+        val btAdd = binding.buttonTang
+        val btMinus = binding.buttonGiam
 
+        @SuppressLint("SetTextI18n")
         fun bind(cart: ShoppingBasketItem) {
             binding.apply {
                 binding.anhItemGioHang.load(cart.itemImageSource)
                 tenItemGioHang.text = cart.itemName
-                giaItemGioHang.text = cart.itemPrice.toString()
+                giaItemGioHang.text = "€" + cart.itemPrice.toString()
                 tvItemAmount.text = cart.itemAmount.toString()
             }
         }
@@ -53,7 +55,12 @@ class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAd
         holder.btDelete.setOnClickListener {
             onClickListener.onDeleteClick(item)
         }
-
+        holder.btAdd.setOnClickListener {
+            onClickListener.onAddClick(item)
+        }
+        holder.btMinus.setOnClickListener {
+            onClickListener.onMinusClick(item)
+        }
     }
 
     companion object DiffCallback : DiffUtil.ItemCallback<ShoppingBasketItem>(){
@@ -71,6 +78,8 @@ class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAd
     /** Simple ClickListener. Return cart Object info when user click **/
     interface OnClickListener{
         fun onDeleteClick(cart: ShoppingBasketItem)
+        fun onAddClick(cart: ShoppingBasketItem)
+        fun onMinusClick(cart: ShoppingBasketItem)
     }
 
 

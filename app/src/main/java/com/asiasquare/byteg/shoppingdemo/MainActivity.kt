@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.asiasquare.byteg.shoppingdemo.databinding.ActivityMainBinding
 
@@ -37,13 +38,20 @@ class MainActivity : AppCompatActivity() {
         navController = navHostFragment.navController
         binding.bottomNav.setupWithNavController(navController)
 
+        setSupportActionBar(binding.toolbar)
+        setupActionBarWithNavController(navController)
+
+
+        /**
+         * Show Favorite Badge
+         */
         viewModel.favoriteItemCount.observe(this, {
             binding.bottomNav.getOrCreateBadge(R.id.favoriteFragment).apply {
                 backgroundColor = ResourcesCompat.getColor(resources, R.color.secondary_500, null)
                 badgeTextColor = ResourcesCompat.getColor(resources, R.color.white, null)
                 maxCharacterCount = 3
                 if (viewModel.favoriteItemCount.value != null && viewModel.favoriteItemCount.value!! >0 ) {
-                    number = viewModel.favoriteItemCount.value!! // should be change
+                    number = viewModel.favoriteItemCount.value!!
                     isVisible = true
                 } else {
                     isVisible = false
@@ -51,11 +59,27 @@ class MainActivity : AppCompatActivity() {
             }
         })
 
-
-
+        /**
+         * Show Shopping Basket Badge
+         */
+        viewModel.cartAmountItemCount.observe(this, {
+            binding.bottomNav.getOrCreateBadge(R.id.cartFragment).apply {
+                backgroundColor = ResourcesCompat.getColor(resources, R.color.secondary_500, null)
+                badgeTextColor = ResourcesCompat.getColor(resources, R.color.white, null)
+                maxCharacterCount = 3
+                if (viewModel.cartAmountItemCount.value != null && viewModel.cartAmountItemCount.value!! >0 ) {
+                    number = viewModel.cartAmountItemCount.value!!
+                    isVisible = true
+                } else {
+                    isVisible = false
+                }
+            }
+        })
     }
 
-
+    override fun onSupportNavigateUp(): Boolean {
+        return navController.navigateUp() || super.onSupportNavigateUp()
+    }
 
 
 

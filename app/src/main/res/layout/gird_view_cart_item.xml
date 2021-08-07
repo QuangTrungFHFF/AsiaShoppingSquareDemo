@@ -49,7 +49,7 @@
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
         android:layout_height="0dp"
-        android:text="Khối Lượng: 220g"
+        tools:text="Khối Lượng: 220g"
         app:layout_constraintStart_toEndOf="@id/anh_item_gio_hang"
         app:layout_constraintTop_toBottomOf="@id/ten_item_gio_hang" />
 
@@ -58,7 +58,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="#fa3223"
-        android:text="50.000"
+        tools:text="50.000"
         android:layout_marginTop="5dp"
         android:layout_marginStart="10dp"
         app:layout_constraintStart_toEndOf="@id/anh_item_gio_hang"

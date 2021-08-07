@@ -20,7 +20,7 @@
     <fragment
         android:id="@+id/itemListFragment"
         android:name="com.asiasquare.byteg.shoppingdemo.itemlist.ItemListFragment"
-        android:label="Sản Phẩm"
+        android:label="{catalogName}"
         tools:layout="@layout/fragment_item_list">
         <argument
             android:name="catalogId"
@@ -28,6 +28,9 @@
         <action
             android:id="@+id/action_itemListFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
+        <argument
+            android:name="catalogName"
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/detailFragment"

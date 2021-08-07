@@ -52,8 +52,15 @@ class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
             it?.let {
                 if (viewModel.searchQuery.value.isNotEmpty()) {
                     binding.recyclerviewSearch.visibility = View.VISIBLE
-                } else
+                }
+                else
                     binding.recyclerviewSearch.visibility = View.GONE
+
+                if (it.isEmpty()) {
+                    binding.findEmptyTv.visibility = View.VISIBLE
+                }else
+                    binding.findEmptyTv.visibility = View.GONE
+
                 adapter.submitList(it)
             }
         })

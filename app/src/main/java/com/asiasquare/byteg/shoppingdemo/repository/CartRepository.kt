@@ -11,7 +11,7 @@ class CartRepository(private val database: AsiaDatabase){
 
     val cartItems: LiveData<List<ShoppingBasketItem>> = database.basketItemDao.getAllItemsInBasket()
 
-    val cartLiveItemCount: LiveData<Int> = database.basketItemDao.getLiveCartItemsCount()
+    val cartLiveAmountItemCount: LiveData<Int> = database.basketItemDao.getLiveAmountItemsCount()
 
     suspend fun addCartItem(item: ShoppingBasketItem){
         withContext(Dispatchers.IO){
@@ -26,6 +26,7 @@ class CartRepository(private val database: AsiaDatabase){
             Log.d("REPO FAV", "Successful update item to Shopping cart")
         }
     }
+
 
     suspend fun deleteCartItem(item: ShoppingBasketItem){
         withContext(Dispatchers.IO){
