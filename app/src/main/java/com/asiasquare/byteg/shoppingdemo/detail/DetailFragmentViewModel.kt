@@ -25,6 +25,7 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
     val isFavorite : LiveData<Boolean>
         get() = _isFavorite
 
+    private var itemAmount: Int = 1
 
 
     init {
@@ -55,17 +56,31 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
 
     fun onCartClicking() {
         viewModelScope.launch {
-            if (cartItemRepository.getCartItemById(_selectedItem.itemId) != null) {
-                cartItemRepository.updateCartItem(_selectedItem.asCartItem())
-                Log.d("Detail viewmodel", "So Luong da duoc update")
-            } else
 
-                cartItemRepository.addCartItem(_selectedItem.asCartItem())
-            Log.d("Detail viewmodel","Them Item vao Shopping Basket")
+            //Try to get this item from current cart
+            val item = cartItemRepository.getCartItemById(_selectedItem.itemId)
+
+            //Case: already have this item in card
+            if (item != null) {
+                //update the item amount
+                itemAmount += item.itemAmount
+                cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
+                Log.d("Detail viewmodel", "So Luong da duoc update")
+
+            } else
+                //Add this new item to the cart
+                cartItemRepository.addCartItem(_selectedItem.asCartItem(itemAmount))
+            Log.d("Detail viewmodel","Them $itemAmount Item vao Shopping Basket")
             }
         }
 
+    fun setAmount(amount: Int){
+        itemAmount = amount
+    }
 
+    fun getAmount(): Int{
+        return itemAmount
+    }
 
 
     class Factory(

@@ -1,12 +1,15 @@
 package com.asiasquare.byteg.shoppingdemo.detail
 
 import android.annotation.SuppressLint
+import android.content.ContentValues.TAG
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
+import android.util.Log
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.AdapterView
 import android.widget.ArrayAdapter
 import android.widget.Toast
 import androidx.navigation.fragment.navArgs
@@ -18,7 +21,7 @@ import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
 
 
-class DetailFragment : Fragment(){
+class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     private var _binding : FragmentDetailBinding? = null
     private val binding get() = _binding!!
@@ -63,7 +66,7 @@ class DetailFragment : Fragment(){
             context?.let { ArrayAdapter(it, R.layout.spinner_item_custom,amount) }
         arrayAdapter?.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item)
         binding.spinner.adapter= arrayAdapter
-
+        binding.spinner.onItemSelectedListener = this
 
         /** Change heart color: red if it's a favorite, black if it is not **/
         viewModel.isFavorite.observe(viewLifecycleOwner, {
@@ -85,5 +88,20 @@ class DetailFragment : Fragment(){
         }
 
 
+    }
+
+    override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
+        val item = parent?.getItemAtPosition(position)
+        try {
+            viewModel.setAmount(item as Int)
+        } catch (e: Exception){
+            viewModel.setAmount(1) // Set amount to 1 (default) if there is error when set this value. Should not happen
+        }
+
+        Log.d("DetailFragment", "amount set to ${viewModel.getAmount()} ")
+    }
+
+    override fun onNothingSelected(parent: AdapterView<*>?) {
+        TODO("Not yet implemented")
     }
 }

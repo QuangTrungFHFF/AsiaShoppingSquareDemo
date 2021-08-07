@@ -43,7 +43,7 @@ data class Item(
         )
     }
 
-    fun asCartItem() : ShoppingBasketItem{
+    fun asCartItem(amount: Int) : ShoppingBasketItem{
         return ShoppingBasketItem(
             itemId = itemId,
             itemName = itemName,
@@ -53,7 +53,8 @@ data class Item(
             itemWeight = itemWeight,
             itemDescription = itemDescription,
             itemBrand = itemBrand,
-            itemOrigin = itemOrigin
+            itemOrigin = itemOrigin,
+            itemAmount = amount
         )
     }
 
