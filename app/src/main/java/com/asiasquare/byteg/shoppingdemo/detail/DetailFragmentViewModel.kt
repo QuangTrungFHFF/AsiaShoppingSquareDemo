@@ -56,23 +56,31 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
 
     fun onCartClicking() {
         viewModelScope.launch {
-
             //Try to get this item from current cart
             val item = cartItemRepository.getCartItemById(_selectedItem.itemId)
 
-            //Case: already have this item in card
             if (item != null) {
-                //update the item amount
                 itemAmount += item.itemAmount
-                cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
-                Log.d("Detail viewmodel", "So Luong da duoc update")
-
+                when {
+                    itemAmount < 50 -> {
+                        //update the item amount
+                        itemAmount += item.itemAmount
+                        cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
+                        Log.d("Detail viewmodel", "So Luong da duoc update")
+                    }
+                    else -> {
+                        //update the item amount
+                        itemAmount = 50
+                        cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
+                        Log.d("Detail viewmodel", "Da du 50 san pham trong gio hang")
+                    }
+                }
             } else
-                //Add this new item to the cart
+            //Add this new item to the cart
                 cartItemRepository.addCartItem(_selectedItem.asCartItem(itemAmount))
             Log.d("Detail viewmodel","Them $itemAmount Item vao Shopping Basket")
-            }
         }
+    }
 
     fun setAmount(amount: Int){
         itemAmount = amount

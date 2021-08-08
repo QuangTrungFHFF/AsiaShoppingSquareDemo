@@ -41,16 +41,13 @@ class CartFragmentViewModel(application: Application) : AndroidViewModel(applica
             val item = cartRepository.getCartItemById(cart.itemId)
 
             //Case: already have this item in card
-            if (item != null) {
+            if (item != null && item.itemAmount < 50) {
                 //update the item amount
                 itemAmount = item.itemAmount +1
                 cartRepository.updateCartItem(cart.asDomainItem().asCartItem(itemAmount))
                 Log.d("Cart viewmodel", "So Luong da duoc update")
 
-            } else
-            //Add this new item to the cart
-                cartRepository.addCartItem(cart.asDomainItem().asCartItem(itemAmount))
-            Log.d("Cart viewmodel","Them $itemAmount Item vao Shopping Basket")
+            }
         }
     }
 
@@ -60,16 +57,13 @@ class CartFragmentViewModel(application: Application) : AndroidViewModel(applica
             val item = cartRepository.getCartItemById(cart.itemId)
 
             //Case: already have this item in card
-            if (item != null) {
+            if (item != null && item.itemAmount > 1) {
                 //update the item amount
                 itemAmount = item.itemAmount - 1
                 cartRepository.updateCartItem(cart.asDomainItem().asCartItem(itemAmount))
                 Log.d("Cart viewmodel", "So Luong da duoc update")
 
-            } else
-            //Add this new item to the cart
-                cartRepository.addCartItem(cart.asDomainItem().asCartItem(itemAmount))
-            Log.d("Cart viewmodel","Xoa $itemAmount Item trong Shopping Basket")
+            }
         }
     }
 

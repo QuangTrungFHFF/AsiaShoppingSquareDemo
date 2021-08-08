@@ -2,6 +2,7 @@ package com.asiasquare.byteg.shoppingdemo.cart
 
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -20,11 +21,27 @@ class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAd
 
         @SuppressLint("SetTextI18n")
         fun bind(cart: ShoppingBasketItem) {
+            val amount = cart.itemAmount
             binding.apply {
                 binding.anhItemGioHang.load(cart.itemImageSource)
                 tenItemGioHang.text = cart.itemName
+                khoiLuongItemGioHang.text = "Khối lượng: "+ cart.itemWeight
                 giaItemGioHang.text = "€" + cart.itemPrice.toString()
                 tvItemAmount.text = cart.itemAmount.toString()
+                when {
+                    amount < 2 -> {
+                        buttonGiam.visibility = View.GONE
+                        buttonTang.visibility = View.VISIBLE
+                    }
+                    amount < 50 -> {
+                        buttonGiam.visibility = View.VISIBLE
+                        buttonTang.visibility = View.VISIBLE
+                    }
+                    else -> {
+                        buttonGiam.visibility = View.VISIBLE
+                        buttonTang.visibility = View.GONE
+                    }
+                }
             }
         }
 
