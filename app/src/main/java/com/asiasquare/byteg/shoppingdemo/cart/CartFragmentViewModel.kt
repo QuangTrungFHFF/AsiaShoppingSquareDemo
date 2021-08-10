@@ -47,7 +47,10 @@ class CartFragmentViewModel(application: Application) : AndroidViewModel(applica
                 cartRepository.updateCartItem(cart.asDomainItem().asCartItem(itemAmount))
                 Log.d("Cart viewmodel", "So Luong da duoc update")
 
-            }
+            } else
+            //Add this new item to the cart
+                cartRepository.addCartItem(cart.asDomainItem().asCartItem(itemAmount))
+            Log.d("Cart viewmodel","Them $itemAmount Item vao Shopping Basket")
         }
     }
 
@@ -63,7 +66,10 @@ class CartFragmentViewModel(application: Application) : AndroidViewModel(applica
                 cartRepository.updateCartItem(cart.asDomainItem().asCartItem(itemAmount))
                 Log.d("Cart viewmodel", "So Luong da duoc update")
 
-            }
+            } else
+            //Add this new item to the cart
+                cartRepository.addCartItem(cart.asDomainItem().asCartItem(itemAmount))
+            Log.d("Cart viewmodel","Xoa $itemAmount Item trong Shopping Basket")
         }
     }
 

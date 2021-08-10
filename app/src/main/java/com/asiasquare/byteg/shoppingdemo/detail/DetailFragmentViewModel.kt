@@ -60,20 +60,22 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
             val item = cartItemRepository.getCartItemById(_selectedItem.itemId)
 
             if (item != null) {
-                itemAmount += item.itemAmount
                 when {
-                    itemAmount < 50 -> {
+                    item.itemAmount < 50 -> {
                         //update the item amount
                         itemAmount += item.itemAmount
-                        cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
-                        Log.d("Detail viewmodel", "So Luong da duoc update")
+                        if (itemAmount < 50) {
+                            cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
+                            Log.d("Detail viewmodel", "So Luong da duoc update")
+                        } else
+                            cartItemRepository.updateCartItem(_selectedItem.asCartItem(50))
+                            Log.d("Detail viewmodel", "Da du 50 san pham trong gio hang")
                     }
-                    else -> {
-                        //update the item amount
-                        itemAmount = 50
-                        cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
-                        Log.d("Detail viewmodel", "Da du 50 san pham trong gio hang")
-                    }
+//                    else -> {
+//                        //update the item amount
+//                        cartItemRepository.updateCartItem(_selectedItem.asCartItem(50))
+//                        Log.d("Detail viewmodel", "Da du 50 san pham trong gio hang")
+//                    }
                 }
             } else
             //Add this new item to the cart
@@ -81,6 +83,7 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
             Log.d("Detail viewmodel","Them $itemAmount Item vao Shopping Basket")
         }
     }
+
 
     fun setAmount(amount: Int){
         itemAmount = amount

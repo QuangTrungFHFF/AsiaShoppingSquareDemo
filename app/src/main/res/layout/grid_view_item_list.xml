@@ -28,6 +28,7 @@
 
         <TextView
             android:id="@+id/tensanpham"
+            style="@style/text_ellipsise"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:layout_marginStart="4dp"
@@ -40,8 +41,7 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/anhsanpham"
-            />
+            app:layout_constraintTop_toBottomOf="@id/anhsanpham" />
 
         <TextView
             android:id="@+id/giasanpham"

@@ -6,6 +6,7 @@ inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit)
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
             clearFocus()
+            isIconified = false
             return true
         }
 
