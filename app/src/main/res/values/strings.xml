@@ -18,4 +18,7 @@
     <string name="them_vao_gio_hang">Thêm vào giỏ hàng</string>
     <string name="tien_hang_dat_hang">Tiến hành đặt hàng</string>
 
+    <!-- Text in SearchFragment-->
+    <string name="no_match_search">Không có kết quả phù hợp, vui lòng thử lại...</string>
+
 </resources>

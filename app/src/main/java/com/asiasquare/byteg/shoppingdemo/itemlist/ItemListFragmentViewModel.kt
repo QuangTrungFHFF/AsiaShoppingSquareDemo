@@ -11,11 +11,14 @@ import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import com.asiasquare.byteg.shoppingdemo.repository.ItemRepository
 import kotlinx.coroutines.Dispatchers
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.combine
+import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
 import kotlinx.coroutines.withContext
 
 enum class ListStatus { LOADING, ERROR, DONE }
-
+enum class SortOrder { BY_NAME, BY_PRICE }
 class ItemListFragmentViewModel(application: Application, catalogId: Int) : AndroidViewModel(application){
 
 
@@ -41,11 +44,27 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     private val favoriteItemRepository = FavoriteRepository(database)
     private val itemRepository = ItemRepository(database)
 
-    val localItemList = itemRepository.getLocalItemListByCatalogId(catalogId)
+    //val localItemList = itemRepository.getLocalItemListByCatalogId(catalogId)
 
     private val _isFavorite =MutableLiveData<Boolean>()
     val isFavorite : LiveData<Boolean>
         get() = _isFavorite
+
+    val newId = MutableStateFlow(catalogId)
+    val searchQuery = MutableStateFlow("")
+    val sortOrder = MutableStateFlow(SortOrder.BY_PRICE)
+
+    private val tasksFlow = combine(
+        newId,
+        searchQuery,
+        sortOrder
+    ) { id, query, sortOrder ->
+        Triple(id, query, sortOrder)
+    }.flatMapLatest { (id, query, sortOrder) ->
+        database.itemDao.getTasks(id, query, sortOrder)
+    }
+
+    val localItemList = tasksFlow.asLiveData()
 
     init {
         getData(catalogId)
@@ -113,8 +132,9 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     fun onFavoriteClicking(item: LocalItem) {
 
         viewModelScope.launch {
-
-            if(isFavorite.value == true){
+            _isFavorite.value =
+                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
+            if(_isFavorite.value == true){
                 Log.d("ItemList viewmodel","Item is added into Favorite")
 
                 favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
@@ -130,7 +150,12 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
         }
     }
 
-
+    fun checkFavorite(item: LocalItem) {
+        viewModelScope.launch {
+            _isFavorite.value =
+                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
+        }
+    }
 
     fun onDetailClick( item: LocalItem){
         _navigateToDetail.value = item

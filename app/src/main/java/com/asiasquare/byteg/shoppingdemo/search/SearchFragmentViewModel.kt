@@ -38,26 +38,26 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
 
 
     init {
-        getData()
+        //getData()
     }
 
-    private fun getData(){
-        viewModelScope.launch {
-            val items = itemRepository.getAllData()
-            saveDataToLocalDatabase(items)
-        }
-    }
-
-    private fun saveDataToLocalDatabase(items: List<NetworkItem>){
-        viewModelScope.launch {
-            try {
-                itemRepository.addListLocalItem(items)
-            }catch (e: Exception){
-                e.message?.let { Log.d("Search: Get all data",it) }
-            }
-        }
-
-    }
+//    private fun getData(){
+//        viewModelScope.launch {
+//            val items = itemRepository.getAllData()
+//            saveDataToLocalDatabase(items)
+//        }
+//    }
+//
+//    private fun saveDataToLocalDatabase(items: List<NetworkItem>){
+//        viewModelScope.launch {
+//            try {
+//                itemRepository.addListLocalItem(items)
+//            }catch (e: Exception){
+//                e.message?.let { Log.d("Search: Get all data",it) }
+//            }
+//        }
+//
+//    }
 
     fun onDetailClick( item: LocalItem){
         _navigateToDetail.value = item
@@ -70,8 +70,9 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
     fun onFavoriteClicking(item: LocalItem) {
 
         viewModelScope.launch {
-
-            if(isFavorite.value == true){
+            _isFavorite.value =
+                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
+            if(_isFavorite.value == true){
                 Log.d("ItemList viewmodel","Item is added into Favorite")
 
                 favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
