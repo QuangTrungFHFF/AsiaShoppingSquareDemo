@@ -156,15 +156,13 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
             _isFavorite.value =favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
                 if (_isFavorite.value == false) {
                     favoriteItemRepository.addFavoriteItem(item.asDomainItem().asFavoriteItem())
-                    item.itemFavorite= true
+                    _isFavorite.value= true
                 } else {
                     Log.d("ItemList viewmodel","Item is added into Favorite")
                     favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
-                    item.itemFavorite = false
-
+                    _isFavorite.value = false
                 }
-
-            itemRepository.updateLocalItem(item)
+            //itemRepository.updateLocalItem(item)
         }
     }
 

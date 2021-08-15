@@ -29,9 +29,7 @@ data class LocalItem(
     @ColumnInfo(name = "item_brand")
     var itemBrand : String,
     @ColumnInfo(name = "item_origin")
-    var itemOrigin : String,
-    @ColumnInfo(name = "item_favorite")
-    var itemFavorite : Boolean
+    var itemOrigin : String
 ) : Parcelable {
 
     fun asDomainItem(): Item {

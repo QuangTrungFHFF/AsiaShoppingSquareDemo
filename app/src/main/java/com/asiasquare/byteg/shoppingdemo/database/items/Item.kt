@@ -28,8 +28,7 @@ data class Item(
             itemWeight = itemWeight,
             itemDescription = itemDescription,
             itemBrand = itemBrand,
-            itemOrigin = itemOrigin,
-            itemFavorite = false
+            itemOrigin = itemOrigin
         )
     }
     fun asFavoriteItem() : FavoriteItem{

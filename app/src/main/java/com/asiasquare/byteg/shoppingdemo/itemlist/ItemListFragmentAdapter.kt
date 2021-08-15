@@ -30,10 +30,6 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
                 tensanpham.text = item.itemName
                 giasanpham.text= "€" + item.itemPrice.toString()
 
-                when {
-                    item.itemFavorite -> ivAddFavorite.setImageResource(R.drawable.timdo24)
-                    else -> ivAddFavorite.setImageResource(R.drawable.timden24)
-                }
             }
         }
         companion object{

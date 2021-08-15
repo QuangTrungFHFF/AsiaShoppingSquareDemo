@@ -30,7 +30,6 @@ class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
 
     private var toast : Toast? = null
 
-
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
@@ -63,6 +62,13 @@ class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
             }
         })
         /** weird behavior **/
+//        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
+//            when(it){
+//                true -> Toast.makeText(context, "Đã thêm sản phẩm vào danh sách Yêu thích", Toast.LENGTH_LONG).show()
+//                else -> Toast.makeText(context, "Đã xóa sản phẩm khỏi danh sách Yêu thích", Toast.LENGTH_LONG).show()
+//            }
+//        })
+
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
             showToast(it)
 
@@ -117,7 +123,6 @@ class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
         _binding = null
         searchView.setOnQueryTextListener(null)
     }
-
     fun showToast(isFavorite: Boolean){
         toast?.cancel()
 
@@ -128,5 +133,4 @@ class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
         }
         toast?.show()
     }
-
 }

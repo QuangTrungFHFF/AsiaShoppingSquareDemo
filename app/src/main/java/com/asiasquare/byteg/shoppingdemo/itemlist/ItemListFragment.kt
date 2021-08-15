@@ -3,6 +3,7 @@ package com.asiasquare.byteg.shoppingdemo.itemlist
 import android.os.Bundle
 import android.os.Handler
 import android.view.*
+import android.widget.Toast
 import androidx.fragment.app.Fragment
 import androidx.appcompat.widget.SearchView
 import androidx.lifecycle.Observer
@@ -76,8 +77,8 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
 
 //        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
 //            when(it){
-//                true -> Toast.makeText(context, "Đã thêm sản phẩm vào danh sách Yêu thích", Toast.LENGTH_LONG).show()
-//                else -> Toast.makeText(context, "Đã xóa sản phẩm khỏi danh sách Yêu thích", Toast.LENGTH_LONG).show()
+//                true -> Toast.makeText(context, "Đã thêm sản phẩm vào danh sách Yêu thích", Toast.LENGTH_SHORT).show()
+//                else -> Toast.makeText(context, "Đã xóa sản phẩm khỏi danh sách Yêu thích", Toast.LENGTH_SHORT).show()
 //            }
 //        })
 
