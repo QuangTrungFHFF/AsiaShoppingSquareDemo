@@ -30,7 +30,9 @@ data class ShoppingBasketItem(
     @ColumnInfo(name = "item_origin")
     var itemOrigin: String,
     @ColumnInfo(name = "item_amount")
-    var itemAmount: Int
+    var itemAmount: Int,
+    @ColumnInfo(name = "total_price")
+    var totalPrice: Double
 ) : Parcelable {
 
     fun asDomainItem() : Item {
@@ -44,8 +46,7 @@ data class ShoppingBasketItem(
             itemWeight = itemWeight,
             itemDescription = itemDescription,
             itemBrand = itemBrand,
-            itemOrigin = itemOrigin,
-            //itemAmount = itemAmount
+            itemOrigin = itemOrigin
         )
     }
 }

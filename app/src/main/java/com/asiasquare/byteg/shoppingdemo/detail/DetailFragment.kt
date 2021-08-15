@@ -19,6 +19,11 @@ import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
+import android.widget.Spinner
+import android.content.Context;
+import android.util.AttributeSet;
+
+
 
 
 class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
@@ -92,14 +97,16 @@ class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
 
     override fun onItemSelected(parent: AdapterView<*>?, view: View?, position: Int, id: Long) {
         val item = parent?.getItemAtPosition(position)
-        try {
-            viewModel.setAmount(item as Int)
-        } catch (e: Exception){
-            viewModel.setAmount(1) // Set amount to 1 (default) if there is error when set this value. Should not happen
-        }
+                try {
+                    viewModel.setAmount(item as Int)
+                } catch (e: Exception){
+                    viewModel.setAmount(1) // Set amount to 1 (default) if there is error when set this value. Should not happen
+                }
 
         Log.d("DetailFragment", "amount set to ${viewModel.getAmount()} ")
     }
+
+
 
     override fun onNothingSelected(parent: AdapterView<*>?) {
         TODO("Not yet implemented")

@@ -28,7 +28,8 @@ data class Item(
             itemWeight = itemWeight,
             itemDescription = itemDescription,
             itemBrand = itemBrand,
-            itemOrigin = itemOrigin
+            itemOrigin = itemOrigin,
+            itemFavorite = false
         )
     }
     fun asFavoriteItem() : FavoriteItem{
@@ -58,7 +59,8 @@ data class Item(
             itemDescription = itemDescription,
             itemBrand = itemBrand,
             itemOrigin = itemOrigin,
-            itemAmount = amount
+            itemAmount = amount,
+            totalPrice = Math.round(amount * itemPrice * 100.0) / 100.0
         )
     }
 

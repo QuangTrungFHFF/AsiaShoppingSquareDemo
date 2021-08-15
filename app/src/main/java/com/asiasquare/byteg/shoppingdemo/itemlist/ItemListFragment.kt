@@ -74,12 +74,12 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
         })
 
 
-        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
+//        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
 //            when(it){
 //                true -> Toast.makeText(context, "Đã thêm sản phẩm vào danh sách Yêu thích", Toast.LENGTH_LONG).show()
 //                else -> Toast.makeText(context, "Đã xóa sản phẩm khỏi danh sách Yêu thích", Toast.LENGTH_LONG).show()
 //            }
-        })
+//        })
 
         /** Navigate to detail by Id **/
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {

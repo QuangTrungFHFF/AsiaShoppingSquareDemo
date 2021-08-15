@@ -26,7 +26,7 @@ class CartFragmentAdapter(private val onClickListener: OnClickListener) : ListAd
                 binding.anhItemGioHang.load(cart.itemImageSource)
                 tenItemGioHang.text = cart.itemName
                 khoiLuongItemGioHang.text = "Khối lượng: "+ cart.itemWeight
-                giaItemGioHang.text = "€" + cart.itemPrice.toString()
+                giaItemGioHang.text = "€" + cart.totalPrice.toString()
                 tvItemAmount.text = cart.itemAmount.toString()
                 when {
                     amount < 2 -> {

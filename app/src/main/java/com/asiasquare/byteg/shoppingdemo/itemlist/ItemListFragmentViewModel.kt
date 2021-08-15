@@ -129,31 +129,41 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
 //        }
 //    }
 
-    fun onFavoriteClicking(item: LocalItem) {
+//    fun onFavoriteClicking(item: LocalItem) {
+//
+//        viewModelScope.launch {
+//            _isFavorite.value =
+//                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
+//            if(_isFavorite.value == true){
+//                Log.d("ItemList viewmodel","Item is added into Favorite")
+//
+//                favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
+//                _isFavorite.value = false
+//
+//            }else
+//            {
+//                favoriteItemRepository.addFavoriteItem(item.asDomainItem().asFavoriteItem())
+//
+//                _isFavorite.value = true
+//            }
+//
+//        }
+//    }
 
+        fun onFavoriteClicking(item: LocalItem) {
         viewModelScope.launch {
-            _isFavorite.value =
-                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
-            if(_isFavorite.value == true){
-                Log.d("ItemList viewmodel","Item is added into Favorite")
+            //_isFavorite.value = item.itemFavorite
+            _isFavorite.value =favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
+                if (_isFavorite.value == false) {
+                    favoriteItemRepository.addFavoriteItem(item.asDomainItem().asFavoriteItem())
+                    item.itemFavorite= true
+                } else {
+                    Log.d("ItemList viewmodel","Item is added into Favorite")
+                    favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
+                    item.itemFavorite = false
+                }
 
-                favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
-                _isFavorite.value = false
 
-            }else
-            {
-                favoriteItemRepository.addFavoriteItem(item.asDomainItem().asFavoriteItem())
-
-                _isFavorite.value = true
-            }
-
-        }
-    }
-
-    fun checkFavorite(item: LocalItem) {
-        viewModelScope.launch {
-            _isFavorite.value =
-                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
         }
     }
 
