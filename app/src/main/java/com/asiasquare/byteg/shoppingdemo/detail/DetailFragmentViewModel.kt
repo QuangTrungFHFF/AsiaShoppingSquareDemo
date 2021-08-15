@@ -3,6 +3,7 @@ package com.asiasquare.byteg.shoppingdemo.detail
 import android.R
 import android.app.Application
 import android.util.Log
+import android.widget.Toast
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
@@ -63,9 +64,9 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
                 when {
                     item.itemAmount < 50 -> {
                         //update the item amount
-                        itemAmount += item.itemAmount
-                        if (itemAmount < 50) {
-                            cartItemRepository.updateCartItem(_selectedItem.asCartItem(itemAmount))
+                        val amount = itemAmount + item.itemAmount
+                        if (amount < 50) {
+                            cartItemRepository.updateCartItem(_selectedItem.asCartItem(amount))
                             Log.d("Detail viewmodel", "So Luong da duoc update")
                         } else
                             cartItemRepository.updateCartItem(_selectedItem.asCartItem(50))
