@@ -161,9 +161,10 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
                     Log.d("ItemList viewmodel","Item is added into Favorite")
                     favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
                     item.itemFavorite = false
+
                 }
 
-
+            itemRepository.updateLocalItem(item)
         }
     }
 

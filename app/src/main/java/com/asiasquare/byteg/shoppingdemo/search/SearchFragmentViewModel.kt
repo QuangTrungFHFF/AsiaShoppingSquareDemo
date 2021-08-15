@@ -70,9 +70,9 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
     fun onFavoriteClicking(item: LocalItem) {
 
         viewModelScope.launch {
-            _isFavorite.value =
+            val isCurrentFavorite =
                 favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
-            if(_isFavorite.value == true){
+            if(isCurrentFavorite){
                 Log.d("ItemList viewmodel","Item is added into Favorite")
 
                 favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())

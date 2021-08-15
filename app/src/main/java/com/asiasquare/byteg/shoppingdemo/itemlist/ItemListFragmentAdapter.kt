@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
-import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewItemListBinding
 
 
@@ -61,7 +60,6 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
         holder.btnFavorite.setOnClickListener {
             onClickListener.onAddFavoriteClick(item)
-
         }
     }
 
