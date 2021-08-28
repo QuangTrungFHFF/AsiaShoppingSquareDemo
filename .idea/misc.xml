@@ -6,17 +6,38 @@
         <entry key="..\:/AndroidProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_detail.xml" value="0.2658514492753623" />
         <entry key="..\:/AndroidProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/gird_view_cart_item.xml" value="0.24791666666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/add.xml" value="0.11979166666666667" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/edit_text_custom.xml" value="0.12916666666666668" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/ic_baseline_access_time_24.xml" value="0.12916666666666668" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/ic_baseline_account_box_24.xml" value="0.12685185185185185" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/ic_baseline_email_24.xml" value="0.11018518518518519" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/ic_baseline_home_24.xml" value="0.11018518518518519" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/ic_outline_cancel_24.xml" value="0.12685185185185185" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/ic_sort.xml" value="0.15" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/drawable/textview_border_orange.xml" value="0.19166666666666668" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/font/rubik.xml" value="0.11018518518518519" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/activity_checkout_ui.xml" value="0.13451086956521738" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/activity_main.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/activity_thanh_toan_tin_dung.xml" value="0.11548913043478261" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/activity_web_view_thanh_toan.xml" value="0.10280797101449275" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/dat_hang_activity.xml" value="0.10869565217391304" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_blank.xml" value="0.11775362318840579" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_cart.xml" value="0.15" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_catalog.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_customer_list.xml" value="0.18" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_detail.xml" value="0.25" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_favorite.xml" value="0.1" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_item_list.xml" value="0.22" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_new_customer.xml" value="0.2918395573997234" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_order.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_order2.xml" value="0.14175724637681159" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_payment_method.xml" value="0.6022727272727273" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/fragment_search.xml" value="0.20416666666666666" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/gird_view_cart_item.xml" value="0.22" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/grid_view_item_list.xml" value="0.1" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/grid_view_order_item.xml" value="0.18" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/grid_view_search_item.xml" value="0.33" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/list_item_customer.xml" value="0.25" />
+        <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/payment_item_list.xml" value="0.25" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/progressbar.xml" value="0.25" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/layout/spinner_item_custom.xml" value="0.14791666666666667" />
         <entry key="..\:/Users/Admin/AndroidStudioProjects/AsiaShoppingSquareDemo/app/src/main/res/menu/bottom_navigation_menu.xml" value="0.12129629629629629" />

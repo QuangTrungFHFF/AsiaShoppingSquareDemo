@@ -6,6 +6,7 @@ import android.util.Log
 import android.widget.Toast
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
@@ -18,7 +19,6 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
     private val cartItemRepository = CartRepository(database)
-
 
     private val _selectedItem = item.asDomainItem()
 
@@ -54,7 +54,6 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
         }
     }
 
-
     fun onCartClicking() {
         viewModelScope.launch {
             //Try to get this item from current cart
@@ -72,11 +71,6 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
                             cartItemRepository.updateCartItem(_selectedItem.asCartItem(50))
                             Log.d("Detail viewmodel", "Da du 50 san pham trong gio hang")
                     }
-//                    else -> {
-//                        //update the item amount
-//                        cartItemRepository.updateCartItem(_selectedItem.asCartItem(50))
-//                        Log.d("Detail viewmodel", "Da du 50 san pham trong gio hang")
-//                    }
                 }
             } else
             //Add this new item to the cart
@@ -84,7 +78,6 @@ class DetailFragmentViewModel(item: LocalItem, application: Application) : Andro
             Log.d("Detail viewmodel","Them $itemAmount Item vao Shopping Basket")
         }
     }
-
 
     fun setAmount(amount: Int){
         itemAmount = amount

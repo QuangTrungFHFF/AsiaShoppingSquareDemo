@@ -21,4 +21,72 @@
     <!-- Text in SearchFragment-->
     <string name="no_match_search">Không có kết quả phù hợp, vui lòng thử lại...</string>
 
+    <!-- Text in Payment-->
+    <string name="phuong_thuc_thanh_toan">Phương thức thanh toán:</string>
+    <string name="thanh_toan_tin_dung">Thanh toán bằng thẻ tín dụng</string>
+    <string name="thanh_toan_cnc">Click &amp; Collect\n(Thanh toán tại cửa hàng)</string>
+
+    <string name="chon_ngay_lay_hang">Chọn ngày lấy hàng</string>
+    <string name="_00_00">00:00</string>
+
+    <string name="thong_tin_thanh_toan">Thông tin thanh toán</string>
+    <string name="Thanh_toan">Tiến hành thanh toán</string>
+    <string name="tro_ve_cua_hang">TRỞ VỀ CỬA HÀNG</string>
+    <string name="tiep_tuc_dat_hang">Tiếp tục đặt hàng</string>
+    <string name="m_v_ng">Mã vùng</string>
+    <string name="ti_p_t_c">Tiếp tục</string>
+    <string name="thanh_pho">Thành phố</string>
+    <string name="email_vn">Địa chỉ email</string>
+    <string name="ho_va_ten">Họ và tên</string>
+    <string name="customer_information">Customer information</string>
+    <string name="quay_ve_cua_hang">Quay về cửa hàng</string>
+    <string name="hoan_tat_thanh_toan">Hoàn tất thanh toán</string>
+    <string name="thanh_toan_bang_the_tin_dung">Thanh toán bằng thẻ tín dụng.</string>
+
+
+    <string name="thong_tin_thanh_toan_body">Hiện tại quý khách có thể thanh toán bằng Paypal cho địa chỉ:</string>
+    <string name="paypal_email">asiasquare.com@gmail.com</string>
+    <string name="thong_tin_thanh_toan_body_paypal">Trong thời gian tới chúng tôi sẽ cung cấp thêm các tiện ích thanh toán để tiện cho quý khách.</string>
+    <string name="thong_tin_thanh_toan_body_cac">Quý khách có thể đặt hàng và thanh toán khi lấy hàng tại cửa hàng tại địa chỉ:</string>
+    <string name="thong_tin_thanh_toan_tien_mat">Quý khách vui lòng thanh toán khi lấy hàng tại địa chỉ:</string>
+    <string name="dia_chi_cua_hang">Feldmochinger Str. 36\n80992 München</string>
+    <string name="thoi_gian_hoat_dong_t2_t6">Thứ 2 – Thứ 6: 09.00 – 17.00</string>
+    <string name="thoi_gian_hoat_dong_t7">Thứ 7        : 08.00 – 20.00</string>
+    <string name="thoi_gian_hoat_dong_cn">Chủ nhật     : Đóng cửa</string>
+
+    <string name="thong_tin_giao_hang"> Chi phí vận chuyển</string>
+    <string name="thong_tin_giao_hang_body_duoi_50">Đối với đơn hàng dưới 50 EUR, quý khách vui lòng thanh toán 5,99 EUR chi phí vận chuyển.</string>
+    <string name="thong_tin_giao_hang_body_tren_50">Đối với đơn hàng từ 50 EUR trở lên, đơn hàng của quý khách sẽ được miễn phí vận chuyển.</string>
+    <string name="thong_tin_giao_hang_body_lien_he">Nếu quý khách có yêu cầu riêng về quá trình và thời gian vận chuyển, xin vui lòng liên hệ trực tiếp với bộ phận chăm sóc khách hàng.</string>
+
+    <string name="thong_tin_lien_he">Chăm sóc khách hàng</string>
+    <string name="thong_tin_lien_he_cam_on">Trân trọng cảm ơn quý khách đã sử dụng app Asia Square của chúng tôi.</string>
+    <string name="thong_tin_lien_he_bo_phan_cskh">Bộ phận chăm sóc khách hàng </string>
+    <string name="thong_tin_lien_he_email">Email: <u>asiasquare.com@gmail.com</u></string>
+    <string name="thong_tin_lien_he_hotline">Đường dây nóng:</string>
+    <string name="thong_tin_lien_he_hotline_one">+49-89-44354936</string>
+    <string name="thong_tin_lien_he_hotline_two">+49-1522-4880909</string>
+    <string name="thong_tin_lien_he_hotline_three">+49-1578-6807618</string>
+    <string name="thong_tin_lien_he_thoi_gian_title">với thời gian hoạt động</string>
+    <string name="thong_tin_lien_he_thoi_gian_body_first_option">Thứ 2 – Thứ 7: 09.00 – 17.00</string>
+    <string name="thong_tin_lien_he_thoi_gian_body_second_option">Thứ 2 – Thứ 7: 08.00 – 20.00</string>
+    <string name="thong_tin_lien_he_end">sẵn sàng tiếp nhận thông tin, phản hồi và thắc mắc của quý khách. </string>
+
+    <string name="chuyen_tien_vao_tai_khoan">Quý khách tiếp tục đặt hàng để hoàn tất đơn hàng, sau đó đăng nhập tại Paypal và chuyển tiền vào tài khoản:</string>
+    <string name="huong_dan_thanh_toan_paypal"><u>Hướng dẫn thanh toán Paypal</u></string>
+    <string name="dia_chi">Địa chỉ giao hàng</string>
+    <string name="sdt">Số điện thoại</string>
+    <string name="thanh_toan_thanh_cong">Xác nhận thanh toán thành công!</string>
+    <string name="xoa_thong_tin">Xóa thông tin?</string>
+    <string name="xoa_thong_tin_detail">Xác nhận xóa thông tin giao hàng này?</string>
+    <string name="xac_nhan">Xác nhận</string>
+    <string name="quay_lai">Quay lại</string>
+    <string name="visa_master">Visa / Mastercard</string>
+
+    <string name="tab">\u0009</string>
+    <string name="double_tab">\u0009\u0009</string>
+    <string name="triple_tab">\u0009\u0009\u0009</string>
+    <string name="quad_tab">\u0009\u0009\u0009\u0009</string>
+
+
 </resources>

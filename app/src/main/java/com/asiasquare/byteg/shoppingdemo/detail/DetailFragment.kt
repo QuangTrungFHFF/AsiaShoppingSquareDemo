@@ -16,13 +16,7 @@ import androidx.navigation.fragment.navArgs
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
-import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
-import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentDetailBinding
-import android.widget.Spinner
-import android.content.Context;
-import android.util.AttributeSet;
-
 
 
 
@@ -45,7 +39,6 @@ class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
         item = args.selectedItem
         val viewModelFactory = DetailFragmentViewModel.Factory(item, application)
         viewModel = ViewModelProvider(this, viewModelFactory).get(DetailFragmentViewModel::class.java)
-
 
         return binding.root
     }
@@ -82,7 +75,6 @@ class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
             binding.ivFavorite.setImageResource(checkFavorite)
         })
 
-
         binding.ivFavorite.setOnClickListener {
             viewModel.onFavoriteClicking()
         }
@@ -91,7 +83,6 @@ class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
             viewModel.onCartClicking()
             Toast.makeText(context, "Đã thêm sản phẩm vào giỏ hàng", Toast.LENGTH_SHORT).show()
         }
-
 
     }
 
@@ -102,7 +93,6 @@ class DetailFragment : Fragment(), AdapterView.OnItemSelectedListener {
                 } catch (e: Exception){
                     viewModel.setAmount(1) // Set amount to 1 (default) if there is error when set this value. Should not happen
                 }
-
         Log.d("DetailFragment", "amount set to ${viewModel.getAmount()} ")
     }
 

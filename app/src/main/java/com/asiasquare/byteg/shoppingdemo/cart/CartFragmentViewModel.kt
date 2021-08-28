@@ -4,8 +4,10 @@ import android.app.Application
 import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
+import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.database.items.ShoppingBasketItem
 import com.asiasquare.byteg.shoppingdemo.repository.CartRepository
+import com.asiasquare.byteg.shoppingdemo.search.SearchFragmentAdapter
 import kotlinx.coroutines.channels.Channel
 import kotlinx.coroutines.flow.receiveAsFlow
 import kotlinx.coroutines.launch
@@ -21,10 +23,21 @@ class CartFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     val cartList = cartRepository.cartItems
 
+    private val _navigateToDetail = MutableLiveData<LocalItem?>()
+    val navigateToDetail : LiveData<LocalItem?>
+        get() = _navigateToDetail
+
     private var itemAmount: Int = 1
+
+
+    private val _totalPrice = MutableLiveData<String?>()
+    val totalPrice :  MutableLiveData<String?>
+    get() = _totalPrice
+
 
     private val cartEventChannel = Channel<TasksEvent>()
     val tasksEvent = cartEventChannel.receiveAsFlow()
+
 
     fun onDeleteCartClicking(cart: ShoppingBasketItem) {
         viewModelScope.launch {
@@ -40,7 +53,7 @@ class CartFragmentViewModel(application: Application) : AndroidViewModel(applica
             //Try to get this item from current cart
             val item = cartRepository.getCartItemById(cart.itemId)
 
-            //Case: already have this item in card
+            //Case: already have this item in cart
             if (item != null && item.itemAmount < 50) {
                 //update the item amount
                 itemAmount = item.itemAmount +1
@@ -80,6 +93,14 @@ class CartFragmentViewModel(application: Application) : AndroidViewModel(applica
 
     fun onUndoDeleteClick(cart: ShoppingBasketItem) = viewModelScope.launch {
         cartRepository.addCartItem(cart)
+    }
+
+    fun onDetailClick( item: ShoppingBasketItem){
+        _navigateToDetail.value = item.asDomainItem().asLocalItem()
+    }
+
+    fun onNavigationComplete(){
+        _navigateToDetail.value = null
     }
 
     sealed class TasksEvent {
