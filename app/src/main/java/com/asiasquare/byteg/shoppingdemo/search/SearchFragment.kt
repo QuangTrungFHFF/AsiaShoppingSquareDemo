@@ -11,7 +11,11 @@ import androidx.navigation.fragment.findNavController
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentSearchBinding
+import com.asiasquare.byteg.shoppingdemo.util.addTildeOptions
 import com.asiasquare.byteg.shoppingdemo.util.onQueryTextChanged
+import com.asiasquare.byteg.shoppingdemo.util.removeAccents
+import java.text.Normalizer
+
 
 class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
 
@@ -62,7 +66,7 @@ class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
 
             }
         })
-        /** weird behavior **/
+        /** show Toast when add item into Favorite **/
         viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
             showToast(it)
 
@@ -94,17 +98,22 @@ class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {
         searchView.maxWidth = Integer.MAX_VALUE // close button alignment
         //Restoring the SearchView when rotation
         val pendingQuery = viewModel.searchQuery.value
+
         if (pendingQuery != null && pendingQuery.isNotEmpty()){
             searchItem.expandActionView()
             searchView.setQuery(pendingQuery, false)
         }
 
+
         searchView.onQueryTextChanged { viewModel.searchQuery.value = it}
+
+
+
     }
 
 
-    override fun onItemClick(search: LocalItem) {
-        viewModel.onDetailClick(search)
+    override fun onItemClick(item: LocalItem) {
+        viewModel.onDetailClick(item)
     }
 
     override fun onAddFavoriteClick(item: LocalItem) {

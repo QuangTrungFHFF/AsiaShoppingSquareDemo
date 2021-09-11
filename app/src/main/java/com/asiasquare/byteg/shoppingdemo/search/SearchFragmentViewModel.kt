@@ -5,10 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
-import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
-import com.asiasquare.byteg.shoppingdemo.itemlist.ListStatus
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
-import com.asiasquare.byteg.shoppingdemo.repository.ItemRepository
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.flatMapLatest
 import kotlinx.coroutines.launch
@@ -17,12 +14,12 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
 
     private val database = AsiaDatabase.getInstance(application)
     private val favoriteItemRepository = FavoriteRepository(database)
-    private val itemRepository = ItemRepository(database)
 
     val searchQuery = MutableStateFlow("")
     private val searchFlow = searchQuery.flatMapLatest {
         database.itemDao.getSearchItems(it)
     }
+
 
     val searchItems = searchFlow.asLiveData()
 
@@ -37,9 +34,7 @@ class SearchFragmentViewModel (application: Application) : AndroidViewModel(appl
         get() = _isFavorite
 
 
-    init {
-        //getData()
-    }
+
 
 //    private fun getData(){
 //        viewModelScope.launch {

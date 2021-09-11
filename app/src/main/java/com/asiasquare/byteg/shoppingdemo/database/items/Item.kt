@@ -17,7 +17,7 @@ data class Item(
     val itemBrand: String,
     val itemOrigin: String
 ) : Parcelable{
-    fun asLocalItem() : LocalItem {
+    fun asLocalItem(): LocalItem {
         return LocalItem(
             itemId = itemId,
             itemBrandId = itemBrandId,

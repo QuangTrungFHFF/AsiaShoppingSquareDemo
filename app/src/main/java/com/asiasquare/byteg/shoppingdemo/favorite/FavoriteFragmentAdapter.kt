@@ -21,6 +21,7 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
         /** Bind item to View, load image here using Coil */
 
         val btDelete = binding.buttonXoaYeuThich
+        val btAddToCart = binding.buttonThem
 
         fun bind (favorite: FavoriteItem){
             binding.anhItemYeuThich.load(favorite.itemImageSource)
@@ -57,6 +58,10 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
             onClickListener.onDeleteClick(item)
         }
 
+        holder.btAddToCart.setOnClickListener {
+            onClickListener.addToCard(item)
+        }
+
     }
 
     companion object DiffCallback: DiffUtil.ItemCallback<FavoriteItem>(){
@@ -76,6 +81,7 @@ class FavoriteFragmentAdapter (private val onClickListener: OnClickListener): Li
     interface OnClickListener{
         fun onItemClick(favorite: FavoriteItem)
         fun onDeleteClick(favorite: FavoriteItem)
+        fun addToCard (favorite: FavoriteItem)
     }
 
 

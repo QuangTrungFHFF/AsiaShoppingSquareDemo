@@ -5,6 +5,7 @@ import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Toast
 import androidx.appcompat.app.AlertDialog
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
@@ -111,6 +112,8 @@ class FavoriteFragment : Fragment(), FavoriteFragmentAdapter.OnClickListener {
         viewModel.onDetailClick(favorite)
     }
 
+
+
     override fun onDeleteClick(favorite: FavoriteItem) {
         val dialogBuilder = AlertDialog.Builder(requireActivity())
 
@@ -134,6 +137,11 @@ class FavoriteFragment : Fragment(), FavoriteFragmentAdapter.OnClickListener {
         // show alert dialog
         alert.show()
 
+    }
+
+    override fun addToCard(favorite: FavoriteItem) {
+        viewModel.onCartClicking(favorite)
+        Toast.makeText(context, "Sản phẩm đã được thêm vào giỏ hàng", Toast.LENGTH_SHORT).show()
     }
 
 }

@@ -18,7 +18,7 @@ internal abstract class BaseUIActivity : AppCompatActivity(){
     }
     protected var amount : Int = -1
 
-    protected var itemsInCart : String = "Danh sach gio hang"
+    protected var itemsInCart : String = "Danh sách giỏ hàng"
 
     protected var temporaryCustomerId: String? = null
 
@@ -80,12 +80,12 @@ internal abstract class BaseUIActivity : AppCompatActivity(){
     ){
         when (paymentResult) {
             is PaymentSheetResult.Canceled -> {
-                viewModel.status.value = "Da huy qua trinh thanh toan."
+                viewModel.status.value = "Đã hủy quá trình thanh toán."
                 viewModel.continueShopping.value = false
             }
             is PaymentSheetResult.Failed -> {
                 viewModel.continueShopping.value = false
-                viewModel.status.value = "Khong the thuc hien thanh toan."
+                viewModel.status.value = "Không thể thực hiện thanh toán."
                 Log.e("App", "Got error: ${paymentResult.error}")
             }
             is PaymentSheetResult.Completed -> {

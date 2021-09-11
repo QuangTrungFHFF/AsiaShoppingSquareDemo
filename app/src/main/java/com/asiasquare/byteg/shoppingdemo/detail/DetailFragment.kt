@@ -1,7 +1,6 @@
 package com.asiasquare.byteg.shoppingdemo.detail
 
 import android.annotation.SuppressLint
-import android.content.ContentValues.TAG
 import androidx.lifecycle.ViewModelProvider
 import android.os.Bundle
 import android.util.Log

@@ -5,6 +5,7 @@ import android.util.Log
 import androidx.lifecycle.*
 import com.asiasquare.byteg.shoppingdemo.database.items.NetworkItem
 import com.asiasquare.byteg.shoppingdemo.database.AsiaDatabase
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.repository.FavoriteRepository
 import com.asiasquare.byteg.shoppingdemo.repository.ItemRepository
@@ -42,6 +43,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
 
     //val localItemList = itemRepository.getLocalItemListByCatalogId(catalogId)
 
+
     private val _isFavorite =MutableLiveData<Boolean>()
     val isFavorite : LiveData<Boolean>
         get() = _isFavorite
@@ -77,6 +79,7 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
             _status.postValue (ListStatus.DONE)
 
             saveDataToLocalDatabase(items)
+
         }
     }
 
@@ -96,67 +99,21 @@ class ItemListFragmentViewModel(application: Application, catalogId: Int) : Andr
     }
 
 
-//    private fun getData(catalogId: Int){
-//        viewModelScope.launch {
-//            try {
-//                withContext(Dispatchers.IO){
-//                    _status.postValue (ListStatus.LOADING)
-//                    val listResult = when(catalogId){
-//                        0-> ServerApi.retrofitService.getDataFirst()
-//                        1-> ServerApi.retrofitService.getDataSecond()
-//                        2-> ServerApi.retrofitService.getDataThird()
-//                        3-> ServerApi.retrofitService.getDataFourth()
-//                        4-> ServerApi.retrofitService.getDataFifth()
-//                        5-> ServerApi.retrofitService.getDataSixth()
-//                        else -> ServerApi.retrofitService.getDataSeventh()
-//                    }
-//
-//                    _status.postValue (ListStatus.DONE)
-//                    _list.postValue(listResult)
-//
-//                }
-//
-//                Log.d("Get data $catalogId","sucess")
-//            }catch (e: Exception){
-//                _status.postValue (ListStatus.ERROR)
-//
-//                e.message?.let { Log.d("Get data $catalogId",it) }
-//            }
-//        }
-//    }
-
-//    fun onFavoriteClicking(item: LocalItem) {
-//
-//        viewModelScope.launch {
-//            _isFavorite.value =
-//                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
-//            if(_isFavorite.value == true){
-//                Log.d("ItemList viewmodel","Item is added into Favorite")
-//
-//                favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
-//                _isFavorite.value = false
-//
-//            }else
-//            {
-//                favoriteItemRepository.addFavoriteItem(item.asDomainItem().asFavoriteItem())
-//
-//                _isFavorite.value = true
-//            }
-//
-//        }
-//    }
-
-        fun onFavoriteClicking(item: LocalItem) {
+    fun onFavoriteClicking(item: LocalItem) {
         viewModelScope.launch {
             //_isFavorite.value = item.itemFavorite
-            _isFavorite.value =favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
-                if (_isFavorite.value == false) {
+            //_isFavorite.value =favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
+            val isCurrentFavorite =
+                favoriteItemRepository.getFavoriteItemById(item.asDomainItem().itemId) !== null
+                if (!isCurrentFavorite) {
                     favoriteItemRepository.addFavoriteItem(item.asDomainItem().asFavoriteItem())
                     item.itemFavorite= true
+                    _isFavorite.value = true
                 } else {
                     Log.d("ItemList viewmodel","Item is added into Favorite")
                     favoriteItemRepository.deleteFavoriteItem(item.asDomainItem().asFavoriteItem())
                     item.itemFavorite = false
+                    _isFavorite.value = false
 
                 }
 

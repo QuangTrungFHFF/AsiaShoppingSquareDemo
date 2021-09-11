@@ -67,7 +67,7 @@ internal class UIViewModel(
         liveData {
             continueShopping.value = false
             inProgress.postValue(true)
-            status.postValue("Chuan bi qua trinh thanh toan...")
+            status.postValue("Chuẩn bị quá trình thanh toán...")
 
             val checkoutResponse = repository.checkout(
                 customer, PaymentRepository.CheckoutCurrency.EUR, mode, amount, metadata
@@ -75,11 +75,11 @@ internal class UIViewModel(
 
             checkoutResponse.fold(
                 onSuccess = {response ->
-                    status.postValue("San sang tien hanh thanh toan"
+                    status.postValue("Sẵn sàng quá trình thanh toán"
                     )
                 },
                 onFailure = {
-                    status.postValue("Da co loi xuat hien trong qua tinh chuan bi thanh toan!"
+                    status.postValue("Đã có lỗi xuất hiện trong quá trình chuẩn bị thanh toán!"
                     )
                 }
             )

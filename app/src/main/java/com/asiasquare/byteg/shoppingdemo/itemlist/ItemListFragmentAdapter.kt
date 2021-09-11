@@ -3,11 +3,14 @@ package com.asiasquare.byteg.shoppingdemo.itemlist
 import android.annotation.SuppressLint
 import android.view.LayoutInflater
 import android.view.ViewGroup
+import androidx.lifecycle.LiveData
+import androidx.lifecycle.MutableLiveData
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import coil.load
 import com.asiasquare.byteg.shoppingdemo.R
+import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewItemListBinding
 
@@ -15,13 +18,13 @@ import com.asiasquare.byteg.shoppingdemo.databinding.GridViewItemListBinding
 
 class ItemListFragmentAdapter(private val onClickListener: OnClickListener):ListAdapter <LocalItem, ItemListFragmentAdapter.ItemListViewHolder>(DiffCallback) {
 
-
     class ItemListViewHolder (private val binding: GridViewItemListBinding):
         RecyclerView.ViewHolder(binding.root)  {
 
         val btnFavorite= binding.ivAddFavorite
         @SuppressLint("SetTextI18n")
         fun bind(item: LocalItem) {
+
             binding.apply {
                 anhsanpham.load(item.itemImageSource){
                     placeholder(R.drawable.loading_animation)
@@ -70,7 +73,7 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(oldItem: LocalItem, newItem: LocalItem): Boolean {
-            return oldItem == newItem
+            return false
         }
 
     }
