@@ -123,4 +123,23 @@
             android:id="@+id/action_orderFragment_to_detailFragment"
             app:destination="@id/detailFragment" />
     </fragment>
+    <fragment
+        android:id="@+id/thanhToanDrawerFragment2"
+        android:name="com.asiasquare.byteg.shoppingdemo.drawer.ThanhToanDrawerFragment"
+        android:label="ThanhToanDrawerFragment" />
+    <fragment
+        android:id="@+id/customerServiceDrawerFragment"
+        android:name="com.asiasquare.byteg.shoppingdemo.drawer.CustomerServiceDrawerFragment"
+        android:label="Thông Tin Liên Hệ"
+        tools:layout="@layout/fragment_customer_service_drawer" />
+    <fragment
+        android:id="@+id/paymentMethodDrawerFragment"
+        android:name="com.asiasquare.byteg.shoppingdemo.drawer.PaymentMethodDrawerFragment"
+        android:label="Hình Thức Thanh Toán"
+        tools:layout="@layout/fragment_payment_method_drawer" />
+    <fragment
+        android:id="@+id/shippingDrawerFragment"
+        android:name="com.asiasquare.byteg.shoppingdemo.drawer.ShippingDrawerFragment"
+        android:label="Vận Chuyển"
+        tools:layout="@layout/fragment_shipping_drawer" />
 </navigation>

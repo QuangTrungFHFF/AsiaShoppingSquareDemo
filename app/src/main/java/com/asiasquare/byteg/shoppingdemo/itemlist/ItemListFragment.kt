@@ -75,10 +75,10 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
             }
         })
 
-
-//        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
-//            showToast(it)
-//        })
+        /** show Toast when add item into Favorite **/
+        viewModel.isFavorite.observe(viewLifecycleOwner, Observer {
+            showToast(it)
+        })
 
         /** Navigate to detail by Id **/
         viewModel.navigateToDetail.observe(viewLifecycleOwner, Observer {
@@ -133,16 +133,16 @@ class ItemListFragment : Fragment(), ItemListFragmentAdapter.OnClickListener {
     }
 
 
-//    fun showToast(isFavorite: Boolean){
-//        toast?.cancel()
-//
-//        toast = when(isFavorite){
-//            true -> Toast.makeText(context, "Đã thêm sản phẩm vào danh sách Yêu thích", Toast.LENGTH_SHORT)
-//
-//            else -> Toast.makeText(context, "Đã xóa sản phẩm khỏi danh sách Yêu thích", Toast.LENGTH_SHORT)
-//        }
-//        toast?.show()
-//    }
+    fun showToast(isFavorite: Boolean){
+        toast?.cancel()
+
+        toast = when(isFavorite){
+            true -> Toast.makeText(context, "Đã thêm sản phẩm vào danh sách Yêu thích", Toast.LENGTH_SHORT)
+
+            else -> Toast.makeText(context, "Đã xóa sản phẩm khỏi danh sách Yêu thích", Toast.LENGTH_SHORT)
+        }
+        toast?.show()
+    }
 
     /**Remove _binding when fragment is destroy**/
     override fun onDestroyView() {

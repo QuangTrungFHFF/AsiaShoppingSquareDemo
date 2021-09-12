@@ -1,9 +1,9 @@
 <resources>
     <string name="app_name">AsiaSquareShoppingDemo</string>
     <string name="home">Home</string>
-    <string name="favorite">Favorite</string>
-    <string name="cart">Cart</string>
-    <string name="search">Search</string>
+    <string name="favorite">Yêu Thích</string>
+    <string name="cart">Giỏ Hàng</string>
+    <string name="search">Tìm Kiếm</string>
 
     <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
@@ -41,10 +41,12 @@
     <string name="customer_information">Customer information</string>
     <string name="quay_ve_cua_hang">Quay về cửa hàng</string>
     <string name="hoan_tat_thanh_toan">Hoàn tất thanh toán</string>
+
+    <!-- Text in Drawer Payment Method-->
     <string name="thanh_toan_bang_the_tin_dung">Thanh toán bằng thẻ tín dụng.</string>
+    <string name="visa_master">Visa / Mastercard</string>
 
-
-    <string name="thong_tin_thanh_toan_body">Hiện tại quý khách có thể thanh toán bằng Paypal cho địa chỉ:</string>
+    <string name="thong_tin_thanh_toan_body">Thanh toán</string>
     <string name="paypal_email">asiasquare.com@gmail.com</string>
     <string name="thong_tin_thanh_toan_body_paypal">Trong thời gian tới chúng tôi sẽ cung cấp thêm các tiện ích thanh toán để tiện cho quý khách.</string>
     <string name="thong_tin_thanh_toan_body_cac">Quý khách có thể đặt hàng và thanh toán khi lấy hàng tại cửa hàng tại địa chỉ:</string>
@@ -54,11 +56,13 @@
     <string name="thoi_gian_hoat_dong_t7">Thứ 7        : 08.00 – 20.00</string>
     <string name="thoi_gian_hoat_dong_cn">Chủ nhật     : Đóng cửa</string>
 
+    <!-- Text in Drawer Shipping-->
     <string name="thong_tin_giao_hang"> Chi phí vận chuyển</string>
-    <string name="thong_tin_giao_hang_body_duoi_50">Đối với đơn hàng dưới 50 EUR, quý khách vui lòng thanh toán 5,99 EUR chi phí vận chuyển.</string>
-    <string name="thong_tin_giao_hang_body_tren_50">Đối với đơn hàng từ 50 EUR trở lên, đơn hàng của quý khách sẽ được miễn phí vận chuyển.</string>
+    <string name="thong_tin_giao_hang_body_duoi_50">Đối với đơn hàng <b>dưới 50 EUR</b>, quý khách vui lòng thanh toán 5,99 EUR chi phí vận chuyển.</string>
+    <string name="thong_tin_giao_hang_body_tren_50">Đối với đơn hàng <b>từ 50 EUR</b> trở lên, đơn hàng của quý khách sẽ được miễn phí vận chuyển.</string>
     <string name="thong_tin_giao_hang_body_lien_he">Nếu quý khách có yêu cầu riêng về quá trình và thời gian vận chuyển, xin vui lòng liên hệ trực tiếp với bộ phận chăm sóc khách hàng.</string>
 
+    <!-- Text in Drawer Customer Service-->
     <string name="thong_tin_lien_he">Chăm sóc khách hàng</string>
     <string name="thong_tin_lien_he_cam_on">Trân trọng cảm ơn quý khách đã sử dụng app Asia Square của chúng tôi.</string>
     <string name="thong_tin_lien_he_bo_phan_cskh">Bộ phận chăm sóc khách hàng </string>
@@ -81,12 +85,19 @@
     <string name="xoa_thong_tin_detail">Xác nhận xóa thông tin giao hàng này?</string>
     <string name="xac_nhan">Xác nhận</string>
     <string name="quay_lai">Quay lại</string>
-    <string name="visa_master">Visa / Mastercard</string>
 
     <string name="tab">\u0009</string>
     <string name="double_tab">\u0009\u0009</string>
     <string name="triple_tab">\u0009\u0009\u0009</string>
     <string name="quad_tab">\u0009\u0009\u0009\u0009</string>
+
+    //Navigation Drawer
+    <string name="thong_tin_ca_nhan">Thông tin cá nhân</string>
+    <string name="hinh_thuc_thanh_toan">Hình Thức Thanh Toán</string>
+    <string name="cac_don_hang">Các Đơn Hàng</string>
+    <string name="giao_hang">Vận Chuyển</string>
+    <string name="chinh_sach_doi_tra">Đặt hàng theo yêu cầu</string>
+    <string name="lien_he">Thông tin liên hệ</string>
 
 
 </resources>

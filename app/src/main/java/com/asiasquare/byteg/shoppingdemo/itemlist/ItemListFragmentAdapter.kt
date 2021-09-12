@@ -1,7 +1,9 @@
 package com.asiasquare.byteg.shoppingdemo.itemlist
 
 import android.annotation.SuppressLint
+import android.graphics.Paint
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
@@ -13,7 +15,7 @@ import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.FavoriteItem
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.databinding.GridViewItemListBinding
-
+import com.asiasquare.byteg.shoppingdemo.util.round
 
 
 class ItemListFragmentAdapter(private val onClickListener: OnClickListener):ListAdapter <LocalItem, ItemListFragmentAdapter.ItemListViewHolder>(DiffCallback) {
@@ -25,18 +27,31 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
         @SuppressLint("SetTextI18n")
         fun bind(item: LocalItem) {
 
+            val priceDiscounted = item.itemDiscountedPrice
+
             binding.apply {
                 anhsanpham.load(item.itemImageSource){
                     placeholder(R.drawable.loading_animation)
                     error(R.drawable.ic_connection_error)
                 }
                 tensanpham.text = item.itemName
-                giasanpham.text= "€" + item.itemPrice.toString()
 
-                when {
-                    item.itemFavorite -> ivAddFavorite.setImageResource(R.drawable.timdo24)
-                    else -> ivAddFavorite.setImageResource(R.drawable.timden24)
-                }
+                if (priceDiscounted != 0.0) {
+
+                    giasanpham.text= "€" + item.itemPrice.toString()
+                    giasanpham.paintFlags = giasanpham.paintFlags or Paint.STRIKE_THRU_TEXT_FLAG
+                    binding.tvDiscountedPrice.text= "€${item.itemDiscountedPrice}"
+                    binding.tvDiscountedPrice.visibility = View.VISIBLE
+                } else {
+                    binding.tvDiscountedPrice.visibility = View.INVISIBLE
+                    giasanpham.text= "€" + item.itemPrice.toString()
+                    giasanpham.paintFlags = giasanpham.paintFlags and Paint.STRIKE_THRU_TEXT_FLAG.inv()
+            }
+
+//                when {
+//                    item.itemFavorite -> ivAddFavorite.setImageResource(R.drawable.timdo24)
+//                    else -> ivAddFavorite.setImageResource(R.drawable.timden24)
+//                }
             }
         }
         companion object{
@@ -73,7 +88,8 @@ class ItemListFragmentAdapter(private val onClickListener: OnClickListener):List
 
         @SuppressLint("DiffUtilEquals")
         override fun areContentsTheSame(oldItem: LocalItem, newItem: LocalItem): Boolean {
-            return false
+            return oldItem == newItem
+//            return false
         }
 
     }

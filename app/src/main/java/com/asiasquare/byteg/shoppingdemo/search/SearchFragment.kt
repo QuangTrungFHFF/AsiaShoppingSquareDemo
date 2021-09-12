@@ -11,10 +11,7 @@ import androidx.navigation.fragment.findNavController
 import com.asiasquare.byteg.shoppingdemo.R
 import com.asiasquare.byteg.shoppingdemo.database.items.LocalItem
 import com.asiasquare.byteg.shoppingdemo.databinding.FragmentSearchBinding
-import com.asiasquare.byteg.shoppingdemo.util.addTildeOptions
 import com.asiasquare.byteg.shoppingdemo.util.onQueryTextChanged
-import com.asiasquare.byteg.shoppingdemo.util.removeAccents
-import java.text.Normalizer
 
 
 class SearchFragment : Fragment(), SearchFragmentAdapter.OnClickListener {

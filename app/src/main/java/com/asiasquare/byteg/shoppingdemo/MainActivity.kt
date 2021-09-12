@@ -1,6 +1,6 @@
 package com.asiasquare.byteg.shoppingdemo
 
-import android.os.Build
+
 import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.core.content.res.ResourcesCompat
@@ -8,6 +8,7 @@ import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.ui.AppBarConfiguration
+import androidx.navigation.ui.navigateUp
 import androidx.navigation.ui.setupActionBarWithNavController
 import androidx.navigation.ui.setupWithNavController
 import com.asiasquare.byteg.shoppingdemo.databinding.ActivityMainBinding
@@ -36,10 +37,17 @@ class MainActivity : AppCompatActivity() {
         val navHostFragment =
             supportFragmentManager.findFragmentById(R.id.nav_host_fragment) as NavHostFragment
         navController = navHostFragment.navController
+
+        appBarConfiguration = AppBarConfiguration(
+                    setOf(R.id.catalogFragment, R.id.favoriteFragment, R.id.cartFragment, R.id.searchFragment),
+            binding.drawerLayout
+        )
+
         binding.bottomNav.setupWithNavController(navController)
+        binding.navigationView.setupWithNavController(navController)
 
         setSupportActionBar(binding.toolbar)
-        setupActionBarWithNavController(navController)
+        setupActionBarWithNavController(navController, appBarConfiguration)
 
 
         /**
@@ -78,7 +86,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     override fun onSupportNavigateUp(): Boolean {
-        return navController.navigateUp() || super.onSupportNavigateUp()
+        return navController.navigateUp(appBarConfiguration) || super.onSupportNavigateUp()
     }
 
 

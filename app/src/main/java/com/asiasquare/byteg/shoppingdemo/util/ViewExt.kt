@@ -7,7 +7,8 @@ import java.text.Normalizer
 inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit) {
     this.setOnQueryTextListener(object : SearchView.OnQueryTextListener {
         override fun onQueryTextSubmit(query: String?): Boolean {
-            listener(removeAccents(query).orEmpty())
+//            listener(removeAccents(query).orEmpty())
+            listener(query.orEmpty())
             clearFocus()
             return true
         }
@@ -18,32 +19,29 @@ inline fun SearchView.onQueryTextChanged(crossinline listener: (String) -> Unit)
         }
     })
 
-
 }
 
 
+//fun stripAccents(s: String?): String? {
+//    var s = s
+//    s = Normalizer.normalize(s, Normalizer.Form.NFD)
+//    s = s.replace("[\\p{M}]".toRegex(), "") //remove all accents
+//    s = s.replace("a|e|i|o".toRegex(), "*") //replace a, e, i ,o with wildcard
+//    return s
+//}
 
-fun stripAccents(s: String?): String? {
-    var s = s
-    s = Normalizer.normalize(s, Normalizer.Form.NFD)
-    s = s.replace("[\\p{M}]".toRegex(), "") //remove all accents
-    s = s.replace("a|e|i|o".toRegex(), "*") //replace a, e, i ,o with wildcard
-    return s
-}
+//fun addTildeOptions(searchText: String?): String {
+//    return searchText?.toLowerCase()
+//        ?.replace("\\.*[aáàäâã]\\.*".toRegex(), "[aáàäâã]")!!
+//
+//}
+//
 
-fun addTildeOptions(searchText: String?): String {
-    return searchText?.toLowerCase()
-        ?.replace("\\.*[aáàäâã]\\.*".toRegex(), "[aáàäâã]")!!
-
-}
-
-
-
-private val REGEX_UNACCENT = "\\p{Mn}+".toRegex()
-fun CharSequence.unaccent(): String {
-    val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
-    return REGEX_UNACCENT.replace(temp, "")
-}
+//private val REGEX_UNACCENT = "\\p{Mn}+".toRegex()
+//fun CharSequence.unaccent(): String {
+//    val temp = Normalizer.normalize(this, Normalizer.Form.NFD)
+//    return REGEX_UNACCENT.replace(temp, "")
+//}
 
 
 

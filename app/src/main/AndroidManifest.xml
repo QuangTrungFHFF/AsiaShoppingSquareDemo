@@ -29,18 +29,17 @@
         <activity android:name=".MainActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
+            </intent-filter>
+        </activity>
+
+        <activity android:name=".SplashScreen">
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
 
-        <activity
-            android:name=".payment.order.DatHangActivity"
-            android:configChanges="orientation"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:showOnLockScreen="true"
-            android:windowSoftInputMode="adjustPan|stateHidden" />
     </application>
 
 </manifest>

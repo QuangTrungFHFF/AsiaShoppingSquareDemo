@@ -201,7 +201,7 @@
                 app:layout_constraintTop_toBottomOf="@+id/san_pham_xuat_xu" />
 
             <TextView
-                android:id="@+id/giakhuyenmai"
+                android:id="@+id/tvDiscountedPrice"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:layout_marginStart="16dp"
