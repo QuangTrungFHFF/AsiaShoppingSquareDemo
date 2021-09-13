@@ -124,10 +124,6 @@
             app:destination="@id/detailFragment" />
     </fragment>
     <fragment
-        android:id="@+id/thanhToanDrawerFragment2"
-        android:name="com.asiasquare.byteg.shoppingdemo.drawer.ThanhToanDrawerFragment"
-        android:label="ThanhToanDrawerFragment" />
-    <fragment
         android:id="@+id/customerServiceDrawerFragment"
         android:name="com.asiasquare.byteg.shoppingdemo.drawer.CustomerServiceDrawerFragment"
         android:label="Thông Tin Liên Hệ"
